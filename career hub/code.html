@@ -109,12 +109,44 @@
                 transform: translateY(0);
             }
             
-            .fade-in {
-                animation: fadeIn 0.5s ease-out forwards;
+            /* Side Drawer Fixes - Synced with Admissions */
+            #side-drawer {
+                transform: translateX(-100%);
+                transition: transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                background: rgba(10, 24, 45, 0.98);
+                backdrop-filter: blur(25px);
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+                @apply fixed top-0 left-0 bottom-0 w-[280px] z-[70] overflow-y-auto px-6 py-10 flex flex-col;
             }
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
+            #drawer-toggle:checked ~ #side-drawer {
+                transform: translateX(0);
+            }
+            #drawer-overlay {
+                @apply fixed inset-0 z-[60] bg-black/40 opacity-0 invisible transition-all duration-300 backdrop-blur-sm;
+            }
+            #drawer-toggle:checked ~ #drawer-overlay {
+                @apply opacity-100 visible;
+                backdrop-filter: blur(8px);
+            }
+            .drawer-nav-item, .drawer-user-info, .drawer-footer {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 400ms ease-out;
+            }
+            #drawer-toggle:checked ~ #side-drawer .drawer-user-info { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 250ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 350ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 450ms; }
+            #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 500ms; }
+            .drawer-nav-item {
+                @apply flex items-center gap-4 p-4 rounded-2xl text-white font-medium transition-all;
+            }
+            .drawer-nav-item.active {
+                @apply bg-primary shadow-lg shadow-primary/30;
             }
         }
     </style>
@@ -123,49 +155,64 @@
 <body class="bg-background-light text-slate-900 min-h-screen font-body pb-24">
     <!-- Side Drawer & Overlays -->
     <input class="hidden" id="drawer-toggle" type="checkbox" />
-    <label
-        class="fixed inset-0 z-[60] bg-black/40 opacity-0 invisible transition-all duration-300 backdrop-blur-sm peer-checked:opacity-100 peer-checked:visible"
-        for="drawer-toggle"></label>
+    <label class="fixed inset-0 z-[60]" for="drawer-toggle" id="drawer-overlay"></label>
 
-    <aside
-        class="fixed top-0 left-0 bottom-0 w-[300px] z-[70] bg-navy/95 backdrop-blur-2xl border-r border-white/10 -translate-x-full transition-transform duration-300 peer-checked:translate-x-0 flex flex-col p-6"
-        id="side-drawer">
+    <aside id="side-drawer">
         <label class="absolute top-6 right-6 text-white/60 active:scale-90 transition-transform cursor-pointer"
-            for="drawer-toggle"><span class="material-symbols-outlined text-3xl">close</span></label>
-
-        <div class="mb-10 mt-6">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-14 h-14 rounded-full border-2 border-primary p-0.5 bg-white/10 overflow-hidden"><img
-                        alt="Avatar" class="w-full h-full object-cover rounded-full"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMux0mUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P" />
+            for="drawer-toggle">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </label>
+        <div class="drawer-user-info mb-10 mt-4">
+            <div class="flex items-center gap-4 mb-4">
+                <div
+                    class="w-14 h-14 rounded-full border-2 border-brand-red p-0.5 bg-white/10 overflow-hidden shadow-lg">
+                    <img alt="User Avatar" class="w-full h-full object-cover rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMuxmUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P" />
                 </div>
                 <div>
-                    <h3 class="text-white font-black text-lg">Nguyễn Văn A</h3>
-                    <div class="flex items-center gap-1.5 text-gold-luxury text-xs font-bold"><span
-                            class="material-symbols-outlined text-sm"
-                            style="font-variation-settings: 'FILL' 1;">stars</span>2.450 S-Points</div>
+                    <h3 class="text-white font-extrabold text-lg">Nguyễn Văn A</h3>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <span class="material-symbols-outlined text-primary text-sm"
+                            style="font-variation-settings: 'FILL' 1;">stars</span>
+                        <span class="text-white/80 text-xs font-bold tracking-wide">2.450 S-Points</span>
+                    </div>
                 </div>
             </div>
             <div class="h-px w-full bg-white/10"></div>
         </div>
-
         <nav class="flex flex-col gap-2">
-            <a href="../home/code.html"
-                class="flex items-center gap-4 p-4 rounded-2xl text-white/50 font-bold hover:bg-white/5 transition-all"><span
-                    class="material-symbols-outlined">home</span>Trang chủ</a>
-            <a href="../career hub/code.html"
-                class="flex items-center gap-4 p-4 rounded-2xl bg-navy/50 border border-gold-luxury/20 text-gold-luxury font-black shadow-xl"><span
-                    class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>Career
-                Hub</a>
-            <a href="../tuyển sinh/code.html"
-                class="flex items-center gap-4 p-4 rounded-2xl text-white/50 font-bold hover:bg-white/5 transition-all"><span
-                    class="material-symbols-outlined">campaign</span>Tuyển sinh</a>
-            <a href="../Cá nhân/code.html"
-                class="flex items-center gap-4 p-4 rounded-2xl text-white/50 font-bold hover:bg-white/5 transition-all"><span
-                    class="material-symbols-outlined">person</span>Cá nhân</a>
-            <a href="../kho quà tặng/code.html"
-                class="flex items-center gap-4 p-4 rounded-2xl text-white/50 font-bold hover:bg-white/5 transition-all"><span
-                    class="material-symbols-outlined">inventory_2</span>Kho quà tặng</a>
+            <a class="drawer-nav-item" href="../home/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+                <span>Trang chủ</span>
+            </a>
+            <a class="drawer-nav-item active" href="../career hub/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+                <span>Career Hub</span>
+            </a>
+            <a class="drawer-nav-item" href="../tuyển sinh/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">campaign</span>
+                <span>Tuyển sinh</span>
+            </a>
+            <a class="drawer-nav-item" href="../Cá nhân/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+                <span>Cá nhân</span>
+            </a>
+            <a class="drawer-nav-item" href="../đăng ký xét tuyển/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">how_to_reg</span>
+                <span>Đăng ký xét tuyển</span>
+            </a>
+            <a class="drawer-nav-item" href="../kho quà tặng/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+                <span>Kho quà tặng</span>
+            </a>
+            <a class="drawer-nav-item" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+                <span>Thông báo</span>
+            </a>
+            <a class="drawer-nav-item mt-8" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                <span>Cài đặt</span>
+            </a>
         </nav>
     </aside>
 
@@ -185,55 +232,86 @@
 
     <main>
         <!-- SECTION 1: HERO TRUST -->
-        <section class="relative pt-12 pb-16 px-6 text-white overflow-hidden shadow-2xl">
-            <!-- Background image blurred as a backdrop - Generated Career Image -->
+        <section class="relative pt-16 pb-20 px-8 text-white overflow-hidden">
+            <!-- Cinematic Background - Luxury Career Aspirational -->
             <div class="absolute inset-0 z-0">
-                <img src="/C:/Users/Admin/.gemini/antigravity/brain/2f77bea7-ff9f-4579-81d6-ab30a31a7ff0/career_success_hero_backdrop_1772678986352.png"
+                <img src="file:///C:/Users/Admin/.gemini/antigravity/brain/2f77bea7-ff9f-4579-81d6-ab30a31a7ff0/luxury_career_aspirational_hero_1772681548787.png"
                     alt="Career Success" class="w-full h-full object-cover"
-                    style="opacity:0.8; filter:blur(10px); transform:scale(1.1);">
-                <!-- Luxury deep navy gradient overlay (Khung Xanh) with 70-85% transparency -->
-                <div class="absolute inset-0"
-                    style="background: linear-gradient(140deg, rgba(15, 28, 46, 0.85) 0%, rgba(18, 38, 58, 0.75) 60%, rgba(26, 54, 93, 0.7) 100%);">
+                    style="opacity:0.4; filter:blur(15px); transform:scale(1.15);">
+
+                <!-- Noise Texture Overlay for Luxury Feel -->
+                <div class="absolute inset-0 opacity-[0.03] pointer-events-none"
+                    style="background-image: url('https://grainy-gradients.vercel.app/noise.svg'); filter: contrast(150%) brightness(100%);">
                 </div>
-                <div class="hero-overlay absolute inset-0 opacity-40"></div>
+
+                <!-- Strategic Dark Blue to Transparent Gradient Overlay -->
+                <div class="absolute inset-0"
+                    style="background: linear-gradient(135deg, rgba(15, 28, 46, 0.95) 0%, rgba(15, 28, 46, 0.4) 60%, transparent 100%);">
+                </div>
             </div>
 
-            <div class="relative z-10 space-y-8">
-                <div class="space-y-4 max-w-lg">
-                    <h2 class="text-4xl font-black leading-[1.1] uppercase tracking-tighter font-heading">Cánh cửa sự
-                        nghiệp <br>
+            <div class="relative z-10 space-y-10">
+                <div class="space-y-6 max-w-lg">
+                    <h2 class="text-4xl font-extrabold leading-[1.1] uppercase tracking-tighter font-heading">
+                        Cánh cửa sự <br>
                         <span class="text-gold-luxury italic lowercase font-normal serif"
-                            style="font-family: 'Playfair Display', serif; letter-spacing: 0;">mở rộng 100%</span>
+                            style="font-family: 'Playfair Display', serif; letter-spacing: 0.05em; text-shadow: 0 0 20px rgba(198, 168, 94, 0.3);">mở
+                            rộng 100%</span>
                     </h2>
-                    <div class="subtle-divider w-24"></div>
+                    <div
+                        class="h-1 w-20 bg-gradient-to-r from-gold-luxury to-transparent rounded-full shadow-[0_0_10px_rgba(198,168,94,0.5)]">
+                    </div>
 
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-4 p-4 glass-luxury rounded-2xl">
-                            <span
-                                class="material-symbols-outlined text-gold-luxury border border-gold-luxury/20 bg-white/5 p-2 rounded-xl">handshake</span>
-                            <div class="text-[11px] font-bold uppercase tracking-[0.1em] opacity-80">Kết nối <span
-                                    class="text-xl font-black block leading-none mt-1 text-gold-luxury">500+ Doanh
-                                    nghiệp</span></div>
+                    <ul class="space-y-4">
+                        <li
+                            class="flex items-center gap-5 p-5 bg-white/[0.03] backdrop-blur-md rounded-[24px] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-gold-luxury/20 transition-all duration-300 group">
+                            <div
+                                class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:bg-gold-luxury/10 group-hover:border-gold-luxury/30 transition-all">
+                                <span class="material-symbols-outlined text-gold-luxury text-2xl"
+                                    style="font-variation-settings: 'FILL' 1;">handshake</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Đối tác
+                                    chiến lược</span>
+                                <span class="text-xl font-black text-gold-luxury leading-tight mt-0.5"
+                                    style="text-shadow: 0 0 15px rgba(198, 168, 94, 0.2);">500+ Doanh nghiệp</span>
+                            </div>
                         </li>
-                        <li class="flex items-center gap-4 p-4 glass-luxury rounded-2xl">
-                            <span
-                                class="material-symbols-outlined text-gold-luxury border border-gold-luxury/20 bg-white/5 p-2 rounded-xl">trending_up</span>
-                            <div class="text-[11px] font-bold uppercase tracking-[0.1em] opacity-80">Tỷ lệ có việc <span
-                                    class="text-xl font-black block leading-none mt-1 text-gold-luxury">98% sau 6
-                                    tháng</span></div>
+                        <li
+                            class="flex items-center gap-5 p-5 bg-white/[0.03] backdrop-blur-md rounded-[24px] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-gold-luxury/20 transition-all duration-300 group">
+                            <div
+                                class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:bg-gold-luxury/10 group-hover:border-gold-luxury/30 transition-all">
+                                <span class="material-symbols-outlined text-gold-luxury text-2xl"
+                                    style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Kết quả đầu
+                                    ra</span>
+                                <span class="text-xl font-black text-gold-luxury leading-tight mt-0.5"
+                                    style="text-shadow: 0 0 15px rgba(198, 168, 94, 0.2);">98% Có việc ngay</span>
+                            </div>
                         </li>
-                        <li class="flex items-center gap-4 p-4 glass-luxury rounded-2xl">
-                            <span
-                                class="material-symbols-outlined text-gold-luxury border border-gold-luxury/20 bg-white/5 p-2 rounded-xl">verified</span>
-                            <div class="text-[11px] font-bold uppercase tracking-[0.1em] opacity-80">Cam kết <span
-                                    class="text-xl font-black block leading-none mt-1 text-gold-luxury">Giới thiệu việc
-                                    làm 100%</span></div>
+                        <li
+                            class="flex items-center gap-5 p-5 bg-white/[0.03] backdrop-blur-md rounded-[24px] border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-gold-luxury/20 transition-all duration-300 group">
+                            <div
+                                class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:bg-gold-luxury/10 group-hover:border-gold-luxury/30 transition-all">
+                                <span class="material-symbols-outlined text-gold-luxury text-2xl"
+                                    style="font-variation-settings: 'FILL' 1;">verified</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Cam kết đào
+                                    tạo</span>
+                                <span class="text-xl font-black text-gold-luxury leading-tight mt-0.5"
+                                    style="text-shadow: 0 0 15px rgba(198, 168, 94, 0.2);">Hỗ trợ việc làm 100%</span>
+                            </div>
                         </li>
                     </ul>
 
                     <button onclick="openLeadModal('Trust Hero')"
-                        class="cta-premium w-full mt-10 py-5 text-[11px] uppercase tracking-[0.2em]">🔴
-                        Nhận danh sách doanh nghiệp đang tuyển</button>
+                        class="w-full mt-6 py-5 bg-gradient-to-r from-[#E30613] to-[#A11217] text-white font-black text-xs uppercase tracking-[0.3em] rounded-[24px] shadow-[0_10px_30px_rgba(227,6,19,0.4)] active:scale-95 transition-all flex items-center justify-center gap-3">
+                        <span class="material-symbols-outlined text-sm">rocket_launch</span>
+                        Nhận danh sách doanh nghiệp
+                    </button>
                 </div>
 
                 <!-- Logo Carousel -->
