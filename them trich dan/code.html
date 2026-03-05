@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Thêm Trích Dẫn Ý Nghĩa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Public+Sans:wght@300;400;600&amp;family=Caveat:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "cream-bg": "#f8f5f0",
+                        "brand-red": "#E31837",
+                        "soft-red": "#fde8e8",
+                        "vintage-ink": "#3a3a3a",
+                        "paper-white": "#ffffff"
+                    },
+                    fontFamily: {
+                        "sans": ["Public Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "handwriting": ["Caveat", "cursive"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .paper-texture {
+                background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
+            }
+            .film-grain::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+                opacity: 0.12;
+                pointer-events: none;
+                z-index: 100;
+            }
+            .glass-morphism {
+                background: rgba(255, 255, 255, 0.4);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            }
+            .torn-paper-edge {
+                position: relative;
+                clip-path: polygon(
+                    0% 5%, 5% 0%, 15% 5%, 25% 0%, 35% 5%, 45% 0%, 55% 5%, 65% 0%, 75% 5%, 85% 0%, 95% 5%, 100% 0%,
+                    100% 100%, 95% 95%, 85% 100%, 75% 95%, 65% 100%, 55% 95%, 45% 100%, 35% 95%, 25% 100%, 15% 95%, 5% 100%, 0% 95%
+                );
+            }
+            .soft-depth {
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            }
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-vintage-ink bg-cream-bg min-h-screen overflow-hidden selection:bg-brand-red/10">
+    <div class="relative h-screen w-full flex flex-col paper-texture film-grain overflow-hidden">
+        <div class="relative z-50 flex items-center justify-between p-6">
+            <a href="../chon phong cach/code.html"
+                class="flex items-center justify-center size-10 rounded-full bg-white/40 border border-black/5 active:scale-90 transition-transform no-underline text-inherit">
+                <span class="material-symbols-outlined text-xl font-light">arrow_back</span>
+            </a>
+            <h2 class="font-serif text-lg italic font-medium">Thêm trích dẫn</h2>
+            <div class="size-10"></div>
+        </div>
+        <div class="flex-1 px-6 flex flex-col gap-8 overflow-y-auto pb-10">
+            <div class="w-full">
+                <p class="text-[10px] font-bold tracking-[0.2em] uppercase opacity-40 mb-3 ml-1">Lời tự sự của bạn</p>
+                <div class="glass-morphism rounded-3xl p-6 min-h-[220px] flex flex-col relative soft-depth">
+                    <textarea id="quote-input"
+                        class="bg-transparent border-none focus:ring-0 w-full flex-1 resize-none font-handwriting text-2xl placeholder:opacity-30 text-vintage-ink leading-relaxed"
+                        placeholder="Nhập trích dẫn truyền cảm hứng của riêng bạn..." maxlength="150"></textarea>
+                    <div class="flex justify-between items-center mt-2">
+                        <span id="char-count" class="text-xs text-vintage-ink/40 font-semibold">0/150</span>
+                        <span class="material-symbols-outlined text-brand-red/40">format_quote</span>
+                    </div>
+                </div>
+            </div>
+            <div id="saved-quotes-container" class="w-full mt-2 hidden flex-col gap-3">
+                <p class="text-[10px] font-bold tracking-[0.2em] uppercase opacity-40 mb-1 ml-1">Trích dẫn đã lưu</p>
+                <div id="saved-quotes-list" class="flex flex-col gap-3"></div>
+            </div>
+            <div class="w-full flex-1">
+                <div class="flex items-center justify-between mb-4 px-1">
+                    <p class="text-[10px] font-bold tracking-[0.2em] uppercase opacity-40">Gợi ý truyền cảm hứng</p>
+                    <button id="btn-refresh"
+                        class="text-[10px] font-semibold text-brand-red/60 uppercase tracking-widest hover:text-brand-red transition-colors">Làm
+                        mới</button>
+                </div>
+                <div id="suggestions-list" class="flex flex-wrap gap-4 items-start">
+                    <button
+                        class="suggestion-btn torn-paper-edge bg-white px-5 py-3 soft-depth rotate-[-2deg] active:scale-95 transition-transform max-w-[85%]">
+                        <p class="font-handwriting text-lg text-left leading-tight text-vintage-ink">"Hạnh phúc không
+                            phải là điểm đến, mà là hành trình chúng ta đang đi."</p>
+                    </button>
+                    <button
+                        class="suggestion-btn torn-paper-edge bg-white px-5 py-3 soft-depth rotate-[1deg] active:scale-95 transition-transform">
+                        <p class="font-handwriting text-lg text-left leading-tight text-vintage-ink">"Sống rực rỡ như
+                            những đóa hoa."</p>
+                    </button>
+                    <button
+                        class="suggestion-btn torn-paper-edge bg-white px-5 py-3 soft-depth rotate-[-1deg] active:scale-95 transition-transform">
+                        <p class="font-handwriting text-lg text-left leading-tight text-vintage-ink">"Believe in the
+                            magic of new beginnings."</p>
+                    </button>
+                    <button
+                        class="suggestion-btn torn-paper-edge bg-white px-5 py-3 soft-depth rotate-[3deg] active:scale-95 transition-transform max-w-[90%]">
+                        <p class="font-handwriting text-lg text-left leading-tight text-vintage-ink">"Đừng chờ đợi cơ
+                            hội, hãy tự tạo ra nó."</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="relative z-50 p-6 pt-2 bg-gradient-to-t from-cream-bg via-cream-bg to-transparent">
+            <button id="btn-save"
+                class="w-full bg-brand-red text-white py-5 rounded-full font-bold tracking-[0.2em] text-[13px] shadow-[0_12px_25px_-5px_rgba(227,24,55,0.3)] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                <span id="btn-save-text">LƯU TRÍCH DẪN</span>
+                <span id="btn-save-icon" class="material-symbols-outlined text-lg">check_circle</span>
+            </button>
+        </div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-red/5 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div class="absolute top-40 -left-10 w-32 h-32 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
+    </div>
+    <script>
+        const quoteInput = document.getElementById('quote-input');
+        const charCount = document.getElementById('char-count');
+        const btnRefresh = document.getElementById('btn-refresh');
+        const suggestionsList = document.getElementById('suggestions-list');
+        const btnSave = document.getElementById('btn-save');
+        const btnSaveText = document.getElementById('btn-save-text');
+        const btnSaveIcon = document.getElementById('btn-save-icon');
+        const savedQuotesContainer = document.getElementById('saved-quotes-container');
+        const savedQuotesList = document.getElementById('saved-quotes-list');
+
+        let savedQuotes = []; // Array of { text: "...", isSelected: true }
+        const MAX_SELECTION = 2;
+
+        const suggestionsDB = [
+            "Cuộc sống là một bức tranh, hãy tô điểm nó bằng những gam màu tươi sáng nhất.",
+            "Mỗi ngày là một món quà, hãy trân trọng nó.",
+            "Hãy là phiên bản tốt nhất của chính mình.",
+            "Khó khăn không phải là để ngăn cản, mà là để ta vượt qua.",
+            "Cứ đi rồi sẽ đến, cứ gõ rồi cửa sẽ mở.",
+            "Tương lai thuộc về những ai tin vào cái đẹp của ước mơ.",
+            "Thái độ quyết định cao độ.",
+            "Nụ cười là chiếc chìa khóa vạn năng."
+        ];
+
+        // Handle input character count
+        quoteInput.addEventListener('input', () => {
+            charCount.textContent = `${quoteInput.value.length}/150`;
+            updateButtonState();
+            updateSuggestionsHighlight(quoteInput.value);
+        });
+
+        function updateSuggestionsHighlight(currentText) {
+            document.querySelectorAll('.suggestion-btn').forEach(btn => {
+                const btnText = btn.querySelector('p').textContent.replace(/"/g, '');
+                const isMatch = (currentText.trim() === btnText.trim());
+
+                if (isMatch && currentText.trim() !== "") {
+                    btn.classList.remove('bg-white');
+                    btn.classList.add('bg-soft-red');
+                    btn.querySelector('p').classList.remove('text-vintage-ink');
+                    btn.querySelector('p').classList.add('text-brand-red');
+                } else {
+                    btn.classList.remove('bg-soft-red');
+                    btn.classList.add('bg-white');
+                    btn.querySelector('p').classList.remove('text-brand-red');
+                    btn.querySelector('p').classList.add('text-vintage-ink');
+                }
+            });
+        }
+
+        // Handle initial suggestions click
+        document.querySelectorAll('.suggestion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const text = btn.querySelector('p').textContent.replace(/"/g, '');
+                quoteInput.value = text;
+                quoteInput.dispatchEvent(new Event('input'));
+            });
+        });
+
+        // Refresh suggestions
+        btnRefresh.addEventListener('click', () => {
+            const shuffled = [...suggestionsDB].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 4);
+
+            suggestionsList.innerHTML = '';
+            const styles = [
+                { bg: 'bg-white', rotate: '-2deg', color: 'text-vintage-ink' },
+                { bg: 'bg-soft-red', rotate: '1deg', color: 'text-brand-red' },
+                { bg: 'bg-white', rotate: '-1deg', color: 'text-vintage-ink' },
+                { bg: 'bg-white', rotate: '3deg', color: 'text-vintage-ink' }
+            ];
+
+            selected.forEach((text, index) => {
+                const style = styles[index];
+                const btn = document.createElement('button');
+                btn.className = `suggestion-btn torn-paper-edge bg-white px-5 py-3 soft-depth rotate-[${style.rotate}] active:scale-95 transition-transform max-w-[90%]`;
+                btn.innerHTML = `<p class="font-handwriting text-lg text-left leading-tight text-vintage-ink">"${text}"</p>`;
+                btn.addEventListener('click', () => {
+                    quoteInput.value = text;
+                    quoteInput.dispatchEvent(new Event('input'));
+                });
+                suggestionsList.appendChild(btn);
+            });
+            updateSuggestionsHighlight(quoteInput.value);
+        });
+
+        function updateButtonState() {
+            const hasDraft = quoteInput.value.trim() !== '';
+            const selectedCount = savedQuotes.filter(q => q.isSelected).length;
+
+            if (hasDraft) {
+                btnSave.disabled = false;
+                btnSave.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnSave.classList.add('active:scale-[0.98]');
+                btnSaveText.textContent = "LƯU TRÍCH DẪN";
+                btnSaveIcon.textContent = "check_circle";
+            } else if (selectedCount > 0) {
+                btnSave.disabled = false;
+                btnSave.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnSave.classList.add('active:scale-[0.98]');
+                btnSaveText.textContent = "TẠO VISION BOARD";
+                btnSaveIcon.textContent = "arrow_forward";
+            } else if (savedQuotes.length > 0) {
+                btnSave.disabled = true;
+                btnSave.classList.add('opacity-50', 'cursor-not-allowed');
+                btnSave.classList.remove('active:scale-[0.98]');
+                btnSaveText.textContent = "CHỌN ÍT NHẤT 1 TRÍCH DẪN";
+                btnSaveIcon.textContent = "arrow_forward";
+            } else {
+                btnSave.disabled = false;
+                btnSave.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnSave.classList.add('active:scale-[0.98]');
+                btnSaveText.textContent = "LƯU TRÍCH DẪN";
+                btnSaveIcon.textContent = "check_circle";
+            }
+        }
+
+        function renderSavedQuotes() {
+            if (savedQuotes.length > 0) {
+                savedQuotesContainer.classList.remove('hidden');
+                savedQuotesContainer.classList.add('flex');
+            } else {
+                savedQuotesContainer.classList.add('hidden');
+                savedQuotesContainer.classList.remove('flex');
+            }
+
+            savedQuotesList.innerHTML = '';
+            savedQuotes.forEach((quoteObj, index) => {
+                const div = document.createElement('div');
+                const isSelected = quoteObj.isSelected;
+                const borderClass = isSelected ? 'border-brand-red border-2 shadow-[0_0_15px_rgba(227,24,55,0.2)]' : 'border-black/5 opacity-70';
+
+                div.className = `bg-white/90 backdrop-blur-md rounded-2xl p-4 transition-all cursor-pointer soft-depth flex items-start gap-3 ${borderClass}`;
+
+                div.innerHTML = `
+                <div class="${isSelected ? 'bg-brand-red text-white' : 'bg-gray-200 text-gray-400'} w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors">
+                    <span class="material-symbols-outlined text-sm font-bold">check</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-handwriting text-xl text-vintage-ink leading-tight">"${quoteObj.text}"</p>
+                </div>
+                <button onclick="removeQuote(event, ${index})" class="text-vintage-ink/30 hover:text-brand-red shrink-0 active:scale-90 transition-transform p-1"><span class="material-symbols-outlined text-sm">close</span></button>
+            `;
+
+                div.addEventListener('click', () => toggleQuote(index));
+                savedQuotesList.appendChild(div);
+            });
+            updateButtonState();
+        }
+
+        function toggleQuote(index) {
+            const quote = savedQuotes[index];
+            if (!quote.isSelected) {
+                const selectedCount = savedQuotes.filter(q => q.isSelected).length;
+                if (selectedCount >= MAX_SELECTION) {
+                    alert(`Bạn chỉ được chọn tối đa ${MAX_SELECTION} trích dẫn!`);
+                    return;
+                }
+            }
+            quote.isSelected = !quote.isSelected;
+            renderSavedQuotes();
+        }
+
+        window.removeQuote = function (event, index) {
+            event.stopPropagation();
+            savedQuotes.splice(index, 1);
+            renderSavedQuotes();
+        }
+
+        // Save Quote or Navigate
+        btnSave.addEventListener('click', () => {
+            if (btnSave.disabled) return;
+
+            const val = quoteInput.value.trim();
+            if (val !== '') {
+                // Save and navigate immediately as per request
+                sessionStorage.setItem('visionBoardQuotes', JSON.stringify([val]));
+                window.location.href = '../vision board/code.html';
+            } else {
+                const selectedQuotes = savedQuotes.filter(q => q.isSelected).map(q => q.text);
+                if (selectedQuotes.length > 0) {
+                    sessionStorage.setItem('visionBoardQuotes', JSON.stringify(selectedQuotes));
+                    window.location.href = '../vision board/code.html';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

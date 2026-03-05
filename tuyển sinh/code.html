@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html class="" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tuyển sinh & Hướng nghiệp - Cao đẳng Sài Gòn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6b95c5",
+                        navy: "#0A1D37",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#15191d",
+                        "brand-red": "#E30613",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        "2xl": "1rem",
+                        full: "9999px",
+                    }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --hero-gradient: linear-gradient(165deg, #E30613 0%, #B00010 100%);
+            --xp-gradient: linear-gradient(to right, #FF5A5F, #E30613);
+            --drawer-glass: rgba(10, 29, 55, 0.9);
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F8FAFC;
+        }
+        .hero-banner {
+            background: var(--hero-gradient);
+        }
+        .major-card {
+            @apply bg-white dark:bg-slate-900 rounded-[2rem] p-6 border border-slate-100 dark:border-slate-800 transition-all duration-300;
+        }
+        .major-card:active {
+            @apply scale-[0.98] bg-slate-50 dark:bg-slate-800;
+        }
+        .sticky-cta {
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sticky-cta.visible {
+            transform: translateY(0);
+        }
+        .progressive-form-input {
+            @apply w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border-none focus:ring-2 focus:ring-brand-red font-medium text-sm transition-all;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Side Drawer Fixes */
+        #side-drawer {
+            transform: translateX(-100%);
+            transition: transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+            background: rgba(10, 24, 45, 0.98);
+            backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #drawer-toggle:checked ~ #side-drawer {
+            transform: translateX(0);
+        }
+        #drawer-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 300ms ease-out, visibility 300ms ease-out, backdrop-filter 300ms ease-out;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(0px);
+        }
+        #drawer-toggle:checked ~ #drawer-overlay {
+            opacity: 1;
+            visibility: visible;
+            backdrop-filter: blur(8px);
+        }
+        .drawer-nav-item, .drawer-user-info, .drawer-footer {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 400ms ease-out;
+        }
+        #drawer-toggle:checked ~ #side-drawer .drawer-user-info { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 250ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 350ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 450ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 500ms; }
+        .drawer-nav-item {
+            @apply flex items-center gap-4 p-4 rounded-2xl text-white font-medium transition-all;
+        }
+        .drawer-nav-item.active {
+            @apply bg-brand-red shadow-lg shadow-brand-red/30;
+        }
+        
+        .quiz-option {
+            @apply w-full p-4 rounded-2xl border-2 border-slate-100 text-left font-bold text-navy transition-all active:scale-95;
+        }
+        .quiz-option.selected {
+            @apply border-brand-red bg-red-50 text-brand-red;
+        }
+        .checklist-item {
+            @apply flex items-center gap-4 p-5 rounded-[2rem] bg-white border border-slate-100 transition-all cursor-pointer;
+        }
+        .checklist-item.checked {
+            @apply border-emerald-100 bg-emerald-50/30;
+        }
+        .checklist-item.checked .check-box {
+            @apply bg-emerald-500 border-emerald-500 text-white scale-110;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-24 font-display">
+    <input class="hidden" id="drawer-toggle" type="checkbox" />
+    <label class="fixed inset-0 z-[60]" for="drawer-toggle" id="drawer-overlay"></label>
+
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 bg-white/90 dark:bg-black/90 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-4">
+            <label class="cursor-pointer active:scale-90 transition-transform flex items-center justify-center p-1"
+                for="drawer-toggle">
+                <span class="material-symbols-outlined text-navy dark:text-white text-3xl">menu</span>
+            </label>
+            <h1 class="text-lg font-extrabold text-navy dark:text-white uppercase tracking-wider">CAO ĐĂNG SÀI gòn</h1>
+        </div>
+        <div
+            class="xp-badge bg-[var(--xp-gradient)] flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-bold shadow-sm">
+            <span class="material-symbols-outlined text-[14px] leading-none"
+                style="font-variation-settings: 'FILL' 1;">bolt</span>
+            <span>1.240 XP</span>
+        </div>
+    </header>
+
+    <!-- Side Drawer -->
+    <aside class="fixed top-0 left-0 bottom-0 w-[280px] z-[70] overflow-y-auto px-6 py-10 flex flex-col"
+        id="side-drawer">
+        <label class="absolute top-6 right-6 text-white/60 active:scale-90 transition-transform" for="drawer-toggle">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </label>
+        <div class="drawer-user-info mb-10 mt-4">
+            <div class="flex items-center gap-4 mb-4">
+                <div
+                    class="w-14 h-14 rounded-full border-2 border-brand-red p-0.5 bg-white/10 overflow-hidden shadow-lg">
+                    <img alt="User Avatar" class="w-full h-full object-cover rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMux0mUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P" />
+                </div>
+                <div>
+                    <h3 class="text-white font-extrabold text-lg">Nguyễn Văn A</h3>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <span class="material-symbols-outlined text-brand-red text-sm"
+                            style="font-variation-settings: 'FILL' 1;">stars</span>
+                        <span class="text-white/80 text-xs font-bold tracking-wide">2.450 S-Points</span>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px w-full bg-white/10"></div>
+        </div>
+        <nav class="flex flex-col gap-2">
+            <a class="drawer-nav-item" href="../home/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+                <span>Trang chủ</span>
+            </a>
+            <a class="drawer-nav-item" href="../career hub/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">explore</span>
+                <span>Career Hub</span>
+            </a>
+            <a class="drawer-nav-item active" href="../tuyển sinh/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">campaign</span>
+                <span>Tuyển sinh</span>
+            </a>
+            <a class="drawer-nav-item" href="../Cá nhân/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+                <span>Cá nhân</span>
+            </a>
+            <a class="drawer-nav-item" href="../đăng ký xét tuyển/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">how_to_reg</span>
+                <span>Đăng ký xét tuyển</span>
+            </a>
+            <a class="drawer-nav-item" href="../kho quà tặng/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+                <span>Kho quà tặng</span>
+            </a>
+            <a class="drawer-nav-item" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+                <span>Thông báo</span>
+            </a>
+            <a class="drawer-nav-item mt-8" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                <span>Cài đặt</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div id="main-content-flow">
+        <!-- Dashboard View -->
+        <div id="view-dashboard" class="p-6 fade-in">
+            <h2 class="text-2xl font-extrabold text-[#E30613] uppercase tracking-wider mb-8">Tuyển sinh & Hướng nghiệp
+            </h2>
+
+            <!-- Hero Section -->
+            <section class="hero-banner rounded-[2.5rem] p-8 mb-10 text-white relative overflow-hidden shadow-2xl">
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-black mb-4 leading-tight">Mở cánh cửa tương lai</h3>
+                    <p class="text-white/80 mb-8 font-medium">Học thực chiến, nhận bằng quốc tế và cam kết việc làm
+                        100%.</p>
+                    <button onclick="openConsultationForm()"
+                        class="bg-white text-brand-red font-bold px-8 py-4 rounded-2xl shadow-lg active:scale-95 transition-all text-sm uppercase tracking-wider">
+                        Đăng ký tư vấn ngay
+                    </button>
+                </div>
+                <div class="absolute -bottom-8 -right-8 opacity-20 transform rotate-12">
+                    <span class="material-symbols-outlined text-[160px]"
+                        style="font-variation-settings: 'FILL' 1;">campaign</span>
+                </div>
+            </section>
+
+            <!-- Quick Links -->
+            <div class="grid grid-cols-2 gap-4 mb-10">
+                <div onclick="showMajorList()"
+                    class="bg-white border border-slate-100 p-5 rounded-[2rem] shadow-sm active:scale-95 transition-all group">
+                    <div
+                        class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-red group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-brand-red group-hover:text-inherit">school</span>
+                    </div>
+                    <h4 class="font-bold text-sm leading-tight text-navy">Chương trình đào tạo</h4>
+                </div>
+                <div onclick="switchView('scholarship')"
+                    class="bg-white border border-slate-100 p-5 rounded-[2rem] shadow-sm active:scale-95 transition-all group">
+                    <div
+                        class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-blue-600 group-hover:text-inherit">payments</span>
+                    </div>
+                    <h4 class="font-bold text-sm leading-tight text-navy">Học bổng & Học phí</h4>
+                </div>
+                <div onclick="switchView('admission')"
+                    class="bg-white border border-slate-100 p-5 rounded-[2rem] shadow-sm active:scale-95 transition-all group">
+                    <div
+                        class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                        <span
+                            class="material-symbols-outlined text-orange-500 group-hover:text-inherit">history_edu</span>
+                    </div>
+                    <h4 class="font-bold text-sm leading-tight text-navy">Hồ sơ xét tuyển</h4>
+                </div>
+                <div onclick="switchView('consultation')"
+                    class="bg-white border border-slate-100 p-5 rounded-[2rem] shadow-sm active:scale-95 transition-all group">
+                    <div
+                        class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        <span
+                            class="material-symbols-outlined text-emerald-600 group-hover:text-inherit">contact_support</span>
+                    </div>
+                    <h4 class="font-bold text-sm leading-tight text-navy">Tư vấn trực tuyến</h4>
+                </div>
+            </div>
+
+            <!-- Hot Majors Section -->
+            <div class="mb-6 flex items-center justify-between">
+                <h3 class="text-lg font-black text-navy uppercase tracking-tight">Ngành học tiêu biểu</h3>
+                <button onclick="showMajorList()" class="text-xs font-bold text-brand-red uppercase tracking-widest">Tất
+                    cả</button>
+            </div>
+
+            <div id="major-cards-container" class="space-y-4">
+                <!-- Major cards will be injected here -->
+            </div>
+        </div>
+
+        <!-- Major List View -->
+        <div id="view-majors" class="hidden p-6 fade-in">
+            <div class="flex items-center gap-4 mb-8">
+                <button onclick="switchView('dashboard')"
+                    class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-lg">arrow_back_ios_new</span>
+                </button>
+                <h2 class="text-xl font-black text-navy uppercase tracking-tight">Danh sách ngành học</h2>
+            </div>
+            <div id="full-major-list" class="space-y-4">
+                <!-- All major cards -->
+            </div>
+        </div>
+
+        <!-- Major Detail View -->
+        <div id="view-major-detail" class="hidden fade-in bg-white min-h-screen">
+            <!-- Dynamic header/banner -->
+            <div id="major-detail-header" class="relative aspect-video bg-navy overflow-hidden">
+                <img id="major-detail-image" src="" alt="" class="w-full h-full object-cover opacity-60">
+                <button onclick="showMajorList()"
+                    class="absolute top-6 left-6 w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center active:scale-90 transition-transform border border-white/20">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+                <div class="absolute bottom-6 left-6 right-6">
+                    <h2 id="major-detail-title" class="text-2xl font-black text-white leading-tight mb-2"></h2>
+                    <div class="flex gap-4">
+                        <span
+                            class="px-3 py-1 bg-brand-red text-white text-[10px] font-bold rounded-full uppercase tracking-widest"
+                            id="major-detail-time"></span>
+                        <span
+                            class="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] font-bold rounded-full uppercase tracking-widest"
+                            id="major-detail-salary"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 space-y-8 pb-32" id="major-detail-content-area">
+                <section>
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Video giới thiệu</h3>
+                    <div
+                        class="relative aspect-video rounded-3xl bg-slate-100 overflow-hidden group border border-slate-100 shadow-inner">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=2670"
+                            alt="Video Placeholder"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button
+                                class="w-16 h-16 rounded-full bg-brand-red text-white flex items-center justify-center shadow-2xl shadow-brand-red/40 active:scale-90 transition-transform">
+                                <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Mô tả ngành học</h3>
+                    <p id="major-detail-desc" class="text-slate-600 font-medium leading-relaxed"></p>
+                </section>
+
+                <section>
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Lộ trình học tập</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-red-50 text-brand-red flex items-center justify-center shrink-0 font-black text-xs">
+                                1</div>
+                            <div class="font-bold text-sm text-navy">Kỹ năng nền tảng và Tư duy ngành</div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-red-50 text-brand-red flex items-center justify-center shrink-0 font-black text-xs">
+                                2</div>
+                            <div class="font-bold text-sm text-navy">Kiến thức chuyên sâu và Thực hành dự án</div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-red-50 text-brand-red flex items-center justify-center shrink-0 font-black text-xs">
+                                3</div>
+                            <div class="font-bold text-sm text-navy">Thực tập doanh nghiệp và Đồ án tốt nghiệp</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Cơ hội việc làm</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-emerald-500">work</span>
+                            <span class="text-xs font-bold text-navy whitespace-nowrap">Việc làm 100%</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-blue-500">trending_up</span>
+                            <span class="text-xs font-bold text-navy" id="major-detail-growth">Tăng trưởng 15%</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Placeholder for more content to ensure scrolling -->
+                <div class="h-60 flex items-center justify-center text-slate-300 italic text-xs">Xem chi tiết lộ trình
+                    bên dưới</div>
+            </div>
+
+            <!-- Sticky CTA -->
+            <div id="major-sticky-cta" class="sticky-cta fixed bottom-24 left-6 right-6 z-[90]">
+                <button onclick="openConsultationForm(currentMajorId)"
+                    class="w-full py-5 bg-brand-red text-white rounded-3xl font-black uppercase tracking-[0.2em] shadow-2xl shadow-brand-red/40 active:scale-95 transition-transform flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined">description</span>
+                    Nhận lộ trình + Tư vấn miễn phí
+                </button>
+            </div>
+        </div>
+
+        <!-- Scholarship View -->
+        <div id="view-scholarship" class="hidden p-6 fade-in bg-white min-h-screen">
+            <div class="flex items-center gap-4 mb-8">
+                <button onclick="switchView('dashboard')"
+                    class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-lg">arrow_back_ios_new</span>
+                </button>
+                <h2 class="text-xl font-black text-navy uppercase tracking-tight">Học bổng & Học phí</h2>
+            </div>
+
+            <div id="scholarship-hero" class="mb-10">
+                <div class="rounded-[2.5rem] bg-navy-accent p-8 text-white relative overflow-hidden shadow-2xl mb-8">
+                    <h3 class="text-3xl font-black mb-4 leading-tight">🎓 Học bổng lên tới 100% học phí</h3>
+                    <p class="text-white/70 mb-8 font-medium">Khám phá cơ hội cùng chính sách học bổng đa dạng.</p>
+                    <button onclick="startScholarshipQuiz()"
+                        class="w-full py-5 bg-brand-red text-white rounded-3xl font-black uppercase tracking-[0.2em] shadow-xl shadow-brand-red/30 active:scale-95 transition-transform">
+                        🔴 Kiểm tra bạn có đủ điều kiện không?
+                    </button>
+                    <div class="absolute -bottom-6 -right-6 opacity-10">
+                        <span class="material-symbols-outlined text-[140px]">workspace_premium</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="scholarship-quiz" class="hidden space-y-8">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-black text-slate-400 uppercase tracking-widest"
+                        id="quiz-progress-text">Câu 1/3</span>
+                    <div class="h-1.5 w-32 bg-slate-100 rounded-full overflow-hidden">
+                        <div id="quiz-progress-bar" class="h-full bg-brand-red transition-all duration-300"
+                            style="width: 33%"></div>
+                    </div>
+                </div>
+
+                <div id="quiz-step-1">
+                    <h4 class="text-xl font-black text-navy mb-6">Điểm trung bình lớp 12 của bạn?</h4>
+                    <div class="space-y-3">
+                        <button onclick="handleQuizOption(1)" class="quiz-option">Từ 8.0 trở lên</button>
+                        <button onclick="handleQuizOption(1)" class="quiz-option">Từ 7.0 đến 8.0</button>
+                        <button onclick="handleQuizOption(1)" class="quiz-option">Dưới 7.0</button>
+                    </div>
+                </div>
+
+                <div id="quiz-step-2" class="hidden">
+                    <h4 class="text-xl font-black text-navy mb-6">Bạn đăng ký ngành nào?</h4>
+                    <div class="space-y-3">
+                        <button onclick="handleQuizOption(2)" class="quiz-option">Công nghệ thông tin</button>
+                        <button onclick="handleQuizOption(2)" class="quiz-option">Digital Marketing</button>
+                        <button onclick="handleQuizOption(2)" class="quiz-option">Thiết kế đồ họa</button>
+                        <button onclick="handleQuizOption(2)" class="quiz-option">Ngành khác</button>
+                    </div>
+                </div>
+
+                <div id="quiz-step-3" class="hidden">
+                    <h4 class="text-xl font-black text-navy mb-6">Bạn có thành tích nổi bật nào không?</h4>
+                    <div class="space-y-3">
+                        <button onclick="handleQuizOption(3)" class="quiz-option">Có (Giải thưởng/Năng khiếu)</button>
+                        <button onclick="handleQuizOption(3)" class="quiz-option">Hiện chưa có</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="scholarship-result" class="hidden fade-in">
+                <div class="p-8 rounded-[2.5rem] bg-emerald-50 border border-emerald-100 text-center mb-8">
+                    <span class="material-symbols-outlined text-emerald-500 text-4xl mb-4">stars</span>
+                    <h3 class="text-2xl font-black text-navy mb-2">🎉 Chúc mừng!</h3>
+                    <p class="text-emerald-700 font-bold text-lg">Bạn đủ điều kiện nhận học bổng 50–100%</p>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="text-sm font-bold text-slate-500 text-center mb-6 uppercase tracking-widest">Để lại thông
+                        tin nhận hướng dẫn</p>
+                    <input type="text" id="sch-name" placeholder="Họ tên của bạn" class="progressive-form-input">
+                    <input type="tel" id="sch-phone" placeholder="Số điện thoại" class="progressive-form-input">
+                    <input type="email" id="sch-email" placeholder="Email (Không bắt buộc)"
+                        class="progressive-form-input">
+                    <button onclick="submitScholarshipForm()"
+                        class="w-full py-5 bg-brand-red text-white rounded-3xl font-black uppercase tracking-[0.2em] shadow-xl shadow-brand-red/30 active:scale-95 transition-transform mt-4">
+                        🔴 Nhận học bổng ngay
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admission View -->
+        <div id="view-admission" class="hidden p-6 fade-in bg-white min-h-screen">
+            <div class="flex items-center gap-4 mb-8">
+                <button onclick="switchView('dashboard')"
+                    class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-lg">arrow_back_ios_new</span>
+                </button>
+                <h2 class="text-xl font-black text-navy uppercase tracking-tight">Hồ sơ xét tuyển</h2>
+            </div>
+
+            <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 px-2">Checklist hồ sơ</p>
+
+            <div class="space-y-4 mb-10">
+                <div onclick="toggleCheck(this)" class="checklist-item group">
+                    <div
+                        class="check-box w-7 h-7 rounded-xl border-2 border-slate-200 flex items-center justify-center transition-all group-hover:border-brand-red shrink-0">
+                        <span class="material-symbols-outlined text-lg hidden">check</span>
+                    </div>
+                    <span class="font-bold text-navy">Bằng tốt nghiệp THPT</span>
+                </div>
+                <div onclick="toggleCheck(this)" class="checklist-item group">
+                    <div
+                        class="check-box w-7 h-7 rounded-xl border-2 border-slate-200 flex items-center justify-center transition-all group-hover:border-brand-red shrink-0">
+                        <span class="material-symbols-outlined text-lg hidden">check</span>
+                    </div>
+                    <span class="font-bold text-navy">Học bạ THPT</span>
+                </div>
+                <div onclick="toggleCheck(this)" class="checklist-item group">
+                    <div
+                        class="check-box w-7 h-7 rounded-xl border-2 border-slate-200 flex items-center justify-center transition-all group-hover:border-brand-red shrink-0">
+                        <span class="material-symbols-outlined text-lg hidden">check</span>
+                    </div>
+                    <span class="font-bold text-navy">Căn cước công dân (CCCD)</span>
+                </div>
+            </div>
+
+            <div class="p-8 rounded-[3rem] bg-slate-50 border border-slate-100 text-center">
+                <div
+                    class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-6 text-white shadow-xl">
+                    <span class="material-symbols-outlined text-3xl">mark_as_unread</span>
+                </div>
+                <h4 class="text-lg font-black text-navy mb-8">Nhận hướng dẫn nộp hồ sơ qua Zalo</h4>
+                <div class="space-y-4 mb-8">
+                    <input type="text" id="adm-name" placeholder="Họ tên"
+                        class="progressive-form-input bg-white shadow-sm">
+                    <input type="tel" id="adm-phone" placeholder="Số điện thoại"
+                        class="progressive-form-input bg-white shadow-sm">
+                </div>
+                <button onclick="submitAdmission()"
+                    class="w-full py-5 bg-brand-red text-white rounded-3xl font-black uppercase tracking-[0.2em] shadow-xl border-4 border-white active:scale-95 transition-transform-all">
+                    🔴 Nhận hướng dẫn nộp hồ sơ qua Zalo
+                </button>
+            </div>
+        </div>
+
+        <!-- Consultation View -->
+        <div id="view-consultation" class="hidden p-6 fade-in bg-white min-h-screen">
+            <div class="flex items-center gap-4 mb-8">
+                <button onclick="switchView('dashboard')"
+                    class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-lg">arrow_back_ios_new</span>
+                </button>
+                <h2 class="text-xl font-black text-navy uppercase tracking-tight">Tư vấn trực tuyến</h2>
+            </div>
+
+            <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 px-2">Chọn phương thức hỗ trợ</p>
+
+            <div class="grid grid-cols-1 gap-4 mb-10">
+                <div onclick="simulateCrm('Guest', 'Lead - Booking Call')"
+                    class="flex items-center gap-6 p-6 rounded-[2.5rem] bg-white border-2 border-slate-50 shadow-sm active:scale-95 transition-all active:bg-red-50 active:border-red-100">
+                    <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-brand-red">
+                        <span class="material-symbols-outlined text-3xl">phone_in_talk</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-black text-navy">Gọi điện ngay</h4>
+                        <p class="text-xs font-medium text-slate-400">Kết nối trực tiếp 24/7</p>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                </div>
+                <div onclick="simulateCrm('Guest', 'Lead - Booking Call')"
+                    class="flex items-center gap-6 p-6 rounded-[2.5rem] bg-white border-2 border-slate-50 shadow-sm active:scale-95 transition-all active:bg-blue-50 active:border-blue-100">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600">
+                        <span class="material-symbols-outlined text-3xl">chat_bubble</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-black text-navy">Chat Zalo</h4>
+                        <p class="text-xs font-medium text-slate-400">Chuyên viên trực tuyến</p>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                </div>
+                <div onclick="showBookingForm()"
+                    class="flex items-center gap-6 p-6 rounded-[2.5rem] bg-white border-2 border-slate-50 shadow-sm active:scale-95 transition-all active:bg-emerald-50 active:border-emerald-100">
+                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600">
+                        <span class="material-symbols-outlined text-3xl">event_available</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-black text-navy">Đặt lịch tư vấn</h4>
+                        <p class="text-xs font-medium text-slate-400">Hẹn thời gian hỗ trợ</p>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                </div>
+            </div>
+
+            <div id="booking-form"
+                class="hidden fade-in p-8 rounded-[3rem] bg-navy-accent text-white shadow-2xl relative overflow-hidden">
+                <h4 class="text-xl font-black mb-10 text-center">Thông tin đặt lịch</h4>
+                <div class="space-y-4 mb-8">
+                    <input type="text" id="bk-name" placeholder="Tên của bạn"
+                        class="w-full bg-white/10 border-none rounded-2xl py-4 px-6 text-white placeholder-white/30 focus:ring-2 focus:ring-brand-red transition-all">
+                    <input type="tel" id="bk-phone" placeholder="Số điện thoại"
+                        class="w-full bg-white/10 border-none rounded-2xl py-4 px-6 text-white placeholder-white/30 focus:ring-2 focus:ring-brand-red transition-all">
+                    <div class="relative">
+                        <select id="bk-time"
+                            class="w-full bg-white/10 border-none rounded-2xl py-4 px-6 text-white appearance-none focus:ring-2 focus:ring-brand-red transition-all">
+                            <option value="" class="bg-navy text-white">Chọn thời gian</option>
+                            <option value="9am" class="bg-navy text-white">Sáng mai - 9:00</option>
+                            <option value="2pm" class="bg-navy text-white">Chiều mai - 14:00</option>
+                            <option value="8pm" class="bg-navy text-white">Tối mai - 20:00</option>
+                        </select>
+                        <span
+                            class="material-symbols-outlined absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">expand_more</span>
+                    </div>
+                </div>
+                <button onclick="submitBooking()"
+                    class="w-full py-5 bg-brand-red text-white rounded-3xl font-black uppercase tracking-[0.2em] shadow-xl border-4 border-navy-accent active:scale-95 transition-transform mt-4">
+                    🔴 Đặt lịch ngay
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Registration Modal Overlay -->
+    <div id="consultation-modal" class="fixed inset-0 z-[110] flex items-end justify-center hidden">
+        <div class="absolute inset-0 bg-navy/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-white w-full rounded-t-[3rem] p-8 glass-modal transition-all duration-500 transform translate-y-full"
+            id="modal-container">
+            <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-8 cursor-pointer" onclick="closeModal()"></div>
+
+            <div id="form-step-input">
+                <h3 class="text-2xl font-black text-navy mb-2" id="form-title">Tư vấn tuyển sinh</h3>
+                <p class="text-slate-500 text-sm font-medium mb-8" id="form-subtitle">Chúng tôi sẽ liên hệ trong 24h
+                    tới.</p>
+
+                <div class="space-y-4 mb-8">
+                    <input type="text" id="reg-name" placeholder="Họ tên của bạn" class="progressive-form-input">
+                    <input type="tel" id="reg-phone" placeholder="Số điện thoại" class="progressive-form-input">
+                    <input type="email" id="reg-email" placeholder="Email (Không bắt buộc)"
+                        class="progressive-form-input">
+                    <select id="reg-major" class="progressive-form-input appearance-none">
+                        <option value="">Chọn ngành quan tâm</option>
+                    </select>
+                    <div id="extra-field-container" class="hidden">
+                        <select id="reg-call-time" class="progressive-form-input appearance-none">
+                            <option value="">Thời gian muốn được gọi</option>
+                            <option value="Sáng">Buổi sáng (8:00 - 12:00)</option>
+                            <option value="Chiều">Buổi chiều (13:30 - 17:30)</option>
+                            <option value="Tối">Buổi tối (18:00 - 21:00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="submitForm()"
+                    class="w-full py-5 bg-brand-red text-white rounded-3xl font-black uppercase tracking-[0.2em] shadow-xl shadow-brand-red/30 active:scale-95 transition-transform">
+                    🔴 Nhận tư vấn ngay
+                </button>
+            </div>
+
+            <div id="form-step-success" class="hidden text-center py-10 fade-in">
+                <div class="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-emerald-500 text-4xl font-black">done_all</span>
+                </div>
+                <h3 class="text-2xl font-black text-navy mb-4">Gửi thông tin thành công!</h3>
+                <div class="p-6 bg-brand-red/5 border border-brand-red/10 rounded-3xl mb-8">
+                    <p class="text-brand-red font-bold text-sm mb-1">🎁 Quà tặng cho bạn:</p>
+                    <p class="text-navy font-bold">Bộ tài liệu ngành + Lộ trình nghề nghiệp 2024</p>
+                </div>
+                <button onclick="closeModalAndShowRoadmap()"
+                    class="w-full py-5 bg-navy text-white rounded-3xl font-black uppercase tracking-[0.2em] active:scale-95 transition-transform">
+                    🎯 Xem lộ trình ngay
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const majors = [
+            {
+                id: 'digital-marketing',
+                name: 'Digital Marketing',
+                salary: '15-25tr',
+                time: '2.5 năm',
+                rate: '98%',
+                desc: 'Học cách làm chủ thế giới số, từ content marketing đến quảng cáo đa kênh và đo lường hiệu quả kinh doanh thực tế.',
+                growth: 'Tăng trưởng 25%',
+                img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426&ixlib=rb-4.0.3'
+            },
+            {
+                id: 'cntt',
+                name: 'Công nghệ thông tin',
+                salary: '18-35tr',
+                time: '2.5 năm',
+                rate: '100%',
+                desc: 'Đào tạo lập trình viên thực chiến (Java, Python, JS) với tư duy thuật toán và kinh nghiệm triển khai dự án quy mô lớn.',
+                growth: 'Tăng trưởng 30%',
+                img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3'
+            },
+            {
+                id: 'tiet-ke-do-hoa',
+                name: 'Thiết kế đồ họa',
+                salary: '12-20tr',
+                time: '2.5 năm',
+                rate: '95%',
+                desc: 'Phát triển tư duy thẩm mỹ và kỹ năng sử dụng thành thạo bộ công cụ thiết kế chuyên nghiệp của Adobe.',
+                growth: 'Tăng trưởng 18%',
+                img: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1664&ixlib=rb-4.0.3'
+            },
+            {
+                id: 'logistics',
+                name: 'Logistics & Chuỗi cung ứng',
+                salary: '14-22tr',
+                time: '2.5 năm',
+                rate: '96%',
+                desc: 'Nắm vững quy trình vận hành kho bãi, vận tải quốc tế và quản trị hiệu quả toàn bộ chuỗi cung ứng toàn cầu.',
+                growth: 'Tăng trưởng 22%',
+                img: 'https://images.unsplash.com/images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3'
+            }
+        ];
+
+        let currentMajorId = null;
+
+        function createMajorCard(major) {
+            return `
+                <div onclick="openMajorDetail('${major.id}')" class="major-card shadow-sm hover:shadow-xl group">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-brand-red/10 text-brand-red text-[10px] font-black uppercase tracking-widest rounded-full leading-none">${major.name}</span>
+                        <div class="flex items-center gap-1 text-emerald-500">
+                            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">recommend</span>
+                            <span class="text-[10px] font-bold">${major.rate} employment</span>
+                        </div>
+                    </div>
+                    <h4 class="text-lg font-black text-navy mb-4 group-hover:text-brand-red transition-colors">${major.name} thực chiến</h4>
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-bold uppercase">Lương TB</span>
+                            <span class="text-sm font-black text-navy">${major.salary}</span>
+                        </div>
+                        <div class="flex flex-col text-right">
+                            <span class="text-[10px] text-slate-400 font-bold uppercase">Thời gian</span>
+                            <span class="text-sm font-black text-navy">${major.time}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function initDashboard() {
+            const container = document.getElementById('major-cards-container');
+            container.innerHTML = majors.slice(0, 2).map(createMajorCard).join('');
+
+            const listContainer = document.getElementById('full-major-list');
+            listContainer.innerHTML = majors.map(createMajorCard).join('');
+
+            // Populate select major in form
+            const select = document.getElementById('reg-major');
+            majors.forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m.id;
+                opt.text = m.name;
+                select.add(opt);
+            });
+        }
+
+        function switchView(viewId) {
+            const views = ['dashboard', 'majors', 'major-detail', 'scholarship', 'admission', 'consultation'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
+
+            const targetView = document.getElementById(`view-${viewId}`);
+            if (targetView) targetView.classList.remove('hidden');
+            window.scrollTo(0, 0);
+
+            // View-specific resets
+            if (viewId === 'scholarship') {
+                document.getElementById('scholarship-hero').classList.remove('hidden');
+                document.getElementById('scholarship-quiz').classList.add('hidden');
+                document.getElementById('scholarship-result').classList.add('hidden');
+            }
+            if (viewId === 'consultation') {
+                document.getElementById('booking-form').classList.add('hidden');
+            }
+        }
+
+        function showMajorList() { switchView('majors'); }
+
+        function openMajorDetail(majorId) {
+            const major = majors.find(m => m.id === majorId);
+            if (!major) return;
+
+            currentMajorId = majorId;
+            document.getElementById('major-detail-title').textContent = major.name;
+            document.getElementById('major-detail-desc').textContent = major.desc;
+            document.getElementById('major-detail-time').textContent = major.time;
+            document.getElementById('major-detail-salary').textContent = major.salary;
+            document.getElementById('major-detail-growth').textContent = major.growth;
+            document.getElementById('major-detail-image').src = major.img;
+
+            switchView('major-detail');
+            document.getElementById('major-sticky-cta').classList.remove('visible');
+        }
+
+        // --- Scholarship Flow ---
+        let currentQuizStep = 1;
+        function startScholarshipQuiz() {
+            document.getElementById('scholarship-hero').classList.add('hidden');
+            document.getElementById('scholarship-quiz').classList.remove('hidden');
+            currentQuizStep = 1;
+            updateQuizUI();
+        }
+
+        function handleQuizOption(step) {
+            if (currentQuizStep < 3) {
+                currentQuizStep++;
+                updateQuizUI();
+            } else {
+                document.getElementById('scholarship-quiz').classList.add('hidden');
+                document.getElementById('scholarship-result').classList.remove('hidden');
+            }
+        }
+
+        function updateQuizUI() {
+            [1, 2, 3].forEach(s => document.getElementById(`quiz-step-${s}`).classList.add('hidden'));
+            document.getElementById(`quiz-step-${currentQuizStep}`).classList.remove('hidden');
+            document.getElementById('quiz-progress-text').textContent = `Câu ${currentQuizStep}/3`;
+            document.getElementById('quiz-progress-bar').style.width = (currentQuizStep * 33.33) + '%';
+        }
+
+        function submitScholarshipForm() {
+            const name = document.getElementById('sch-name').value;
+            const phone = document.getElementById('sch-phone').value;
+            if (!name || !phone) { alert("Vui lòng điền đủ thông tin!"); return; }
+            simulateCrm(name, 'Lead - Quan tâm học bổng');
+            closeModalAndShowRoadmap();
+        }
+
+        // --- Admission Flow ---
+        function toggleCheck(el) {
+            el.classList.toggle('checked');
+            const icon = el.querySelector('.material-symbols-outlined');
+            icon.classList.toggle('hidden');
+        }
+
+        function submitAdmission() {
+            const name = document.getElementById('adm-name').value;
+            const phone = document.getElementById('adm-phone').value;
+            if (!name || !phone) { alert("Vui lòng điền đủ thông tin!"); return; }
+            simulateCrm(name, 'Lead - Hồ sơ');
+            closeModalAndShowRoadmap();
+        }
+
+        // --- Consultation & Booking Flow ---
+        function showBookingForm() {
+            document.getElementById('booking-form').classList.remove('hidden');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function submitBooking() {
+            const name = document.getElementById('bk-name').value;
+            const phone = document.getElementById('bk-phone').value;
+            if (!name || !phone) { alert("Vui lòng điền đủ thông tin!"); return; }
+            simulateCrm(name, 'Lead - Booking Call');
+            closeModalAndShowRoadmap();
+        }
+
+        // --- CRM Simulation Helper ---
+        function simulateCrm(name, tag) {
+            console.log(`Pushed to CRM: [${tag}] for user ${name}`);
+            const toast = document.createElement('div');
+            toast.className = "fixed top-24 left-1/2 -translate-x-1/2 z-[200] bg-navy-accent text-white px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl fade-in border border-white/10";
+            toast.innerHTML = `CRM TAG: <span class="text-brand-red ml-2 font-black">${tag}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        // --- Modal & Progressive Form Logic ---
+        function openConsultationForm(majorId = null) {
+            const modal = document.getElementById('consultation-modal');
+            const container = document.getElementById('modal-container');
+            const select = document.getElementById('reg-major');
+            const emailField = document.getElementById('reg-email');
+            const extraField = document.getElementById('extra-field-container');
+            const title = document.getElementById('form-title');
+            const subtitle = document.getElementById('form-subtitle');
+
+            if (!majorId) {
+                title.textContent = "Tư vấn tuyển sinh";
+                subtitle.textContent = "Điền thông tin để nhận tư vấn chuyên sâu.";
+                select.classList.remove('hidden');
+                emailField.classList.remove('hidden');
+                extraField.classList.add('hidden');
+                select.value = "";
+            } else {
+                const major = majors.find(m => m.id === majorId);
+                title.textContent = "Nhận lộ trình " + (major ? major.name : "");
+                subtitle.textContent = "Để lại thông tin để dự báo cơ hội nghề nghiệp.";
+                select.classList.add('hidden');
+                emailField.classList.add('hidden');
+                extraField.classList.remove('hidden');
+                select.value = majorId;
+            }
+
+            modal.classList.remove('hidden');
+            setTimeout(() => container.classList.remove('translate-y-full'), 10);
+        }
+
+        function closeModal() {
+            const container = document.getElementById('modal-container');
+            container.classList.add('translate-y-full');
+            setTimeout(() => {
+                document.getElementById('consultation-modal').classList.add('hidden');
+                resetForm();
+            }, 500);
+        }
+
+        function submitForm() {
+            const name = document.getElementById('reg-name').value;
+            const phone = document.getElementById('reg-phone').value;
+            const majorId = document.getElementById('reg-major').value;
+
+            if (!name || !phone) { alert("Vui lòng nhập Họ tên và Số điện thoại"); return; }
+
+            const major = majors.find(m => m.id === majorId);
+            const majorName = major ? major.name : "Tư vấn chung";
+            simulateCrm(name, `Lead - Quan tâm ngành ${majorName}`);
+
+            document.getElementById('form-step-input').classList.add('hidden');
+            document.getElementById('form-step-success').classList.remove('hidden');
+        }
+
+        function resetForm() {
+            document.getElementById('form-step-input').classList.remove('hidden');
+            document.getElementById('form-step-success').classList.add('hidden');
+            document.getElementById('reg-name').value = '';
+            document.getElementById('reg-phone').value = '';
+            document.getElementById('reg-email').value = '';
+        }
+
+        function closeModalAndShowRoadmap() {
+            closeModal();
+            setTimeout(() => { window.location.href = '../lộ trình của bạn/code.html'; }, 600);
+        }
+
+        // --- Initialize ---
+        window.addEventListener('scroll', () => {
+            const detailView = document.getElementById('view-major-detail');
+            if (!detailView || detailView.classList.contains('hidden')) return;
+
+            const scrollHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const clientHeight = document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+
+            const stickyCta = document.getElementById('major-sticky-cta');
+            if (stickyCta) {
+                if (scrollPercent > 50) stickyCta.classList.add('visible');
+                else stickyCta.classList.remove('visible');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav
+        class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-black/95 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 flex justify-between items-center z-[100] pt-2 pb-[calc(1rem+safe-area-inset-bottom)] px-4 shadow-[0_-10px_30px_-5px_rgba(0,0,0,0.08)]">
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
+            href="../home/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 0, 'wght' 400;">home</span>
+            </div>
+            <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Trang
+                chủ</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
+            href="../career hub/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 0, 'wght' 400;">explore</span>
+            </div>
+            <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Career
+                Hub</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0" href="../tuyển sinh/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-[#E30613] flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 1, 'wght' 600; color: #E30613;">campaign</span>
+            </div>
+            <span
+                class="text-[9px] font-extrabold uppercase text-[#E30613] tracking-tighter whitespace-nowrap leading-none">Tuyển
+                sinh</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
+            href="../Cá nhân/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 0, 'wght' 400;">person</span>
+            </div>
+            <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Cá
+                nhân</span>
+        </a>
+    </nav>
+
+    <style>
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            nav {
+                padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</body>
+
+</html>

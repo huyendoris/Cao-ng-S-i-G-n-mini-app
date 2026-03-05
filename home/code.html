@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html class="" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SAIGONTECH Home Dashboard - Navigation Fix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6b95c5",
+                        navy: "#0A1D37",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#15191d",
+                        "brand-red": "#E30613",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        "2xl": "1rem",
+                        full: "9999px",
+                    },
+                    animation: {
+                        'pulse-ring': 'pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'pulse-ring': {
+                            '0%': { transform: 'scale(0.95)', opacity: '0.8' },
+                            '100%': { transform: 'scale(1.8)', opacity: '0' },
+                        }
+                    }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --hero-gradient: linear-gradient(165deg, #E30613 0%, #B00010 100%);
+            --xp-gradient: linear-gradient(to right, #FF5A5F, #E30613);
+            --roadmap-bg: linear-gradient(180deg, #0F1F3D 0%, #162B4F 100%);
+            --drawer-glass: rgba(10, 29, 55, 0.9);
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            background-color: #F8FAFC;
+        }
+        .hero-refined {
+            background: var(--hero-gradient);
+            position: relative;
+        }
+        .icon-soft-red {
+            background: linear-gradient(135deg, #E30613 0%, #B00010 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-variation-settings: 'FILL' 1, 'wght' 500;
+        }
+        .visualize-icon-container-subtle {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: rgba(227, 6, 19, 0.08);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .timeline-dash {
+            position: absolute;
+            left: 15px;
+            top: 32px;
+            bottom: 0;
+            width: 2px;
+            background-image: linear-gradient(to bottom, #E30613 50%, transparent 50%);
+            background-size: 2px 12px;
+            z-index: 0;
+            filter: drop-shadow(0 0 6px rgba(227, 6, 19, 0.8));
+        }
+        .roadmap-section {
+            background: var(--roadmap-bg);
+            position: relative;
+        }
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 9999px;
+            background: #E30613;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 0 12px 2px rgba(227, 6, 19, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .step-circle::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 9999px;
+            background: rgba(227, 6, 19, 0.4);
+            z-index: -1;
+            @apply animate-pulse-ring;
+        }
+        .step-circle-final {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            box-shadow: 0 0 20px 4px rgba(251, 191, 36, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .step-circle-final::before {
+            background: rgba(251, 191, 36, 0.4);
+        }
+        .stagger-1::before { animation-delay: 0s; }
+        .stagger-2::before { animation-delay: 0.4s; }
+        .stagger-3::before { animation-delay: 0.8s; }
+        .stagger-4::before { animation-delay: 1.2s; }
+        .stagger-5::before { animation-delay: 1.6s; }
+        #side-drawer {
+            transform: translateX(-100%);
+            transition: transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+            background: var(--drawer-glass);
+            backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #drawer-toggle:checked ~ #side-drawer {
+            transform: translateX(0);
+        }
+        #drawer-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 300ms ease-out, visibility 300ms ease-out, backdrop-filter 300ms ease-out;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(0px);
+        }
+        #drawer-toggle:checked ~ #drawer-overlay {
+            opacity: 1;
+            visibility: visible;
+            backdrop-filter: blur(8px);
+        }
+        .drawer-nav-item, .drawer-user-info, .drawer-footer {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 400ms ease-out;
+        }
+        #drawer-toggle:checked ~ #side-drawer .drawer-user-info { opacity: 1; transform: translateY(0); transition-delay: 100ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 200ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 250ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 350ms; }
+        #drawer-toggle:checked ~ #side-drawer .drawer-footer { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
+        .drawer-nav-item {
+            @apply flex items-center gap-4 p-4 rounded-2xl text-white font-medium transition-all;
+        }
+        .drawer-nav-item.active {
+            @apply bg-brand-red shadow-lg shadow-brand-red/30;
+        }
+        .drawer-nav-item:not(.active):active {
+            @apply bg-white/10;
+        }
+        .premium-3d-brain-subtle {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .premium-3d-brain-subtle::after {
+            content: 'neurology';
+            font-family: 'Material Symbols Outlined';
+            font-size: 28px;
+            font-variation-settings: 'FILL' 1, 'wght' 500;
+            color: #E30613;
+        }
+        @keyframes float-chat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .float-chat-widget {
+            animation: float-chat 3s ease-in-out infinite;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-24 font-display">
+    <input class="hidden" id="drawer-toggle" type="checkbox" />
+    <label class="fixed inset-0 z-[60]" for="drawer-toggle" id="drawer-overlay"></label>
+    <aside class="fixed top-0 left-0 bottom-0 w-[280px] z-[70] overflow-y-auto px-6 py-10 flex flex-col"
+        id="side-drawer">
+        <label class="absolute top-6 right-6 text-white/60 active:scale-90 transition-transform" for="drawer-toggle">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </label>
+        <div class="drawer-user-info mb-10 mt-4">
+            <div class="flex items-center gap-4 mb-4">
+                <div
+                    class="w-14 h-14 rounded-full border-2 border-brand-red p-0.5 bg-white/10 overflow-hidden shadow-lg">
+                    <img alt="User Avatar" class="w-full h-full object-cover rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMux0mUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P" />
+                </div>
+                <div>
+                    <h3 class="text-white font-extrabold text-lg">Nguyễn Văn A</h3>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <span class="material-symbols-outlined text-brand-red text-sm"
+                            style="font-variation-settings: 'FILL' 1;">stars</span>
+                        <span class="text-white/80 text-xs font-bold tracking-wide">2.450 S-Points</span>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px w-full bg-white/10"></div>
+        </div>
+        <nav class="flex flex-col gap-2">
+            <a class="drawer-nav-item active" href="../home/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                <span>Trang chủ</span>
+            </a>
+            <a class="drawer-nav-item" href="../career hub/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">explore</span>
+                <span>Career Hub</span>
+            </a>
+            <a class="drawer-nav-item" href="../tuyển sinh/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">campaign</span>
+                <span>Tuyển sinh</span>
+            </a>
+            <a class="drawer-nav-item" href="../Cá nhân/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+                <span>Cá nhân</span>
+            </a>
+            <a class="drawer-nav-item" href="../đăng ký xét tuyển/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">how_to_reg</span>
+                <span>Đăng ký xét tuyển</span>
+            </a>
+            <a class="drawer-nav-item" href="../kho quà tặng/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+                <span>Kho quà tặng</span>
+            </a>
+            <a class="drawer-nav-item" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+                <span>Thông báo</span>
+            </a>
+            <a class="drawer-nav-item mt-8" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                <span>Cài đặt</span>
+            </a>
+        </nav>
+        <div class="drawer-footer mt-auto pt-10">
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                <p class="text-[10px] text-white/40 uppercase font-black tracking-widest mb-1">Phiên bản</p>
+                <p class="text-white/60 text-xs font-bold">Luxury Tech v2.4.0</p>
+            </div>
+        </div>
+    </aside>
+    <header
+        class="sticky top-0 z-50 bg-white/90 dark:bg-black/90 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-4">
+            <label class="cursor-pointer active:scale-90 transition-transform flex items-center justify-center p-1"
+                for="drawer-toggle">
+                <span class="material-symbols-outlined text-navy dark:text-white text-3xl">menu</span>
+            </label>
+            <h1 class="text-lg font-extrabold text-navy dark:text-white uppercase tracking-wider">CAO ĐĂNG SÀI gòn</h1>
+        </div>
+        <div
+            class="xp-badge bg-[var(--xp-gradient)] flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-bold shadow-sm">
+            <span class="material-symbols-outlined text-[14px] leading-none"
+                style="font-variation-settings: 'FILL' 1;">bolt</span>
+            <span>1.240 XP</span>
+        </div>
+    </header>
+    <main>
+        <section class="hero-refined relative overflow-hidden" style="min-height:320px; background-color: #f8f9fa;">
+            <!-- Background image blurred as a backdrop -->
+            <div class="absolute inset-0 z-0" style="overflow:hidden;">
+                <img src="download.jpg" alt="Cao Đẳng Sài Gòn" class="w-full h-full object-cover"
+                    style="opacity:0.8; filter:blur(10px); transform:scale(1.1);" />
+                <!-- Subtle gradient to maintain brand feeling while keeping the image visible -->
+                <div class="absolute inset-0"
+                    style="background: linear-gradient(135deg, rgba(230, 0, 35, 0.15) 0%, rgba(160, 0, 10, 0.3) 100%);">
+                </div>
+            </div>
+            <!-- Content -->
+            <div class="relative z-10 px-6 pt-10 pb-6">
+                <h2 class="text-[28px] font-extrabold text-white leading-tight mb-2">
+                    Nơi khởi đầu <span style="color:#FFD6D6;">thực chiến</span><br>cho thành công
+                </h2>
+                <p class="text-white/75 text-sm mb-7 leading-relaxed">
+                    Học thực tế, làm việc thực chiến — không lý thuyết suông.
+                </p>
+                <div class="flex flex-col gap-3">
+                    <button
+                        class="bg-white/15 border border-white/30 text-white font-semibold h-14 rounded-[16px] flex items-center justify-center gap-2 active:scale-95 transition-all backdrop-blur-sm"
+                        onclick="window.location.href='../đăng ký xét tuyển/code.html'">
+                        <span class="material-symbols-outlined text-2xl">how_to_reg</span>
+                        <span>Đăng ký xét tuyển</span>
+                    </button>
+                    <button
+                        class="bg-white text-brand-red font-bold h-14 rounded-[16px] flex items-center justify-center gap-2 active:scale-95 transition-all text-sm uppercase tracking-wide shadow-lg shadow-black/10"
+                        onclick="window.location.href='../lộ trình của bạn/code.html'">
+                        <span class="material-symbols-outlined text-2xl">trending_up</span>
+                        <span>Xem lộ trình định hướng</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats with count-up animation -->
+        <section class="px-6 relative z-20 -mt-5 mb-12">
+            <div class="flex justify-between items-stretch gap-3 max-w-md mx-auto">
+                <div
+                    class="flex-1 bg-white dark:bg-slate-900 p-3 rounded-[12px] flex flex-col items-center text-center shadow-sm border border-slate-100 dark:border-slate-800">
+                    <span class="material-symbols-outlined icon-soft-red text-2xl mb-1">school</span>
+                    <div class="flex items-baseline">
+                        <span class="text-brand-red font-extrabold text-lg count-up" data-target="70"
+                            data-suffix="%">0</span>
+                    </div>
+                    <span class="text-[9px] text-slate-500 dark:text-white/60 font-bold uppercase">Thực hành</span>
+                </div>
+                <div
+                    class="flex-1 bg-white dark:bg-slate-900 p-3 rounded-[12px] flex flex-col items-center text-center shadow-sm border border-slate-100 dark:border-slate-800">
+                    <span class="material-symbols-outlined icon-soft-red text-2xl mb-1">handshake</span>
+                    <div class="flex items-baseline">
+                        <span class="text-brand-red font-extrabold text-lg count-up" data-target="500"
+                            data-suffix="+">0</span>
+                    </div>
+                    <span class="text-[9px] text-slate-500 dark:text-white/60 font-bold uppercase">Đối tác</span>
+                </div>
+                <div
+                    class="flex-1 bg-white dark:bg-slate-900 p-3 rounded-[12px] flex flex-col items-center text-center shadow-sm border border-slate-100 dark:border-slate-800">
+                    <span class="material-symbols-outlined icon-soft-red text-2xl mb-1">verified</span>
+                    <div class="flex items-baseline">
+                        <span class="text-brand-red font-extrabold text-lg count-up" data-target="100"
+                            data-suffix="%">0</span>
+                    </div>
+                    <span class="text-[9px] text-slate-500 dark:text-white/60 font-bold uppercase">Việc làm</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold text-navy dark:text-white">Dành cho bạn</h3><a
+                    class="text-sm font-semibold text-brand-red" href="../career hub/code.html">Tất cả</a>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <a href="../trắc nghiệm AI/code.html"
+                    class="bg-white dark:bg-slate-900 p-5 rounded-[16px] shadow-sm border border-slate-100 dark:border-slate-800 active:scale-95 transition-transform block">
+                    <div class="visualize-icon-container-subtle">
+                        <div class="premium-3d-brain-subtle"></div>
+                    </div>
+                    <h4 class="font-medium text-[14px] mb-4 text-navy dark:text-white leading-snug">Trắc nghiệm nghề
+                        nghiệp AI</h4>
+                    <div class="flex items-center text-brand-red text-[11px] font-bold uppercase tracking-wide">
+                        <span>Khám phá</span>
+                        <span class="material-symbols-outlined text-[14px] ml-1">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <a href="../lộ trình của bạn/code.html"
+                    class="bg-white dark:bg-slate-900 p-5 rounded-[16px] shadow-sm border border-slate-100 dark:border-slate-800 active:scale-95 transition-transform block">
+                    <div class="visualize-icon-container-subtle" style="background: rgba(59, 130, 246, 0.08);">
+                        <span class="material-symbols-outlined text-blue-600 text-3xl"
+                            style="font-variation-settings: 'FILL' 1;">explore</span>
+                    </div>
+                    <h4 class="font-medium text-[14px] mb-4 text-navy dark:text-white leading-snug">Lộ trình định hướng
+                    </h4>
+                    <div class="flex items-center text-brand-red text-[11px] font-bold uppercase tracking-wide">
+                        <span>Khám phá</span>
+                        <span class="material-symbols-outlined text-[14px] ml-1">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <div class="col-span-2 grid grid-cols-2 gap-4">
+                    <a href="../thực chiến/code.html"
+                        class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 active:scale-95 transition-transform flex items-center gap-3">
+                        <span class="material-symbols-outlined text-orange-500">bolt</span>
+                        <span class="font-bold text-xs">Thử thách thực chiến</span>
+                    </a>
+                    <a href="../mô phỏng cơ hội/code.html"
+                        class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-100 dark:border-slate-800 active:scale-95 transition-transform flex items-center gap-3">
+                        <span class="material-symbols-outlined text-blue-500">campaign</span>
+                        <span class="font-bold text-xs">Mô phỏng cơ hội</span>
+                    </a>
+                </div>
+                <a href="../mini game/code.html"
+                    class="col-span-2 p-5 rounded-[16px] relative flex items-center justify-between overflow-hidden bg-[#E30613] shadow-lg active:scale-95 transition-transform block">
+                    <div class="relative z-10 flex flex-col">
+                        <h4 class="text-white font-bold text-lg">Mini Game</h4>
+                        <p class="text-white/80 text-xs font-medium">Chơi game nhận học bổng</p>
+                        <div class="mt-4 bg-white text-brand-red px-5 py-2 rounded-lg text-xs font-bold w-fit">
+                            KHÁM PHÁ
+                        </div>
+                    </div>
+                    <div class="relative z-10">
+                        <span class="material-symbols-outlined text-6xl text-white/30"
+                            style="font-variation-settings: 'FILL' 1;">sports_esports</span>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+                </a>
+                <a href="../kho quà tặng/code.html"
+                    class="col-span-2 bg-slate-100 dark:bg-slate-800 p-4 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined text-brand-red">card_giftcard</span>
+                    <span class="font-bold text-sm">Vào kho quà</span>
+                </a>
+            </div>
+        </section>
+        <section class="roadmap-section px-6 py-12 overflow-hidden">
+            <div
+                class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-red/60 to-transparent">
+            </div>
+            <div class="relative z-10 mb-10">
+                <h2 class="text-white text-2xl font-extrabold leading-tight mb-2">Lộ trình định hướng</h2>
+                <p class="text-white/70 text-sm font-medium">Từ sinh viên năm 1 đến chuyên gia được săn đón</p>
+            </div>
+            <div class="space-y-4 mb-12">
+                <div class="glass-card p-5 rounded-[20px] flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-white/10">
+                        <span class="material-symbols-outlined text-3xl text-white"
+                            style="font-variation-settings: 'FILL' 1;">book_2</span>
+                    </div>
+                    <div>
+                        <h5 class="text-white text-[15px] font-bold leading-snug">Học kết hợp thực chiến</h5>
+                        <p class="text-white/60 text-[12px] font-medium">70% thực hành ngay từ đầu</p>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-[20px] flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-white/10">
+                        <span class="material-symbols-outlined text-3xl text-white"
+                            style="font-variation-settings: 'FILL' 1;">location_city</span>
+                    </div>
+                    <div>
+                        <h5 class="text-white text-[15px] font-bold leading-snug">Kết nối doanh nghiệp</h5>
+                        <p class="text-white/60 text-[12px] font-medium">500+ đối tác chiến lược</p>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-[20px] flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-white/10">
+                        <span class="material-symbols-outlined text-3xl text-white"
+                            style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+                    </div>
+                    <div>
+                        <h5 class="text-white text-[15px] font-bold leading-snug">Chứng chỉ quốc tế</h5>
+                        <p class="text-white/60 text-[12px] font-medium">Liên thông đại học toàn cầu</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-2 mb-10">
+                <div class="timeline-dash"></div>
+                <div class="space-y-8">
+                    <div class="flex gap-4 relative items-center">
+                        <div class="step-circle stagger-1">1</div>
+                        <div class="pt-0">
+                            <p class="text-white font-bold text-sm">Làm bài test định hướng nghề</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 relative items-center">
+                        <div class="step-circle stagger-2">2</div>
+                        <div class="pt-0">
+                            <p class="text-white font-bold text-sm">Chọn ngành &amp; đăng ký xét tuyển</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 relative items-center">
+                        <div class="step-circle stagger-3">3</div>
+                        <div class="pt-0">
+                            <p class="text-white font-bold text-sm">Học thực chiến với giảng viên</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 relative items-center">
+                        <div class="step-circle stagger-4">4</div>
+                        <div class="pt-0">
+                            <p class="text-white font-bold text-sm">Thực tập doanh nghiệp có lương</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 relative items-center">
+                        <div class="step-circle step-circle-final stagger-5">5</div>
+                        <div class="pt-0">
+                            <p class="text-white font-extrabold text-sm">Ra trường với việc làm trong tay</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="w-full bg-white text-[#E30613] font-extrabold h-14 rounded-[14px] flex items-center justify-center gap-2 active:scale-95 shadow-2xl transition-all"
+                onclick="window.location.href='../lộ trình của bạn/code.html'">
+                <span>Xem lộ trình đầy đủ</span>
+                <span class="material-symbols-outlined font-black">arrow_forward</span>
+            </button>
+        </section>
+        <section class="py-12 px-6">
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-[20px] shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800 active:scale-[0.98] transition-transform"
+                onclick="window.location.href='../mô phỏng cơ hội/code.html'">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white bg-emerald-500">
+                    <span class="material-symbols-outlined text-2xl"
+                        style="font-variation-settings: 'FILL' 1;">campaign</span>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-navy dark:text-white leading-snug">Mô phỏng cơ hội</h4>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400">Trải nghiệm môi trường thực tế</p>
+                </div>
+                <div class="ml-auto">
+                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recruitment & Career Section -->
+        <section class="px-6 mb-16">
+            <h3 class="text-xl font-extrabold text-[#E30613] uppercase tracking-wider mb-6">TUYỂN SINH & HƯỚNG NGHIỆP
+            </h3>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Card 1 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\recruitment_2026_banner_1772673222612.png"
+                            alt="Tuyển sinh 2026"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">Cao
+                            đẳng Sài Gòn tuyển sinh 2026</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Trường Cao
+                            đẳng Sài Gòn chính thức triển khai kế hoạch tuyển sinh 2026 với hơn 21+ ngành học...</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\military_discharge_career_orientation_1772673246183.png"
+                            alt="Bộ đội xuất ngũ"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">Bộ
+                            đội xuất ngũ học nghề gì? 52 ngành nghề</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Sau khi xuất
+                            ngũ, nhiều bộ đội băn khoăn nên học nghề gì để sớm ổn định cuộc sống...</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\saigontech_intro_banner_1772673262526.png"
+                            alt="Tìm hiểu Cao đẳng Sài Gòn"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">Tìm
+                            hiểu Cao đẳng Sài Gòn từ A đến Z</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Trường Cao
+                            đẳng Sài Gòn (SaigonTech) được thành lập từ năm 2001, tự hào là đơn vị...</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\hight_school_exam_2026_milestones_banner_1772673277931.png"
+                            alt="THPT QG 2026"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">Thi
+                            THPT QG 2026: Lịch thi và mốc thời gian</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Kỳ thi tốt
+                            nghiệp THPT 2026 là kỳ thi quan trọng đối với học sinh lớp 12 trên cả nước...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end mt-6">
+                <button
+                    class="bg-[#E30613] text-white text-[12px] font-bold px-6 py-3 rounded-2xl shadow-xl shadow-red-500/30 active:scale-95 transition-all uppercase tracking-widest flex items-center gap-2">
+                    <span>Xem thêm</span>
+                    <span class="material-symbols-outlined text-[16px]">double_arrow</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- School News Section -->
+        <section class="px-6 mb-24">
+            <h3 class="text-xl font-extrabold text-[#E30613] uppercase tracking-wider mb-6">TIN TRƯỜNG</h3>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- News 1 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\spring_festival_2026_news_1772673297745.png"
+                            alt="Hội Xuân 2026"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">Hội
+                            Xuân 2026 Trường Cao đẳng Sài Gòn nơi giao thoa sắc xuân</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Hội Xuân 2026
+                            tại Cao đẳng Sài Gòn không chỉ là một sự kiện văn hóa thường niên mà còn...</p>
+                    </div>
+                </div>
+                <!-- News 2 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\tet_holiday_2026_news_banner_1772673347375.png"
+                            alt="Nghỉ Tết 2026"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">
+                            Thông báo kế hoạch nghỉ Tết nguyên đán 2026</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Nhân dịp Tết
+                            Nguyên đán 2026 đang đến gần, Trường Cao đẳng Sài Gòn trân trọng gửi đến...</p>
+                    </div>
+                </div>
+                <!-- News 3 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\mou_signing_news_2025_1772673315146.png"
+                            alt="MOU"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">
+                            Trường Cao đẳng Sài Gòn chính thức "bắt tay" cùng Tạp chí Giáo dục</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Vừa qua,
+                            Trường Cao đẳng Sài Gòn đã tổ chức thành công Lễ hợp tác ký kết MOU cùng Tạp...</p>
+                    </div>
+                </div>
+                <!-- News 4 -->
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-[24px] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] group">
+                    <div class="h-32 sm:h-40 overflow-hidden">
+                        <img src="C:\Users\Admin\.gemini\antigravity\brain\2f77bea7-ff9f-4579-81d6-ab30a31a7ff0\commencement_ceremony_news_2025_1772673330777.png"
+                            alt="Lễ tốt nghiệp"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div class="p-4">
+                        <h4 class="text-[14px] font-bold text-navy dark:text-white mb-2 leading-tight line-clamp-2">
+                            Recap Lễ tốt nghiệp 2025 – Khép lại một hành trình rực rỡ</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 font-medium">Lễ Tốt nghiệp
+                            2025 của Trường Cao đẳng Sài Gòn không chỉ là dấu mốc đánh dấu sự trưởng thành...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <nav
+        class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-black/95 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 flex justify-between items-center z-[100] pt-2 pb-[calc(1rem+safe-area-inset-bottom)] px-4 shadow-[0_-10px_30px_-5px_rgba(0,0,0,0.08)]">
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0" href="../home/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-[#E30613] flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 1, 'wght' 600; color: #E30613;">home</span>
+            </div>
+            <span
+                class="text-[9px] font-extrabold uppercase text-[#E30613] tracking-tighter whitespace-nowrap leading-none">Trang
+                chủ</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
+            href="../career hub/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 0, 'wght' 400;">explore</span>
+            </div>
+            <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Career
+                Hub</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
+            href="../tuyển sinh/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 0, 'wght' 400;">campaign</span>
+            </div>
+            <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Tuyển
+                sinh</span>
+        </a>
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
+            href="../Cá nhân/code.html">
+            <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
+                <span class="material-symbols-outlined text-xl"
+                    style="font-variation-settings: 'FILL' 0, 'wght' 400;">person</span>
+            </div>
+            <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Cá
+                nhân</span>
+        </a>
+    </nav>
+    <style>
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            nav {
+                padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+
+
+    <script>
+        (function () {
+            function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+            function animateCountUp(el) {
+                const target = parseInt(el.dataset.target, 10);
+                const suffix = el.dataset.suffix || '';
+                const duration = 1800;
+                const start = performance.now();
+                function step(now) {
+                    const elapsed = Math.min(now - start, duration);
+                    const progress = easeOutCubic(elapsed / duration);
+                    const current = Math.round(progress * target);
+                    el.textContent = current + suffix;
+                    if (elapsed < duration) requestAnimationFrame(step);
+                    else el.textContent = target + suffix;
+                }
+                requestAnimationFrame(step);
+            }
+            // Trigger on page load using IntersectionObserver
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCountUp(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.count-up').forEach(el => observer.observe(el));
+            });
+        })();
+    </script>
+    <!-- Floating Chat Widget -->
+    <div
+        class="fixed right-6 bottom-28 z-[110] flex flex-col items-end float-chat-widget pointer-events-none select-none">
+        <!-- Chat Bubble and Minus Button -->
+        <div class="relative mb-3 flex items-center pointer-events-auto">
+            <div
+                class="bg-white dark:bg-slate-800 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] border border-slate-100 dark:border-slate-800 px-6 py-4 rounded-full">
+                <p class="text-[14px] font-bold text-navy dark:text-white leading-none">Bạn cần tư vấn, hãy nhắn nhé!
+                </p>
+            </div>
+            <!-- Minus button -->
+            <button
+                class="absolute -top-3 -right-2 w-9 h-9 rounded-full bg-slate-50 dark:bg-slate-900 shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-800 dark:text-slate-200 active:scale-90 transition-transform hover:bg-white dark:hover:bg-slate-800"
+                onclick="this.parentElement.style.display='none'">
+                <span class="material-symbols-outlined text-[20px]">remove</span>
+            </button>
+        </div>
+
+        <!-- Main Chat Button -->
+        <button
+            class="w-16 h-16 rounded-full bg-[#0084FF] shadow-[0_12px_36px_rgba(0,132,255,0.4)] border-4 border-white dark:border-slate-900 flex items-center justify-center text-white active:scale-95 transition-transform pointer-events-auto overflow-hidden relative group">
+            <div class="absolute inset-0 bg-white/15 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span class="material-symbols-outlined text-[32px]"
+                style="font-variation-settings: 'FILL' 1;">mode_comment</span>
+        </button>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Khóa học: Facebook Pixel & Tracking - Cao đẳng Sài Gòn</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E30613",
+                        "navy-accent": "#0A1D37",
+                        "background-light": "#F8F9FB",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .glass-morphism {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .active-lesson-glow {
+                box-shadow: 0 0 20px rgba(227, 6, 19, 0.1);
+                border-color: rgba(227, 6, 19, 0.3);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light font-display text-navy-accent antialiased overflow-x-hidden">
+    <div class="relative mx-auto min-h-screen max-w-md bg-white">
+
+        <!-- Video Header Section -->
+        <div class="sticky top-0 z-50 bg-white">
+            <div class="relative aspect-video w-full bg-black overflow-hidden group">
+                <!-- Placeholder for Video Player -->
+                <img alt="Video Thumbnail" class="h-full w-full object-cover opacity-80"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCa3ifzdiv3HOLHT6fJQgJp59eL2hdQo2KC1i88HgkNPkGuaKdDgUDu2eKJVBQyofIFMB4uly1-KAvuW1fCP-7LCbFqbHMMehzs4FgpcxkySTLs6X8LlRV0PFWKEJX9WNgqzM6ZlwaLDK6evFLZxnXDGla6iVmX_h6oFPftow1-XC93N7LODykJFG-MMd85UHPUrg2qCcA4Y7n8BIfg8FSEvJ7ZeOIdp86xqFm9wCcqE0TrisVYs7KRJJWWnwPTEff1j9bpb5U2Mlm" />
+
+                <!-- Play Button Overlay -->
+                <div
+                    class="absolute inset-0 flex items-center justify-center transition-opacity group-hover:opacity-100">
+                    <button
+                        class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/95 text-white shadow-2xl backdrop-blur-sm transition-transform active:scale-90 ring-4 ring-white/20">
+                        <span class="material-symbols-outlined text-4xl fill-1">play_arrow</span>
+                    </button>
+                </div>
+
+                <!-- Back Button on Video -->
+                <button
+                    class="absolute top-4 left-4 h-9 w-9 flex items-center justify-center rounded-xl bg-black/30 backdrop-blur-md text-white border border-white/20 transition-all active:scale-90"
+                    onclick="window.history.back()">
+                    <span class="material-symbols-outlined text-lg">arrow_back_ios_new</span>
+                </button>
+
+                <!-- Fullscreen Button -->
+                <button
+                    class="absolute bottom-4 right-4 h-9 w-9 flex items-center justify-center rounded-xl bg-black/30 backdrop-blur-md text-white border border-white/20">
+                    <span class="material-symbols-outlined text-lg font-light">fullscreen</span>
+                </button>
+
+                <!-- Video Progress Bar -->
+                <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-white/20">
+                    <div class="h-full w-1/3 bg-primary relative">
+                        <div
+                            class="absolute right-0 top-1/2 -translate-y-1/2 h-3 w-3 bg-white rounded-full border-2 border-primary shadow-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Info -->
+            <div class="p-6 border-b border-slate-100">
+                <div class="flex items-center gap-2 mb-2">
+                    <span
+                        class="px-2.5 py-1 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-md">Bài
+                        3</span>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Kỹ năng chuyên
+                        sâu</span>
+                </div>
+                <h1 class="text-xl font-extrabold text-navy-accent leading-tight">Cài đặt Event Tracking & Facebook
+                    Pixel nâng cao</h1>
+                <div class="mt-4 flex items-center gap-4 text-xs font-bold text-slate-500">
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-primary text-sm">schedule</span>
+                        <span>15:20 phút</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-blue-500 text-sm">visibility</span>
+                        <span>1.2k lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex px-2 border-b border-slate-100 overflow-x-auto no-scrollbar">
+                <button
+                    class="px-6 py-4 text-sm font-black text-primary border-b-2 border-primary whitespace-nowrap">Bài
+                    học (08)</button>
+                <button
+                    class="px-6 py-4 text-sm font-bold text-slate-400 hover:text-navy-accent transition-colors whitespace-nowrap">Tài
+                    liệu</button>
+                <button
+                    class="px-6 py-4 text-sm font-bold text-slate-400 hover:text-navy-accent transition-colors whitespace-nowrap">Thảo
+                    luận</button>
+            </div>
+        </div>
+
+        <!-- Lessons List -->
+        <main class="p-6 pb-44 space-y-4">
+            <!-- Lesson 1 -->
+            <div class="flex items-center gap-4 p-4 rounded-[1.5rem] bg-slate-50 border border-slate-100 opacity-60">
+                <div
+                    class="h-10 w-10 shrink-0 flex items-center justify-center rounded-2xl bg-green-500 text-white shadow-sm">
+                    <span class="material-symbols-outlined text-xl font-black">check</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-bold text-slate-400 truncate tracking-tight">Cài đặt Pixel cơ bản</h3>
+                    <p class="text-[10px] font-bold text-slate-400 mt-0.5">08:45 • Hoàn thành</p>
+                </div>
+            </div>
+
+            <!-- Lesson 2 -->
+            <div class="flex items-center gap-4 p-4 rounded-[1.5rem] bg-slate-50 border border-slate-100 opacity-60">
+                <div
+                    class="h-10 w-10 shrink-0 flex items-center justify-center rounded-2xl bg-green-500 text-white shadow-sm">
+                    <span class="material-symbols-outlined text-xl font-black">check</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-bold text-slate-400 truncate tracking-tight">Tích hợp vào Website</h3>
+                    <p class="text-[10px] font-bold text-slate-400 mt-0.5">12:10 • Hoàn thành</p>
+                </div>
+            </div>
+
+            <!-- Lesson 3: Current -->
+            <div
+                class="flex items-center gap-4 p-5 rounded-[1.8rem] bg-primary/5 active-lesson-glow border border-primary/20 relative overflow-hidden group">
+                <div
+                    class="h-12 w-12 shrink-0 flex items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform">
+                    <span class="material-symbols-outlined text-2xl fill-1">play_arrow</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-black text-primary truncate tracking-tight">Cài đặt Event Tracking nâng cao
+                    </h3>
+                    <p class="text-[10px] font-bold text-navy-accent mt-0.5 uppercase tracking-wider">Đang xem • 15:20
+                    </p>
+                </div>
+                <!-- Mini Equalizer Animation -->
+                <div class="flex gap-0.5 items-end h-3">
+                    <div class="w-0.5 h-full bg-primary animate-[bounce_0.8s_infinite]"></div>
+                    <div class="w-0.5 h-1/2 bg-primary animate-[bounce_1.2s_infinite]"></div>
+                    <div class="w-0.5 h-3/4 bg-primary animate-[bounce_1s_infinite]"></div>
+                </div>
+            </div>
+
+            <!-- Lesson 4 -->
+            <div
+                class="flex items-center gap-4 p-4 rounded-[1.5rem] bg-white border border-slate-100 hover:border-slate-200 shadow-sm transition-all group">
+                <div
+                    class="h-10 w-10 shrink-0 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-xl">play_circle</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-bold text-navy-accent truncate tracking-tight">A/B Testing với Pixel</h3>
+                    <p class="text-[10px] font-bold text-slate-400 mt-0.5">20:15 • Tiếp theo</p>
+                </div>
+                <span class="material-symbols-outlined text-slate-300">lock</span>
+            </div>
+
+            <!-- Lesson 5 -->
+            <div
+                class="flex items-center gap-4 p-4 rounded-[1.5rem] bg-white border border-slate-100 hover:border-slate-200 shadow-sm transition-all group">
+                <div
+                    class="h-10 w-10 shrink-0 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-xl">play_circle</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-bold text-navy-accent truncate tracking-tight">Tối ưu hóa chuyển đổi</h3>
+                    <p class="text-[10px] font-bold text-slate-400 mt-0.5">18:30 • Tiếp theo</p>
+                </div>
+                <span class="material-symbols-outlined text-slate-300">lock</span>
+            </div>
+
+            <button
+                class="w-full py-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-2 border-dashed border-slate-100 rounded-3xl hover:bg-slate-50 transition-colors">
+                Xem thêm bài học khác
+            </button>
+        </main>
+
+        <!-- Fixed Bottom Action Bar -->
+        <div
+            class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-[60] p-6 bg-gradient-to-t from-white via-white to-transparent">
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex-1 flex items-center justify-center gap-3 py-4 rounded-2xl bg-primary text-white shadow-xl shadow-primary/30 transition-all active:scale-95 hover:brightness-110"
+                    onclick="showSuccessModal()">
+                    <span class="material-symbols-outlined fill-1">task_alt</span>
+                    <span class="font-black uppercase tracking-[0.15em] text-sm">Hoàn thành bài học</span>
+                </button>
+                <button
+                    class="h-14 w-14 flex items-center justify-center rounded-2xl bg-navy-accent text-white shadow-xl transition-all active:scale-90">
+                    <span class="material-symbols-outlined">forum</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Opt-in Modal -->
+    <div id="success-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-6">
+        <div class="absolute inset-0 bg-navy-accent/60 backdrop-blur-md" onclick="closeModalAndNavigate()"></div>
+        <div class="relative bg-white rounded-[2.5rem] w-full max-w-sm p-8 shadow-2xl scale-95 opacity-0 transition-all duration-300 transform"
+            id="modal-content">
+            <div class="flex flex-col items-center text-center">
+                <div class="h-20 w-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-primary text-4xl fill-1">verified</span>
+                </div>
+                <h2 class="text-xl font-black text-navy-accent mb-2">Tuyệt vời!</h2>
+                <div class="text-sm font-bold text-slate-500 mb-8 leading-relaxed">
+                    <p class="mb-4 text-primary">Hoàn thành bài số 3</p>
+                    <p class="italic text-navy-accent px-2">“Thiên tài là một phần trăm cảm hứng, chín mươi chín phần
+                        trăm mồ hôi.”</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-3">— Thomas Edison —
+                    </p>
+                </div>
+                <button onclick="closeModalAndNavigate()"
+                    class="w-full py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-[0.2em] shadow-lg shadow-primary/30 active:scale-95 transition-transform hover:brightness-110">
+                    Tiếp tục học tập
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModalAndNavigate() {
+            window.location.href = '../bài học/code.html';
+        }
+    </script>
+</body>
+
+</html>

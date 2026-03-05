@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>S-Points Reward Center</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e50615",
+                        "luxury-red-start": "#E30613",
+                        "luxury-red-end": "#B00010",
+                        "background-light": "#f8f5f6",
+                        "background-dark": "#230f11",
+                        "navy-blue": "#0A1D37"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "24px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            @keyframes sweep {
+                0% { transform: translateX(-100%) rotate(45deg); }
+                20%, 100% { transform: translateX(300%) rotate(45deg); }
+            }
+            .shimmer-effect::after {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: -100%;
+                width: 50%;
+                height: 300%;
+                background: linear-gradient(
+                    to right,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.05) 40%,
+                    rgba(255, 255, 255, 0.25) 50%,
+                    rgba(255, 255, 255, 0.05) 60%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                animation: sweep 6s infinite;
+            }
+            @keyframes pulse-glow {
+                0% { transform: scale(1); text-shadow: 0 0 0px rgba(255, 255, 255, 0); }
+                50% { transform: scale(1.05); text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 215, 0, 0.4); }
+                100% { transform: scale(1); text-shadow: 0 0 0px rgba(255, 255, 255, 0); }
+            }
+            .pulse-glow-effect {
+                animation: pulse-glow 3s ease-in-out infinite;
+                display: inline-block;
+            }
+            .luxury-card-gradient {
+                background: linear-gradient(135deg, #E30613 0%, #B00010 100%);
+            }
+            .glass-morphism {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .dark .glass-morphism {
+                background: rgba(35, 15, 17, 0.8);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-slate-100">
+    <div
+        class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-white dark:bg-background-dark shadow-2xl overflow-hidden">
+        <div class="flex justify-between items-center px-8 pt-4 pb-2 w-full text-xs font-semibold">
+            <span>9:41</span>
+            <div class="flex gap-1.5">
+                <span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+                <span class="material-symbols-outlined text-[14px]">wifi</span>
+                <span class="material-symbols-outlined text-[14px]">battery_full</span>
+            </div>
+        </div>
+        <div
+            class="flex items-center bg-white dark:bg-background-dark p-4 justify-between border-b border-slate-100 dark:border-slate-800">
+            <div
+                class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+                <span class="material-symbols-outlined">close</span>
+            </div>
+            <h2
+                class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">
+                Kho quà tặng</h2>
+            <div class="flex items-center justify-end bg-primary/10 dark:bg-primary/20 px-3 py-1.5 rounded-full">
+                <span class="text-primary text-sm font-bold tracking-tight shrink-0">120 S-Points</span>
+            </div>
+        </div>
+        <div class="px-4 py-4">
+            <div
+                class="relative overflow-hidden rounded-2xl luxury-card-gradient p-7 text-white shadow-[0_20px_40px_rgba(176,0,16,0.3)] border border-white/10 shimmer-effect">
+                <div class="relative z-10">
+                    <p class="text-white/70 text-xs font-semibold uppercase tracking-[0.12em]">TỔNG SỐ DƯ HIỆN TẠI</p>
+                    <div class="flex items-baseline gap-2 mt-2">
+                        <div class="pulse-glow-effect">
+                            <h1 class="text-4xl font-extrabold tracking-tight">120</h1>
+                        </div>
+                        <span class="text-xl font-bold text-white/90">S-Points</span>
+                    </div>
+                    <div class="mt-6 flex gap-3">
+                        <button
+                            class="bg-white/15 hover:bg-white/25 border border-white/20 px-5 py-2.5 rounded-xl text-xs font-bold backdrop-blur-md transition-all">Lịch
+                            sử</button>
+                        <button
+                            class="bg-white text-luxury-red-end px-5 py-2.5 rounded-xl text-xs font-bold shadow-lg hover:bg-slate-50 transition-all">Nạp
+                            thêm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-1">
+            <div class="flex border-b border-slate-100 dark:border-slate-800 px-4 gap-6 overflow-x-auto no-scrollbar">
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-3 pt-2"
+                    href="#">
+                    <p class="text-sm font-bold whitespace-nowrap">Đổi quà</p>
+                </a>
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2"
+                    href="#">
+                    <p class="text-sm font-bold whitespace-nowrap">Voucher</p>
+                </a>
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2"
+                    href="#">
+                    <p class="text-sm font-bold whitespace-nowrap">Miễn phí hồ sơ</p>
+                </a>
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2"
+                    href="#">
+                    <p class="text-sm font-bold whitespace-nowrap">Sự kiện</p>
+                </a>
+            </div>
+        </div>
+        <div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark/50">
+            <div class="grid grid-cols-2 gap-4 p-4">
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col group">
+                    <div class="relative aspect-square bg-white dark:bg-slate-800 overflow-hidden">
+                        <img alt="Hoodie SGC Limited"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDxgbWEptq2w3DLE4I5xiBg_zxlJ5LkzWG7uaG_Tj_sNrW6g3sD-yg8zPkD3-0zOzdHdjyAur-ENa4thKqEdK3Xqqv6WBDd3WdxQl2b_fWG6DFuQLLMnSKdRXlw54RtDq09W1mgV3c78v-vygmTIqTYoRz4obRyQHXrwJCDpw2d98Ct_heb78mKB6sN7UymUh_xzoW1y-yW2m0scalU2F8OllrJJiKjKPiyFckgJn4t-GzD5lEaWQax9mSIYWwaL0zifbJ0Zn6ZjC1" />
+                        <div
+                            class="absolute top-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+                            Hot</div>
+                    </div>
+                    <div class="p-3 flex flex-col flex-1">
+                        <p class="text-slate-900 dark:text-slate-100 text-sm font-bold leading-tight mb-1">Hoodie SGC
+                            Limited</p>
+                        <div class="flex items-center gap-1 mb-3">
+                            <span class="material-symbols-outlined text-primary text-sm font-bold">stars</span>
+                            <p class="text-primary text-sm font-bold">500 pts</p>
+                        </div>
+                        <button
+                            class="mt-auto w-full bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 rounded-lg transition-colors shadow-md shadow-primary/10">Redeem</button>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col group">
+                    <div class="relative aspect-square bg-white dark:bg-slate-800 overflow-hidden">
+                        <img alt="Voucher 30k"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzw3RkfMFdsThhOkuzgJFesh3T9KWmUL89SoZbDYOR8z68VJcw4Fo4or1TtGxr4n7cqZiTxHf7oQU3fZZuTln42CTqKGhbpPn_wXkQVB4JPLiNYM8aYF7Yjesayq-HRIWJGq-X412il55NrxhhPTl_LwGens0FZETzDqQC_wzSbQft7tFzutLna4FbMnLQGn1ZDerQfARCUArYFJW0SOI3h_9NV8hwwAWklJoQCrKqKgvAmGgvWFmQ1UUYNq1_AwBVO4c-HMF5Z0m4" />
+                    </div>
+                    <div class="p-3 flex flex-col flex-1">
+                        <p class="text-slate-900 dark:text-slate-100 text-sm font-bold leading-tight mb-1">Voucher 30k
+                        </p>
+                        <div class="flex items-center gap-1 mb-3">
+                            <span class="material-symbols-outlined text-primary text-sm font-bold">stars</span>
+                            <p class="text-primary text-sm font-bold">100 pts</p>
+                        </div>
+                        <button
+                            class="mt-auto w-full bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 rounded-lg transition-colors shadow-md shadow-primary/10">Redeem</button>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col group">
+                    <div class="relative aspect-square bg-white dark:bg-slate-800 overflow-hidden">
+                        <img alt="Bình nước"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgiu4vLYL0KTXOrFqCsEZtonZNf-MCSyf3AXyQCPBskN5WN5W3VR1lMyDndMt8uyf0fJKkrNsRR5jzp6Y4ZcXq95GqT9ymA7_7-gq031TwRs-1VNBIDhFOh2S4sfX9zSaEHM_jJ_gTqtuCwPDPQrwQAH4-TYwQTHQ_zNh8QqNkb87nOZXDxFJgLty8LOwC-pnOuC7tbv0zmO44FITMKRfWC_iSpJhkE5fgsnOaVz_GOAasdMETzCwYwEoYNj760wV-PeT-QrSVTuqy" />
+                    </div>
+                    <div class="p-3 flex flex-col flex-1">
+                        <p class="text-slate-900 dark:text-slate-100 text-sm font-bold leading-tight mb-1">Bình nước</p>
+                        <div class="flex items-center gap-1 mb-3">
+                            <span class="material-symbols-outlined text-primary text-sm font-bold">stars</span>
+                            <p class="text-primary text-sm font-bold">500 pts</p>
+                        </div>
+                        <button
+                            class="mt-auto w-full bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 rounded-lg transition-colors shadow-md shadow-primary/10">Redeem</button>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col group">
+                    <div class="relative aspect-square bg-white dark:bg-slate-800 overflow-hidden">
+                        <img alt="Apple Watch Draw"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmH-DMq3-N8UQeKGMCG7B2iY-2K-QzEib4W-be-g1k14uQO2W6yXqXDIDZpgONiNc42r5WZ_7O-4tqXVeESsttkL4oFQiDknzs0fN784sv3K-cxMmZNWOjPePH-4xAyVqoU91xNXpSA71-irGMHg_QgC3LXpvg8QQHVa2vvTEer8DMWkWsQfk1eJK-x4r6bzVFyDb4edmOxYOhlNa1iv00o4wM5BfXLWyV2lNKf-CWU7-L_YQmxu0xPZR48Ex7qMps_UYXhP282GWf" />
+                    </div>
+                    <div class="p-3 flex flex-col flex-1">
+                        <p class="text-slate-900 dark:text-slate-100 text-sm font-bold leading-tight mb-1">Apple Watch
+                            SE</p>
+                        <div class="flex items-center gap-1 mb-3">
+                            <span class="material-symbols-outlined text-primary text-sm font-bold">stars</span>
+                            <p class="text-primary text-sm font-bold">30000 pts</p>
+                        </div>
+                        <button
+                            class="mt-auto w-full bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 rounded-lg transition-colors shadow-md shadow-primary/10">Redeem</button>
+                    </div>
+                </div>
+            </div>
+            <div class="h-28"></div>
+        </div>
+        <div
+            class="absolute bottom-0 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 px-2 pb-8 pt-3 z-20">
+            <div class="flex items-center justify-between">
+                <a class="flex flex-col items-center justify-center gap-1 w-1/4 text-slate-400 dark:text-slate-500"
+                    href="#">
+                    <span class="material-symbols-outlined text-[26px]">home</span>
+                    <p class="text-[9px] font-bold uppercase tracking-tight">Trang chủ</p>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1 w-1/4 text-slate-400 dark:text-slate-500"
+                    href="#">
+                    <span class="material-symbols-outlined text-[26px]">explore</span>
+                    <p class="text-[9px] font-bold uppercase tracking-tight">Hướng nghiệp</p>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1 w-1/4 text-primary" href="#">
+                    <span class="material-symbols-outlined text-[26px]">card_giftcard</span>
+                    <p class="text-[9px] font-bold uppercase tracking-tight">Quà tặng</p>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1 w-1/4 text-slate-400 dark:text-slate-500"
+                    href="#">
+                    <span class="material-symbols-outlined text-[26px]">person</span>
+                    <p class="text-[9px] font-bold uppercase tracking-tight">Cá nhân</p>
+                </a>
+            </div>
+        </div>
+        <div
+            class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full z-30">
+        </div>
+        <div class="absolute inset-0 z-50 flex items-center justify-center px-6 bg-black/40 backdrop-blur-[10px]">
+            <div
+                class="w-full glass-morphism rounded-2xl shadow-2xl overflow-hidden p-8 flex flex-col items-center text-center">
+                <div class="relative w-24 h-24 mb-6">
+                    <div class="absolute inset-0 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
+                    <div
+                        class="relative bg-gradient-to-br from-primary to-luxury-red-end w-20 h-20 mx-auto rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30 rotate-3">
+                        <span class="material-symbols-outlined text-white text-4xl"
+                            style="font-variation-settings: 'FILL' 1">featured_seasonal_and_gifts</span>
+                        <div
+                            class="absolute -top-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-[14px]">stars</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="text-navy-blue dark:text-white text-xl font-bold mb-3">Xác nhận đổi quà</h3>
+                <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                    Bạn có chắc chắn muốn dùng <span class="font-bold text-primary">500 pts</span> để đổi <span
+                        class="font-bold">Hoodie SGC Limited</span> không?
+                </p>
+                <div
+                    class="w-full bg-white/40 dark:bg-white/5 rounded-xl p-4 mb-8 flex justify-between items-center border border-white/20">
+                    <div class="text-left">
+                        <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Số dư</p>
+                        <p class="text-sm font-bold text-slate-700 dark:text-slate-200">120 S-Points</p>
+                    </div>
+                    <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+                    <div class="text-right">
+                        <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Chi phí</p>
+                        <p class="text-sm font-bold text-primary">-500 pts</p>
+                    </div>
+                </div>
+                <div class="w-full space-y-3">
+                    <button
+                        class="w-full py-4 rounded-xl luxury-card-gradient text-white font-bold text-sm shadow-lg shadow-primary/25 active:scale-95 transition-transform"
+                        onclick="window.location.href='../đổi quà thành công/code.html'">
+                        Xác nhận
+                    </button>
+                    <button
+                        class="w-full py-2 text-slate-500 dark:text-slate-400 font-bold text-sm hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
+                        onclick="window.location.href='../kho quà tặng/code.html'">
+                        Hủy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
