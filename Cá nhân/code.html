@@ -73,7 +73,16 @@
             100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(227, 6, 19, 0)); }
         }
         .capsule-luxury {
-            @apply w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
             background: linear-gradient(135deg, #FF3D00 0%, #E30613 100%);
             box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
         }
@@ -89,16 +98,35 @@
             background: rgba(10, 24, 45, 0.98);
             backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
-            @apply fixed top-0 left-0 bottom-0 w-[280px] z-[120] overflow-y-auto px-6 py-10 flex flex-col;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 280px;
+            z-index: 120;
+            overflow-y: auto;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
         }
         #drawer-toggle:checked ~ #side-drawer {
             transform: translateX(0);
         }
         #drawer-overlay {
-            @apply fixed inset-0 z-[110] bg-black/40 opacity-0 invisible transition-all duration-300 backdrop-blur-sm;
+            position: fixed;
+            inset: 0px;
+            z-index: 110;
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+            backdrop-filter: blur(4px);
         }
         #drawer-toggle:checked ~ #drawer-overlay {
-            @apply opacity-100 visible;
+            opacity: 1;
+            visibility: visible;
             backdrop-filter: blur(8px);
         }
         .drawer-nav-item, .drawer-user-info, .drawer-footer {
@@ -117,10 +145,20 @@
         #drawer-toggle:checked ~ #side-drawer .drawer-nav-item:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 500ms; }
 
         .drawer-nav-item {
-            @apply flex items-center gap-4 p-4 rounded-2xl text-white font-medium transition-all;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            color: rgb(255 255 255);
+            font-weight: 500;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
         }
         .drawer-nav-item.active {
-            @apply bg-primary shadow-lg shadow-primary/30;
+            background-color: #E30613;
+            box-shadow: 0 10px 15px -3px rgba(227, 6, 19, 0.3), 0 4px 6px -2px rgba(227, 6, 19, 0.05);
         }
     </style>
     <style>
@@ -129,26 +167,57 @@
         }
 
         .feedback-popup {
-            @apply fixed inset-0 z-[200] invisible opacity-0 transition-all duration-300 flex items-center justify-center p-6;
+            position: fixed;
+            inset: 0px;
+            z-index: 200;
+            visibility: hidden;
+            opacity: 0;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
             background: rgba(0, 0, 0, 0.35);
             backdrop-filter: blur(6px);
         }
 
         .feedback-popup.active {
-            @apply visible opacity-100;
+            visibility: visible;
+            opacity: 1;
         }
 
         .feedback-content {
-            @apply relative w-full max-w-sm bg-white dark:bg-slate-900 rounded-[20px] p-6 shadow-[0_15px_40px_rgba(0, 0, 0, 0.12)] opacity-0 translate-y-8 scale-95 transition-all duration-500;
+            position: relative;
+            width: 100%;
+            max-width: 24rem;
+            background-color: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            transform: translateY(2rem) scale(0.95);
+            transition-property: all;
+            transition-duration: 500ms;
             transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .feedback-popup.active .feedback-content {
-            @apply opacity-100 translate-y-0 scale-100;
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         .btn-hover-effect {
-            @apply transition-transform duration-200 active:scale-95 hover:scale-[1.02];
+            transition: transform 200ms;
+        }
+
+        .btn-hover-effect:active {
+            transform: scale(0.95);
+        }
+
+        .btn-hover-effect:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>

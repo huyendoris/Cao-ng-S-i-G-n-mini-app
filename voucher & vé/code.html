@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Voucher & Vé - Cao đẳng Sài Gòn</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -17,16 +17,24 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#E30613",
+                        primary: "#6b95c5",
                         navy: "#0A1D37",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#15191d",
                         "brand-red": "#E30613",
-                        "background-light": "#F8FAFC",
                         "gold-luxury": "#C6A85E",
                     },
                     fontFamily: {
-                        display: ["Inter", "sans-serif"],
+                        display: ["Lexend", "sans-serif"],
                         heading: ["Playfair Display", "serif"],
                     },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        "2xl": "1rem",
+                        full: "9999px",
+                    }
                 },
             },
         };
@@ -35,9 +43,10 @@
         :root {
             --hero-gradient: linear-gradient(165deg, #E30613 0%, #B00010 100%);
             --xp-gradient: linear-gradient(to right, #FF5A5F, #E30613);
+            --drawer-glass: rgba(10, 29, 55, 0.9);
         }
         body { 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Lexend', sans-serif; 
             background-color: #F8FAFC;
         }
         .hero-banner {
