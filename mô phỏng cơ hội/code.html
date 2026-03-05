@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+    <title>Mô phỏng cơ hội việc làm - SAIGONTECH</title>
+    <!-- Google Fonts: Sora for a modern, tech-driven feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -16,193 +17,282 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#e50615",
-                        "primary-dark": "#b00510",
-                        "background-light": "#f8f5f6",
-                        "background-dark": "#230f11",
-                        "navy-custom": "#1e293b",
+                        "brand-red": "#E30613",
+                        "brand-orange": "#FF5A5F",
+                        "surface-light": "#FFFFFF",
+                        "background-light": "#F8FAFC",
+                        "text-navy": "#0F172A",
+                        "text-slate": "#475569",
+                        "slate-low": "#F1F5F9",
                     },
                     fontFamily: {
-                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                        "sans": ["Sora", "sans-serif"]
                     },
                     borderRadius: {
-                        "DEFAULT": "0.5rem",
-                        "lg": "1rem",
-                        "xl": "1.5rem",
-                        "full": "9999px"
+                        "card": "1.25rem", // 20px
+                        "pill": "9999px"
                     },
+                    boxShadow: {
+                        "soft": "0 10px 30px -10px rgba(0, 0, 0, 0.05)",
+                        "premium": "0 20px 40px -12px rgba(227, 6, 19, 0.25)",
+                    }
                 },
             },
         }
     </script>
     <style type="text/tailwindcss">
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: max(884px, 100dvh);
+        @layer base {
+            body {
+                @apply bg-background-light text-text-navy antialiased;
+                font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            }
         }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+
+        .selection-card {
+            @apply flex flex-col items-center justify-center p-4 rounded-card border-2 border-transparent bg-white shadow-soft transition-all cursor-pointer;
         }
-    </style>
-    <style>
-        body {
-            min-height: max(884px, 100dvh);
+        
+        .selection-card.active {
+            @apply border-brand-red bg-red-50 text-brand-red;
+        }
+
+        .selection-card.active .icon-box {
+            @apply bg-brand-red text-white;
+        }
+
+        .icon-box {
+            @apply w-10 h-10 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center mb-2 transition-colors;
+        }
+
+        .skill-chip {
+            @apply flex items-center gap-1.5 px-4 py-2 bg-white border border-slate-200 rounded-pill text-sm font-medium text-text-slate shadow-sm;
+        }
+
+        .cta-button {
+            @apply relative overflow-hidden bg-gradient-to-r from-brand-red to-brand-orange text-white font-bold py-4 rounded-card shadow-premium active:scale-[0.98] transition-all flex items-center justify-center gap-3;
+        }
+
+        .progress-circle {
+            --percentage: 0;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+                        conic-gradient(#E30613 calc(var(--percentage) * 1%), #F1F5F9 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: --percentage 1s ease-in-out;
+        }
+
+        @property --percentage {
+            syntax: '<number>';
+            inherits: false;
+            initial-value: 0;
+        }
+
+        .result-card {
+            @apply bg-white p-6 rounded-card shadow-soft border border-slate-50 relative overflow-hidden;
+        }
+
+        .watermark {
+            @apply absolute -right-6 -bottom-6 text-[140px] text-brand-red opacity-[0.03] select-none pointer-events-none;
+        }
+
+        .status-bar-time {
+            @apply text-[14px] font-bold text-text-navy;
         }
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col items-center">
+<body class="flex flex-col items-center min-h-screen">
+    <!-- Status Bar Mockup -->
     <div
-        class="w-full max-w-[430px] h-12 flex justify-between items-center px-6 pt-4 sticky top-0 bg-background-light/80 backdrop-blur-md z-50">
-        <span class="text-sm font-bold text-slate-900">9:41</span>
-        <div class="flex gap-1.5 items-center">
-            <span class="material-symbols-outlined text-base">signal_cellular_alt</span>
-            <span class="material-symbols-outlined text-base">wifi</span>
-            <span class="material-symbols-outlined text-base">battery_full</span>
+        class="w-full max-w-[430px] h-12 flex justify-between items-center px-6 pt-4 sticky top-0 bg-background-light/80 backdrop-blur-md z-[100]">
+        <span class="status-bar-time">14:07</span>
+        <div class="flex gap-2 items-center">
+            <span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+            <span class="material-symbols-outlined text-[18px]">wifi</span>
+            <span class="material-symbols-outlined text-[18px]">battery_very_low</span>
         </div>
     </div>
-    <main class="w-full max-w-[430px] flex-1 pb-28 overflow-y-auto">
-        <div class="px-6 py-6 flex items-center justify-between">
-            <button class="p-2 -ml-2 text-navy-custom dark:text-slate-100">
-                <span class="material-symbols-outlined">arrow_back_ios</span>
+
+    <main class="w-full max-w-[430px] px-6 pb-32">
+        <!-- Header -->
+        <header class="py-8 flex items-center gap-4">
+            <button
+                class="w-10 h-10 flex items-center justify-center rounded-xl bg-white shadow-sm border border-slate-100 text-text-navy active:scale-90 transition-transform"
+                onclick="window.history.back()">
+                <span class="material-symbols-outlined text-xl">arrow_back_ios_new</span>
             </button>
-            <h1 class="text-xl font-bold text-navy-custom dark:text-slate-100 flex-1 text-center pr-8">
-                Mô phỏng cơ hội việc làm
-            </h1>
-        </div>
-        <div class="px-6 space-y-6">
-            <div
-                class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
-                <div class="mb-6">
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">Mức lương mong
-                        muốn</label>
-                    <div class="relative">
-                        <select
-                            class="w-full h-14 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 text-navy-custom dark:text-white focus:ring-primary focus:border-primary appearance-none">
-                            <option>Chọn mức lương</option>
-                            <option>Dưới 10 triệu</option>
-                            <option>10 - 20 triệu</option>
-                            <option>20 - 40 triệu</option>
-                            <option>Trên 40 triệu</option>
-                        </select>
-                        <span
-                            class="material-symbols-outlined absolute right-4 top-4 text-slate-400 pointer-events-none">expand_more</span>
+            <h1 class="text-[22px] font-extrabold tracking-tight text-text-navy">Mô phỏng cơ hội việc làm</h1>
+        </header>
+
+        <!-- Simulation Form -->
+        <section class="space-y-8" id="simulation-form">
+            <!-- Salary Section -->
+            <div class="section-container">
+                <label
+                    class="block text-sm font-semibold text-text-slate mb-3 ml-1 uppercase tracking-wider text-[11px]">Mức
+                    lương mong muốn</label>
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-brand-red">
+                        <span class="material-symbols-outlined">payments</span>
+                    </div>
+                    <select
+                        class="w-full h-16 pl-12 pr-10 bg-white border-none rounded-card shadow-soft text-text-navy font-medium focus:ring-2 focus:ring-brand-red/20 appearance-none cursor-pointer transition-all hover:shadow-md">
+                        <option value="" disabled selected>Chọn mức lương mong muốn</option>
+                        <option>Dưới 10 triệu VNĐ</option>
+                        <option>10 - 20 triệu VNĐ</option>
+                        <option>20 - 40 triệu VNĐ</option>
+                        <option>Trên 40 triệu VNĐ</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
+                        <span class="material-symbols-outlined">expand_more</span>
                     </div>
                 </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">Kỹ năng hiện
-                        tại</label>
-                    <div
-                        class="flex flex-wrap gap-2 p-3 min-h-[56px] bg-white dark:bg-slate-900 border-2 border-primary/20 rounded-lg">
-                        <div
-                            class="flex items-center gap-1 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium border border-primary/30">
-                            Tiếng Anh
-                            <span class="material-symbols-outlined text-xs">close</span>
-                        </div>
-                        <div
-                            class="flex items-center gap-1 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium border border-primary/30">
-                            Giao tiếp
-                            <span class="material-symbols-outlined text-xs">close</span>
-                        </div>
-                        <div
-                            class="flex items-center gap-1 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium border border-primary/30">
-                            Lãnh đạo
-                            <span class="material-symbols-outlined text-xs">close</span>
-                        </div>
-                        <input class="flex-1 min-w-[100px] border-none focus:ring-0 bg-transparent text-sm p-0"
-                            placeholder="Thêm kỹ năng..." type="text" />
+            </div>
+
+            <!-- Skills Section -->
+            <div class="section-container">
+                <label
+                    class="block text-sm font-semibold text-text-slate mb-3 ml-1 uppercase tracking-wider text-[11px]">Kỹ
+                    năng hiện tại</label>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <div class="skill-chip">
+                        <span class="material-symbols-outlined text-[18px] text-brand-red">translate</span>
+                        <span>Tiếng Anh</span>
                     </div>
-                </div>
-                <div class="mb-8">
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">Môi trường mong
-                        muốn</label>
-                    <div class="space-y-3">
-                        <label
-                            class="flex items-center p-3 rounded-lg border border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50 cursor-pointer">
-                            <input class="w-5 h-5 text-primary focus:ring-primary border-slate-300" name="env"
-                                type="radio" />
-                            <span class="ml-3 text-sm font-medium text-slate-700 dark:text-slate-300">Năng động
-                                (Dynamic)</span>
-                        </label>
-                        <label
-                            class="flex items-center p-3 rounded-lg border border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50 cursor-pointer">
-                            <input checked="" class="w-5 h-5 text-primary focus:ring-primary border-slate-300"
-                                name="env" type="radio" />
-                            <span class="ml-3 text-sm font-medium text-slate-700 dark:text-slate-300">Ổn định
-                                (Stable)</span>
-                        </label>
-                        <label
-                            class="flex items-center p-3 rounded-lg border border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50 cursor-pointer">
-                            <input class="w-5 h-5 text-primary focus:ring-primary border-slate-300" name="env"
-                                type="radio" />
-                            <span class="ml-3 text-sm font-medium text-slate-700 dark:text-slate-300">Quốc tế
-                                (International)</span>
-                        </label>
+                    <div class="skill-chip">
+                        <span class="material-symbols-outlined text-[18px] text-brand-red">groups_3</span>
+                        <span>Giao tiếp</span>
+                    </div>
+                    <div class="skill-chip">
+                        <span class="material-symbols-outlined text-[18px] text-brand-red">psychology</span>
+                        <span>Tư duy logic</span>
                     </div>
                 </div>
                 <button
-                    class="w-full h-14 bg-gradient-to-r from-primary to-red-400 text-white font-bold rounded-lg shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
-                    onclick="window.location.href='../chúc mừng nhận điểm/code.html'">
-                    <span class="material-symbols-outlined">analytics</span>
-                    Tính tỷ lệ có việc làm
+                    class="flex items-center gap-2 px-5 py-2.5 rounded-pill border-2 border-dashed border-slate-200 text-slate-400 text-sm font-bold hover:border-brand-red hover:text-brand-red transition-colors w-fit">
+                    <span class="material-symbols-outlined text-[20px]">add_circle</span>
+                    Thêm kỹ năng
                 </button>
             </div>
-            <div class="glass-effect rounded-xl p-6 border-2 border-white/50 relative overflow-hidden">
-                <div class="absolute -right-4 -top-4 opacity-5">
-                    <span class="material-symbols-outlined text-[120px]">stars</span>
+
+            <!-- Environment Section -->
+            <div class="section-container">
+                <label
+                    class="block text-sm font-semibold text-text-slate mb-3 ml-1 uppercase tracking-wider text-[11px]">Môi
+                    trường mong muốn</label>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="selection-card active" onclick="selectEnv(this)">
+                        <div class="icon-box">
+                            <span class="material-symbols-outlined">bolt</span>
+                        </div>
+                        <span class="text-[13px] font-bold">Năng động</span>
+                    </div>
+                    <div class="selection-card" onclick="selectEnv(this)">
+                        <div class="icon-box">
+                            <span class="material-symbols-outlined">verified_user</span>
+                        </div>
+                        <span class="text-[13px] font-bold">Ổn định</span>
+                    </div>
+                    <div class="selection-card" onclick="selectEnv(this)">
+                        <div class="icon-box">
+                            <span class="material-symbols-outlined">public</span>
+                        </div>
+                        <span class="text-[13px] font-bold">Quốc tế</span>
+                    </div>
                 </div>
-                <div class="flex flex-col items-center text-center">
-                    <div class="relative w-32 h-32 flex items-center justify-center mb-6">
-                        <svg class="w-full h-full transform -rotate-90">
-                            <circle class="text-slate-200 dark:text-slate-700" cx="64" cy="64" fill="transparent" r="58"
-                                stroke="currentColor" stroke-width="8"></circle>
-                            <circle class="text-primary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor"
-                                stroke-dasharray="364" stroke-dashoffset="29" stroke-width="8"></circle>
-                        </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Tỷ lệ</span>
-                            <span class="text-3xl font-bold text-navy-custom dark:text-white">92%</span>
+            </div>
+
+            <!-- CTA -->
+            <button class="cta-button w-full" id="calculate-btn" onclick="runSimulation()">
+                <span class="material-symbols-outlined">analytics</span>
+                TÍNH TỶ LỆ CÓ VIỆC LÀM
+            </button>
+        </section>
+
+        <!-- Result Section (Hidden initially) -->
+        <section class="mt-8 space-y-4 hidden" id="result-section">
+            <div class="result-card flex flex-col items-center py-10">
+                <div class="watermark">
+                    <span class="material-symbols-outlined">stars</span>
+                </div>
+
+                <div class="progress-circle shadow-xl mb-6" id="progress-container">
+                    <div class="flex flex-col items-center">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[2px]">Tỷ lệ</span>
+                        <span class="text-[36px] font-black text-brand-red leading-none" id="percentage-text">0%</span>
+                    </div>
+                </div>
+
+                <div class="text-center mb-8">
+                    <h3 class="text-lg font-extrabold text-text-navy">Simulations Result</h3>
+                    <p class="text-xs text-text-slate font-medium px-8 mt-1">Dựa trên data-driven từ 500+ doanh nghiệp
+                        liên kết với SaigonTech</p>
+                </div>
+
+                <div class="w-full space-y-3 px-2">
+                    <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-white">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Ngành gợi ý</p>
+                            <p class="text-sm font-extrabold text-text-navy">Truyền thông Đa phương tiện</p>
                         </div>
                     </div>
-                    <div class="w-full space-y-4 text-left">
-                        <div class="flex items-center gap-4 bg-white/60 dark:bg-slate-800/60 p-4 rounded-lg">
-                            <div
-                                class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                <span class="material-symbols-outlined">school</span>
-                            </div>
-                            <div>
-                                <p class="text-xs text-slate-500 font-medium">Ngành học gợi ý</p>
-                                <p class="text-sm font-bold text-navy-custom dark:text-slate-200 uppercase">Quản trị
-                                    Khách sạn</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4 bg-white/60 dark:bg-slate-800/60 p-4 rounded-lg">
-                            <div
-                                class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
-                                <span class="material-symbols-outlined">business_center</span>
-                            </div>
-                            <div>
-                                <p class="text-xs text-slate-500 font-medium">Thực tập mục tiêu</p>
-                                <p class="text-sm font-bold text-navy-custom dark:text-slate-200">Vinpearl Group</p>
-                            </div>
-                        </div>
+
+                    <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-white">
                         <div
-                            class="pt-2 flex items-center justify-center gap-2 text-primary bg-primary/5 py-3 rounded-lg border border-dashed border-primary/30">
-                            <span class="material-symbols-outlined text-xl">insights</span>
-                            <p class="text-sm font-bold italic">Hoàn vốn sau 1.5 năm làm việc</p>
+                            class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined">business_center</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Công ty thực tập
+                            </p>
+                            <p class="text-sm font-extrabold text-text-navy">FPT Software / VNG</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-white">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined">insights</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Thời gian hoàn vốn
+                            </p>
+                            <p class="text-sm font-extrabold text-text-navy italic">~ 14 tháng (Uớc tính)</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!-- Advice Card -->
+            <div class="p-5 rounded-card bg-brand-red/5 border border-brand-red/10 flex gap-4 items-start">
+                <span class="material-symbols-outlined text-brand-red">info</span>
+                <div>
+                    <p class="text-[13px] font-bold text-brand-red leading-tight">Mẹo tăng tỷ lệ (Data Insider)</p>
+                    <p class="text-[11px] text-text-slate mt-1">Tham gia "Thử thách thực chiến" tại School Hub để nâng
+                        tỷ lệ lên 98%.</p>
+                </div>
+            </div>
+
+            <button
+                class="w-full py-4 text-brand-red font-bold text-sm uppercase tracking-widest border-2 border-brand-red/20 rounded-card bg-white active:scale-95 transition-all mt-4"
+                onclick="location.reload()">
+                Cập nhật thông tin mới
+            </button>
+        </section>
     </main>
+
+    <!-- Navigation Bar -->
     <nav
-        class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-black/95 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 flex justify-between items-center z-[100] pt-2 pb-[calc(1rem+safe-area-inset-bottom)] px-4 shadow-[0_-10px_30px_-5px_rgba(0,0,0,0.08)]">
-        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
-            href="../home/code.html">
+        class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-100 flex justify-between items-center z-[100] pt-2 pb-[calc(1rem+safe-area-inset-bottom)] px-4 shadow-[0_-10px_30px_-5px_rgba(0,0,0,0.08)] w-full max-w-[430px]">
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400" href="../home/code.html">
             <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
                 <span class="material-symbols-outlined text-xl"
                     style="font-variation-settings: 'FILL' 0, 'wght' 400;">home</span>
@@ -210,8 +300,7 @@
             <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Trang
                 chủ</span>
         </a>
-        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
-            href="../career hub/code.html">
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400" href="../career hub/code.html">
             <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
                 <span class="material-symbols-outlined text-xl"
                     style="font-variation-settings: 'FILL' 0, 'wght' 400;">explore</span>
@@ -219,17 +308,15 @@
             <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Career
                 Hub</span>
         </a>
-        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
-            href="../tuyển sinh/code.html">
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-brand-red" href="../tuyển sinh/code.html">
             <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
                 <span class="material-symbols-outlined text-xl"
-                    style="font-variation-settings: 'FILL' 0, 'wght' 400;">campaign</span>
+                    style="font-variation-settings: 'FILL' 1, 'wght' 400;">campaign</span>
             </div>
-            <span class="text-[9px] font-semibold uppercase tracking-tighter whitespace-nowrap leading-none">Tuyển
+            <span class="text-[9px] font-bold uppercase tracking-tighter whitespace-nowrap leading-none">Tuyển
                 sinh</span>
         </a>
-        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400 dark:text-slate-500"
-            href="../Cá nhân/code.html">
+        <a class="flex flex-col items-center gap-0.5 flex-1 min-w-0 text-slate-400" href="../Cá nhân/code.html">
             <div class="w-9 h-9 rounded-full border-2 border-transparent flex items-center justify-center mb-0.5">
                 <span class="material-symbols-outlined text-xl"
                     style="font-variation-settings: 'FILL' 0, 'wght' 400;">person</span>
@@ -238,9 +325,65 @@
                 nhân</span>
         </a>
     </nav>
-    <div class="fixed bottom-1 w-32 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full left-1/2 -translate-x-1/2 z-[60]">
-    </div>
 
+    <!-- Home indicator -->
+    <div class="fixed bottom-2 w-32 h-1.5 bg-slate-200 rounded-full left-1/2 -translate-x-1/2 z-[110]"></div>
+
+    <script>
+        function selectEnv(el) {
+            document.querySelectorAll('.selection-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            el.classList.add('active');
+        }
+
+        function runSimulation() {
+            const btn = document.getElementById('calculate-btn');
+            const resultSection = document.getElementById('result-section');
+            const percentageText = document.getElementById('percentage-text');
+            const progressCircle = document.getElementById('progress-container');
+
+            // Button Loading State
+            btn.disabled = true;
+            btn.innerHTML = `
+                <svg class="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                HỆ THỐNG ĐANG PHÂN TÍCH...
+            `;
+
+            setTimeout(() => {
+                // Show result section
+                resultSection.classList.remove('hidden');
+
+                // Animate to result section
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Reset button
+                btn.innerHTML = `
+                    <span class="material-symbols-outlined">check_circle</span>
+                    KẾT QUẢ ĐÃ SẴN SÀNG
+                `;
+                btn.classList.replace('from-brand-red', 'from-emerald-500');
+                btn.classList.replace('to-brand-orange', 'to-emerald-400');
+
+                // Animate progress circle
+                let count = 0;
+                const target = 92;
+                const interval = setInterval(() => {
+                    if (count >= target) {
+                        clearInterval(interval);
+                    } else {
+                        count++;
+                        percentageText.innerText = count + '%';
+                        progressCircle.style.setProperty('--percentage', count);
+                    }
+                }, 20);
+
+            }, 2000);
+        }
+    </script>
 </body>
 
 </html>
