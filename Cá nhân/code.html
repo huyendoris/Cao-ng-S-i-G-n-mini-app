@@ -258,7 +258,7 @@
                     <div
                         class="relative w-24 h-24 rounded-full border-4 border-white p-0.5 bg-white/20 shadow-xl floating">
                         <img alt="Student portrait" class="w-full h-full object-cover rounded-full"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPk-g61R5tR9Aj476NA_43uN9ygPJA6lwEB4yiwhDd7S8wjCCGiffqaGa9D8o5M4gTLpytaQ6sZ8HixgyfaIWtsLWiysQ7Tg5Yki_1svfhbw22hgxbNUdN3o8gYUDXTfp4uuWJmvMVOKpeYMLHjpSMh95NBOTGWQjELmC4PKRPK1XNJOfOhyiyiHbv-goW7DHOD8b4RcuUy4qhYStWHAi6MB1V-ZNBO4WngCEHq36Je_j8_YhHDmbP8pe9L1Th9JlWUB-GE6Mg9NKe">
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMux0mUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P">
                     </div>
                 </div>
                 <div class="text-center space-y-0.5 relative z-10">
@@ -379,24 +379,15 @@
                     class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
             </a>
 
-            <a class="flex items-center justify-between bg-white dark:bg-slate-900 p-5 rounded-[24px] shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.98] hover:shadow-md hover:-translate-y-0.5 transition-all group cursor-pointer"
-                onclick="toggleFeedback()">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="size-12 rounded-2xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-purple-600"
-                            style="font-variation-settings: 'FILL' 1;">headset_mic</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-black text-[15px] text-navy dark:text-white">Hỗ trợ & Góp ý</span>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Liên hệ ban giám
-                            hiệu</span>
-                    </div>
-                </div>
-                <span
-                    class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
-            </a>
         </div>
+
+    <!-- Floating Feedback Button -->
+    <button onclick="toggleFeedback()"
+        class="fixed bottom-24 right-5 z-[90] w-14 h-14 rounded-full bg-purple-600 text-white shadow-xl flex items-center justify-center active:scale-90 transition-all hover:scale-105"
+        style="box-shadow: 0 8px 24px rgba(124,58,237,0.4);"
+        title="Hỗ trợ & Góp ý">
+        <span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">headset_mic</span>
+    </button>
 
     </main>
 
@@ -452,32 +443,17 @@
         <div class="fixed inset-0" onclick="toggleFeedback()"></div>
         <div class="feedback-content relative">
             <div id="feedbackForm">
-                <h3 class="text-[22px] font-bold text-navy dark:text-white leading-tight mb-1">Góp ý cho trường</h3>
-                <p class="text-[13px] text-slate-500 dark:text-slate-400 mb-5">Ý kiến của bạn giúp chúng tôi hoàn thiện
-                    hơn mỗi ngày.</p>
+                <h3 class="text-[22px] font-bold text-navy dark:text-white leading-tight mb-1">Hỗ trợ & Góp ý</h3>
+                <p class="text-[13px] text-slate-500 dark:text-slate-400 mb-5">Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn.</p>
                 <form onsubmit="submitFeedback(event)">
-                    <div class="relative mb-4">
-                        <select
-                            class="w-full h-[52px] bg-white border border-[#E6E6E6] rounded-xl px-4 text-[14px] text-slate-700 font-medium appearance-none focus:outline-none focus:border-[#E60023] transition-colors"
-                            required>
-                            <option value="" disabled selected hidden>Chọn chủ đề</option>
-                            <option>Chất lượng giảng dạy</option>
-                            <option>Cơ sở vật chất</option>
-                            <option>Dịch vụ sinh viên</option>
-                            <option>Hoạt động ngoại khóa</option>
-                            <option>Khác</option>
-                        </select>
-                        <span
-                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">expand_more</span>
-                    </div>
                     <div class="mb-5">
                         <textarea required
-                            class="w-full min-h-[140px] bg-[#FAFAFA] border border-transparent rounded-2xl p-4 text-[14px] text-slate-700 focus:outline-none focus:border-[#E60023] focus:bg-white transition-all resize-none placeholder:text-slate-400"
-                            placeholder="Nhập nội dung góp ý của bạn..."></textarea>
+                            class="w-full min-h-[100px] bg-[#FAFAFA] border border-transparent rounded-2xl p-4 text-[14px] text-slate-700 focus:outline-none focus:border-[#E60023] focus:bg-white transition-all resize-none placeholder:text-slate-400"
+                            placeholder="Nhập nội dung góp ý hoặc câu hỏi cần hỗ trợ..."></textarea>
                     </div>
                     <button type="submit"
                         class="w-full h-[52px] bg-[#E60023] text-white text-[15px] font-bold rounded-xl active:scale-95 transition-all hover:shadow-[0_8px_20px_rgba(230,0,35,0.25)] flex items-center justify-center">
-                        GỬI GÓP Ý
+                        XÁC NHẬN GỬI
                     </button>
                 </form>
             </div>
