@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#D61F36",
+                        "navy": "#0A1D37",
+                        "gold-luxury": "#C6A85E",
+                        "background-light": "#F8F9FA",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "heading": ["Playfair Display", "serif"],
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass-card {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .history-item {
+                @apply flex items-center gap-4 p-4 rounded-[2rem] bg-white border border-slate-100 shadow-sm transition-all active:scale-[0.98];
+            }
+        }
+        body {
+            font-family: 'Lexend', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .capsule-luxury {
+            @apply w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all;
+            background: linear-gradient(135deg, #FF3D00 0%, #E30613 100%);
+            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
+        }
+        #side-drawer {
+            transform: translateX(-100%);
+            transition: transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+            background: rgba(10, 29, 55, 0.9);
+            backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #drawer-toggle:checked ~ #side-drawer {
+            transform: translateX(0);
+        }
+        #drawer-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 300ms ease-out, visibility 300ms ease-out, backdrop-filter 300ms ease-out;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(0px);
+        }
+        #drawer-toggle:checked ~ #drawer-overlay {
+            opacity: 1;
+            visibility: visible;
+            backdrop-filter: blur(8px);
+        }
+        .drawer-nav-item {
+            @apply flex items-center gap-4 p-4 rounded-xl text-white/70 font-medium transition-all;
+        }
+        .drawer-nav-item.active {
+            @apply bg-primary/20 text-white border border-primary/30 shadow-lg shadow-primary/20;
+        }
+        .drawer-nav-item:not(.active):active {
+            @apply bg-white/5;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light min-h-screen pb-10">
+    <input class="hidden" id="drawer-toggle" type="checkbox">
+    <div class="fixed inset-0 z-[60] drawer-overlay" id="drawer-overlay"
+        onclick="document.getElementById('drawer-toggle').checked = false"></div>
+    <aside class="fixed left-0 top-0 z-[70] h-full w-[280px] p-6 text-white overflow-y-auto" id="side-drawer">
+        <label class="absolute right-4 top-4 cursor-pointer text-white/50 hover:text-white transition-colors"
+            for="drawer-toggle">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </label>
+        <div class="drawer-user-info mb-10 mt-4">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-14 h-14 rounded-full border-2 border-primary p-0.5 bg-white/10 overflow-hidden shadow-lg">
+                    <img alt="User Avatar" class="w-full h-full object-cover rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMux0mUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P" />
+                </div>
+                <div>
+                    <h3 class="text-white font-extrabold text-lg">Nguyễn Văn A</h3>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <span class="material-symbols-outlined text-primary text-sm"
+                            style="font-variation-settings: 'FILL' 1;">stars</span>
+                        <span class="text-white/80 text-xs font-bold tracking-wide">2.450 S-Points</span>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px w-full bg-white/10"></div>
+        </div>
+        <nav class="flex flex-col gap-2">
+            <a class="drawer-nav-item" href="../home/code.html">
+                <span class="material-symbols-outlined">home</span>
+                <span>Trang chủ</span>
+            </a>
+            <a class="drawer-nav-item" href="../tuyển sinh/code.html">
+                <span class="material-symbols-outlined">campaign</span>
+                <span>Tuyển sinh</span>
+            </a>
+            <a class="drawer-nav-item" href="../career hub/code.html">
+                <span class="material-symbols-outlined">explore</span>
+                <span>Career Hub</span>
+            </a>
+            <a class="drawer-nav-item" href="../lộ trình học cá nhân hóa/code.html">
+                <span class="material-symbols-outlined">route</span>
+                <span>Lộ trình học</span>
+            </a>
+            <a class="drawer-nav-item" href="../kho quà tặng/code.html">
+                <span class="material-symbols-outlined">inventory_2</span>
+                <span>Kho quà tặng</span>
+            </a>
+            <a class="drawer-nav-item active" href="../Cá nhân/code.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+                <span>Cá nhân</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 bg-white/80 backdrop-blur-md px-6 py-5 flex items-center border-b border-slate-100">
+        <label class="cursor-pointer capsule-luxury active:scale-95 transition-transform" for="drawer-toggle">
+            <span class="material-symbols-outlined text-white text-2xl font-bold">menu</span>
+        </label>
+        <h1 class="flex-1 text-center text-lg font-black text-navy uppercase tracking-tight">Lịch sử đổi quà</h1>
+        <button onclick="window.history.back()"
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 border border-slate-100 active:scale-95 transition-all text-navy ml-4">
+            <span class="material-symbols-outlined">arrow_back_ios_new</span>
+        </button>
+    </header>
+
+    <main class="p-6 space-y-8">
+        <!-- User Summary -->
+        <div class="bg-navy rounded-[2.5rem] p-6 text-white relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+            <div class="relative z-10 flex items-center justify-between">
+                <div>
+                    <p class="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-1">Số dư hiện tại</p>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-gold-luxury"
+                            style="font-variation-settings: 'FILL' 1;">stars</span>
+                        <span class="text-3xl font-black">1,250</span>
+                        <span class="text-xs font-bold text-white/60 mt-2 uppercase">S-Points</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-1">Tổng quà đã đổi</p>
+                    <p class="text-2xl font-black italic tracking-tighter">08</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Content -->
+        <div class="space-y-6">
+            <div class="flex items-center justify-between px-2">
+                <h2 class="text-sm font-black text-navy uppercase tracking-widest">Giao dịch gần đây</h2>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Tháng
+                    03/2026</span>
+            </div>
+
+            <!-- List -->
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div class="history-item">
+                    <div
+                        class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1544816153-12ad5d7133a2?auto=format&fit=crop&q=80&w=100&h=100"
+                            alt="Gift" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-navy leading-tight mb-1">Ly sứ SGC Limited Edition</h4>
+                        <p class="text-[10px] text-slate-400 font-medium">02/03/2026 • 15:45</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-black text-primary">-300</p>
+                        <span
+                            class="px-2 py-1 bg-emerald-50 text-emerald-500 text-[8px] font-black uppercase rounded-md tracking-tighter">Thành
+                            công</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="history-item">
+                    <div
+                        class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1589149062358-84271960220a?auto=format&fit=crop&q=80&w=100&h=100"
+                            alt="Gift" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-navy leading-tight mb-1">Voucher Highlands Coffee 50k</h4>
+                        <p class="text-[10px] text-slate-400 font-medium">28/02/2026 • 09:12</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-black text-primary">-500</p>
+                        <span
+                            class="px-2 py-1 bg-emerald-50 text-emerald-500 text-[8px] font-black uppercase rounded-md tracking-tighter">Thành
+                            công</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="history-item">
+                    <div
+                        class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=100&h=100"
+                            alt="Gift" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-navy leading-tight mb-1">Áo thun đồng phục SGC</h4>
+                        <p class="text-[10px] text-slate-400 font-medium">25/02/2026 • 11:30</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-black text-primary">-1,200</p>
+                        <span
+                            class="px-2 py-1 bg-orange-50 text-orange-500 text-[8px] font-black uppercase rounded-md tracking-tighter">Đang
+                            xử lý</span>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="history-item">
+                    <div
+                        class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                        <span class="material-symbols-outlined text-gold-luxury text-3xl">local_activity</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-navy leading-tight mb-1">Vé xem phim CGV</h4>
+                        <p class="text-[10px] text-slate-400 font-medium">20/02/2026 • 20:05</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-black text-primary">-600</p>
+                        <span
+                            class="px-2 py-1 bg-emerald-50 text-emerald-500 text-[8px] font-black uppercase rounded-md tracking-tighter">Thành
+                            công</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State Help (Optional) -->
+            <div class="p-8 text-center bg-white rounded-[2.5rem] border border-dashed border-slate-200">
+                <span class="material-symbols-outlined text-4xl text-slate-200 mb-4">info</span>
+                <p class="text-xs text-slate-400 font-medium leading-relaxed">Mọi thắc mắc về việc đổi thưởng, vui lòng
+                    liên hệ bộ phận hỗ trợ sinh viên tại văn phòng trường.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Toast Mockup -->
+    <div id="toast"
+        class="fixed top-10 left-1/2 -translate-x-1/2 z-[100] bg-navy text-white px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl transition-all duration-500 opacity-0 translate-y-[-20px] pointer-events-none">
+        Cập nhật lịch sử thành công
+    </div>
+
+    <script>
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            toast.style.transform = 'translate(-50%, 0)';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translate(-50%, -20px)';
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

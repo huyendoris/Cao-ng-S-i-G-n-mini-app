@@ -20,9 +20,11 @@
                         "icon-red": "#E05A6B", // De-saturated red for icons
                         "background-light": "#F8F9FA",
                         "background-dark": "#121212",
+                        "gold-luxury": "#C6A85E",
                     },
                     fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
+                        "display": ["Lexend", "sans-serif"],
+                        "heading": ["Playfair Display", "serif"],
                     },
                     borderRadius: {
                         "DEFAULT": "1rem",
@@ -81,6 +83,27 @@
         }
         .drawer-nav-item:not(.active):active {
             @apply bg-white/10;
+        }
+        .feedback-popup {
+            @apply fixed inset-0 z-[110] flex items-end justify-center invisible opacity-0 transition-all duration-300;
+        }
+        .feedback-popup.active {
+            @apply visible opacity-100;
+        }
+        .feedback-content {
+            @apply bg-white dark:bg-slate-900 w-full max-w-md rounded-t-[2.5rem] p-8 transform translate-y-full transition-transform duration-300 shadow-2xl;
+        }
+        .feedback-popup.active .feedback-content {
+            @apply translate-y-0;
+        }
+        .capsule-luxury {
+            @apply w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all;
+            background: linear-gradient(135deg, #FF3D00 0%, #E30613 100%);
+            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
+        }
+        .capsule-luxury:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 20px rgba(198, 168, 94, 0.2);
         }
     </style>
     <style>
@@ -159,11 +182,11 @@
     <header
         class="sticky top-0 z-50 bg-white/90 dark:bg-black/90 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
         <div class="flex items-center gap-4">
-            <label class="cursor-pointer active:scale-90 transition-transform flex items-center justify-center p-1"
-                for="drawer-toggle">
-                <span class="material-symbols-outlined text-navy dark:text-white text-3xl">menu</span>
+            <label class="cursor-pointer capsule-luxury active:scale-95" for="drawer-toggle">
+                <span class="material-symbols-outlined text-white text-2xl font-bold">menu</span>
             </label>
-            <h1 class="text-lg font-extrabold text-navy dark:text-white uppercase tracking-wider">CAO ĐĂNG SÀI gòn</h1>
+            <h1 class="text-lg font-extrabold text-navy dark:text-white uppercase tracking-wider font-heading">CAO ĐĂNG
+                SÀI gòn</h1>
         </div>
         <div
             class="xp-badge bg-[var(--xp-gradient)] flex items-center gap-1 px-3 py-1.5 rounded-full text-white text-xs font-bold shadow-sm">
@@ -200,7 +223,7 @@
                         </div>
                         <button
                             class="bg-primary/5 text-primary px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1 active:scale-95 transition-all"
-                            onclick="window.location.href='../đổi quà thành công/code.html'">
+                            onclick="window.location.href='../lịch sử đổi quà/code.html'">
                             <span class="material-symbols-outlined" style="font-size: 18px;">history</span>
                             Lịch sử
                         </button>
@@ -215,21 +238,9 @@
                         </button>
                         <button
                             class="flex items-center justify-center gap-2 rounded-2xl bg-white border border-slate-100 py-4 text-center font-bold text-slate-700 active:scale-95 transition-all shadow-sm"
-                            onclick="window.location.href='../tuyển sinh/code.html'">
-                            <span class="material-symbols-outlined text-xl text-primary">campaign</span>
-                            <span class="text-xs">Tuyển sinh</span>
-                        </button>
-                        <button
-                            class="flex items-center justify-center gap-2 rounded-2xl bg-white border border-slate-100 py-4 text-center font-bold text-slate-700 active:scale-95 transition-all shadow-sm"
                             onclick="window.location.href='../mô phỏng cơ hội/code.html'">
                             <span class="material-symbols-outlined text-xl text-blue-500">campaign</span>
-                            <span class="text-xs">Mô phỏng</span>
-                        </button>
-                        <button
-                            class="flex items-center justify-center gap-2 rounded-2xl bg-white border border-slate-100 py-4 text-center font-bold text-slate-700 active:scale-95 transition-all shadow-sm"
-                            onclick="window.location.href='../home/code.html'">
-                            <span class="material-symbols-outlined text-xl text-primary">home</span>
-                            <span class="text-xs">Trang chủ</span>
+                            <span class="text-xs">Mô phỏng cơ hội</span>
                         </button>
                     </div>
                 </div>
@@ -270,7 +281,7 @@
                 </a>
                 <div class="h-[1px] bg-[#F0F0F0] dark:bg-slate-800 mx-2"></div>
                 <a class="flex items-center justify-between bg-white dark:bg-slate-800/50 p-4 rounded-[12px] shadow-sm border border-slate-100 dark:border-slate-800 active:bg-slate-50 transition-colors"
-                    href="../đổi quà thành công/code.html">
+                    href="../lịch sử đổi quà/code.html">
                     <div class="flex items-center gap-4">
                         <div class="size-10 rounded-full bg-primary/5 flex items-center justify-center">
                             <span class="material-symbols-outlined text-icon-red">history</span>
@@ -292,8 +303,8 @@
                     <span class="material-symbols-outlined text-slate-300" style="font-size: 20px;">chevron_right</span>
                 </a>
                 <div class="h-[1px] bg-[#F0F0F0] dark:bg-slate-800 mx-2"></div>
-                <a class="flex items-center justify-between bg-white dark:bg-slate-800/50 p-4 rounded-[12px] shadow-sm border border-slate-100 dark:border-slate-800 active:bg-slate-50 transition-colors"
-                    href="#" style="">
+                <a class="flex items-center justify-between bg-white dark:bg-slate-800/50 p-4 rounded-[12px] shadow-sm border border-slate-100 dark:border-slate-800 active:bg-slate-50 transition-colors cursor-pointer"
+                    onclick="toggleFeedback()">
                     <div class="flex items-center gap-4">
                         <div class="size-10 rounded-full bg-primary/5 flex items-center justify-center">
                             <span class="material-symbols-outlined text-icon-red" style="">headset_mic</span>
@@ -354,6 +365,56 @@
         </a>
     </nav>
 
+    <!-- Feedback Popup -->
+    <div id="feedbackPopup" class="feedback-popup">
+        <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleFeedback()"></div>
+        <div class="feedback-content relative">
+            <div class="w-12 h-1 bg-slate-200 rounded-full mx-auto mb-6"></div>
+
+            <div id="feedbackForm">
+                <h3 class="text-xl font-bold text-navy dark:text-white mb-2">Góp ý cho trường</h3>
+                <p class="text-slate-500 text-sm mb-6">Ý kiến của bạn giúp chúng tôi hoàn thiện hơn mỗi ngày.</p>
+
+                <form onsubmit="submitFeedback(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Chủ
+                            đề</label>
+                        <select
+                            class="w-full h-12 bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 text-sm focus:ring-2 focus:ring-primary/20">
+                            <option>Chất lượng giảng dạy</option>
+                            <option>Cơ sở vật chất</option>
+                            <option>Dịch vụ sinh viên</option>
+                            <option>Hoạt động ngoại khóa</option>
+                            <option>Khác</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Nội dung
+                            góp ý</label>
+                        <textarea required
+                            class="w-full h-32 bg-slate-50 dark:bg-slate-800 border-none rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary/20 resize-none"
+                            placeholder="Nhập nội dung góp ý của bạn tại đây..."></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full h-14 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                        GỬI GÓP Ý
+                    </button>
+                </form>
+            </div>
+
+            <div id="feedbackSuccess" class="hidden text-center py-8">
+                <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="material-symbols-outlined text-emerald-500 text-4xl">check_circle</span>
+                </div>
+                <h3 class="text-xl font-bold text-navy dark:text-white mb-2">Gửi thành công!</h3>
+                <p class="text-slate-500 text-sm mb-8">Cảm ơn bạn đã đóng góp ý kiến quý báu cho nhà trường.</p>
+                <button onclick="toggleFeedback()"
+                    class="w-full h-14 border border-slate-200 font-bold rounded-xl active:bg-slate-50 transition-all text-slate-600">
+                    ĐÓNG
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

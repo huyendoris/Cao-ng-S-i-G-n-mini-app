@@ -87,6 +87,11 @@
                 -ms-overflow-style: none;
                 scrollbar-width: none;
             }
+            .capsule-luxury {
+                @apply w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all;
+                background: linear-gradient(135deg, #FF3D00 0%, #E30613 100%);
+                box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
+            }
         }
     </style>
   <style>
@@ -2147,83 +2152,24 @@
 </head>
 
 <body class="bg-background-light font-display text-slate-900 antialiased overflow-x-hidden">
-  <input class="hidden" id="drawer-toggle" type="checkbox" />
-  <label class="fixed inset-0 z-[60]" for="drawer-toggle" id="drawer-overlay"></label>
-  <aside class="fixed top-0 left-0 bottom-0 w-[280px] z-[70] overflow-y-auto px-6 py-10 flex flex-col" id="side-drawer">
-    <label class="absolute top-6 right-6 text-white/60 active:scale-90 transition-transform" for="drawer-toggle">
-      <span class="material-symbols-outlined text-3xl">close</span>
-    </label>
-    <div class="drawer-user-info mb-10 mt-4">
-      <div class="flex items-center gap-4 mb-4">
-        <div class="w-14 h-14 rounded-full border-2 border-primary p-0.5 bg-white/10 overflow-hidden shadow-lg">
-          <img alt="User Avatar" class="w-full h-full object-cover rounded-full"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMux0mUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P" />
-        </div>
-        <div>
-          <h3 class="text-white font-extrabold text-lg">Nguyễn Văn A</h3>
-          <div class="flex items-center gap-1.5 mt-0.5">
-            <span class="material-symbols-outlined text-primary text-sm"
-              style="font-variation-settings: 'FILL' 1;">stars</span>
-            <span class="text-white/80 text-xs font-bold tracking-wide">2.450 S-Points</span>
-          </div>
-        </div>
-      </div>
-      <div class="h-px w-full bg-white/10"></div>
-    </div>
-    <nav class="flex flex-col gap-2">
-      <a class="drawer-nav-item" href="../home/code.html">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
-        <span>Trang chủ</span>
-      </a>
-      <a class="drawer-nav-item" href="../career hub/code.html">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">explore</span>
-        <span>Career Hub</span>
-      </a>
-      <a class="drawer-nav-item" href="../tuyển sinh/code.html">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">campaign</span>
-        <span>Tuyển sinh</span>
-      </a>
-      <a class="drawer-nav-item" href="../Cá nhân/code.html">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
-        <span>Cá nhân</span>
-      </a>
-      <a class="drawer-nav-item" href="../đăng ký xét tuyển/code.html">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">how_to_reg</span>
-        <span>Đăng ký xét tuyển</span>
-      </a>
-      <a class="drawer-nav-item" href="../kho quà tặng/code.html">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
-        <span>Kho quà tặng</span>
-      </a>
-      <a class="drawer-nav-item" href="#">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
-        <span>Thông báo</span>
-      </a>
-      <a class="drawer-nav-item mt-8" href="#">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
-        <span>Cài đặt</span>
-      </a>
-    </nav>
-    <div class="drawer-footer mt-auto pt-10">
-      <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-        <p class="text-[10px] text-white/40 uppercase font-black tracking-widest mb-1">Phiên bản</p>
-        <p class="text-white/60 text-xs font-bold">Luxury Tech v2.4.0</p>
-      </div>
-    </div>
-  </aside>
+
   <div class="relative mx-auto min-h-screen max-w-md bg-background-light overflow-hidden">
     <div class="absolute inset-0 bg-tech-pattern pointer-events-none"></div>
     <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-    <header class="relative z-10 flex items-center justify-between p-6">
-      <label class="cursor-pointer active:scale-90 transition-transform flex items-center justify-center p-1"
-        for="drawer-toggle">
-        <span class="material-symbols-outlined text-navy-accent text-2xl font-bold">menu</span>
-      </label>
-      <h1 class="text-xl font-bold text-navy-accent" style="">Lộ trình của bạn</h1>
+    <header
+      class="sticky top-0 z-50 bg-white/90 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+      <div class="flex items-center gap-4">
+        <button
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 border border-slate-200 active:scale-95 transition-all text-navy"
+          onclick="window.location.href='../Cá nhân/code.html'">
+          <span class="material-symbols-outlined text-xl font-bold">arrow_back_ios_new</span>
+        </button>
+        <h1 class="text-lg font-extrabold text-navy dark:text-white uppercase tracking-wider font-heading">Lộ trình của
+          bạn</h1>
+      </div>
       <div class="h-10 w-10 overflow-hidden rounded-full border-2 border-white shadow-sm">
         <img alt="User profile" class="h-full w-full object-cover"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd2ztZKaAoymULdKZJS-BJvipjA-GyEytkMSN22M_gQ168M3qlOJJn4zexPTebabym-bNFWlNlEnnpB47XuYoEfALkm-s2i8sfehLVJ_xkw1XZuMPbUGphAOkEzNh3OCNfvmyelhKr0BLGXQtOlcPh0NizafSOHMcRV0Pgh5Nz_W6hRluCbNgk3hKKQji29ePFbn55G6BvcIYV5Tt5bxRfqJJ_Q7aGmrFn8iarjHAaP9DghmWxRtK1EG3sYN9ewoFVTYy7FQS74xCK"
-          style="">
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd2ztZKaAoymULdKZJS-BJvipjA-GyEytkMSN22M_gQ168M3qlOJJn4zexPTebabym-bNFWlNlEnnpB47XuYoEfALkm-s2i8sfehLVJ_xkw1XZuMPbUGphAOkEzNh3OCNfvmyelhKr0BLGXQtOlcPh0NizafSOHMcRV0Pgh5Nz_W6hRluCbNgk3hKKQji29ePFbn55G6BvcIYV5Tt5bxRfqJJ_Q7aGmrFn8iarjHAaP9DghmWxRtK1EG3sYN9ewoFVTYy7FQS74xCK" />
       </div>
     </header>
     <main class="relative z-10 px-6 pb-48 space-y-8">

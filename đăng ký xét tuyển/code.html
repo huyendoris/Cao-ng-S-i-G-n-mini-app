@@ -20,9 +20,11 @@
                         primary: "#E30613",
                         navy: "#0A1D37",
                         "off-white": "#F8F9FB",
+                        "gold-luxury": "#C6A85E",
                     },
                     fontFamily: {
                         sans: ["Plus Jakarta Sans", "sans-serif"],
+                        heading: ["Playfair Display", "serif"],
                     },
                 },
             },
@@ -83,6 +85,15 @@
         }
         .drawer-nav-item:not(.active):active {
             @apply bg-white/10;
+        }
+        .capsule-luxury {
+            @apply w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all;
+            background: linear-gradient(135deg, #FF3D00 0%, #E30613 100%);
+            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
+        }
+        .capsule-luxury:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 20px rgba(198, 168, 94, 0.2);
         }
     </style>
 </head>
@@ -155,11 +166,10 @@
     </aside>
     <!-- Top Bar -->
     <header class="sticky top-0 z-50 bg-[#1A237E] text-white px-6 py-4 flex items-center gap-4">
-        <label class="cursor-pointer active:scale-90 transition-transform flex items-center justify-center p-1"
-            for="drawer-toggle">
-            <span class="material-symbols-outlined text-white text-2xl">menu</span>
+        <label class="cursor-pointer capsule-luxury active:scale-95" for="drawer-toggle">
+            <span class="material-symbols-outlined text-white text-2xl font-bold">menu</span>
         </label>
-        <h1 class="text-lg font-bold flex-1">Đơn đăng ký xét tuyển</h1>
+        <h1 class="text-sm font-bold uppercase tracking-widest font-heading">Xét tuyển trực tuyến</h1>
         <div class="flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full">
             <span class="material-symbols-outlined text-sm">more_horiz</span>
             <div class="w-px h-3 bg-white/30"></div>
