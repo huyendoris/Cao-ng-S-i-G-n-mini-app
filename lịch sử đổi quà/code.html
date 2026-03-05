@@ -39,6 +39,13 @@
             .history-item {
                 @apply flex items-center gap-4 p-4 rounded-[2rem] bg-white border border-slate-100 shadow-sm transition-all active:scale-[0.98];
             }
+            .floating-element {
+                animation: float 6s ease-in-out infinite;
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(5deg); }
         }
         body {
             font-family: 'Lexend', sans-serif;
@@ -173,98 +180,81 @@
     </header>
 
     <main class="p-6 space-y-8">
-        <!-- Premium Hero Summary -->
-        <section
-            class="hero-banner pt-10 pb-16 px-6 relative overflow-hidden rounded-[40px] shadow-[0_20px_50px_rgba(227,6,19,0.2)]">
-            <!-- Premium Gradient -->
-            <div class="absolute inset-0 bg-gradient-to-br from-[#d90429] to-[#ef233c] z-0"></div>
+        <!-- Redesigned Hero Summary -->
+        <section class="relative overflow-hidden rounded-[24px] shadow-2xl mb-8">
+            <!-- Background Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#9a0915] via-[#E30613] to-[#ff5d63] z-0"></div>
 
-            <!-- Subtle Lighting Effect -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-0"></div>
+            <!-- Pattern Overlay -->
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none z-0">
+                <span class="material-symbols-outlined text-[320px] select-none">redeem</span>
+            </div>
+
+            <!-- Lighting Elements -->
             <div
-                class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 z-0">
+                class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 z-10 pointer-events-none">
             </div>
             <div
-                class="absolute bottom-0 left-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 z-0">
+                class="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-[60px] translate-y-1/2 -translate-x-1/2 z-10 pointer-events-none">
             </div>
 
-            <!-- Background Decorative Image -->
-            <div
-                class="absolute inset-0 z-0 opacity-[0.06] mix-blend-overlay flex items-center justify-center pointer-events-none">
-                <span
-                    class="material-symbols-outlined text-[350px] -rotate-12 translate-x-10 -translate-y-10">redeem</span>
-            </div>
+            <div class="relative z-20 px-8 py-10 flex flex-row items-center justify-between gap-6">
+                <!-- Info Column -->
+                <div class="flex-1">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-4">
+                        <span class="material-symbols-outlined text-[14px] text-white/90">history</span>
+                        <span class="text-[10px] font-black text-white/90 uppercase tracking-widest leading-none">Lịch
+                            sử đổi quà</span>
+                    </div>
 
-            <!-- Micro Animation: Sparkles -->
-            <div class="absolute inset-0 z-0 pointer-events-none">
-                <span
-                    class="material-symbols-outlined text-white/60 text-sm absolute top-10 left-10 animate-pulse">sparkles</span>
-                <span class="material-symbols-outlined text-white/40 text-lg absolute top-1/4 right-32 animate-pulse"
-                    style="animation-delay: 1s;">sparkles</span>
-                <span class="material-symbols-outlined text-white/50 text-xs absolute bottom-16 left-1/4 animate-pulse"
-                    style="animation-delay: 2s;">sparkles</span>
-            </div>
-
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 mt-2">
-                <div class="max-w-xs z-10 text-white">
-                    <!-- Typography Fix -->
-                    <h2
-                        class="text-[36px] font-black leading-[1.1] uppercase tracking-tight text-white mb-4 drop-shadow-md">
+                    <h2 class="text-[28px] font-black leading-tight text-white mb-2 tracking-tight">
                         ĐỔI QUÀ<br>
-                        <span class="font-medium text-white/90">S-POINTS</span>
+                        <span class="text-white/80 font-medium">S-POINTS</span>
                     </h2>
-                    <!-- Subtitle Improvement -->
-                    <p class="text-[#ffffffcc] text-[14px] font-light leading-[1.6] mb-8 drop-shadow-sm max-w-[260px]">
-                        Tích lũy điểm thưởng từ học tập<br>
-                        và hoạt động để đổi các phần quà độc quyền.
+
+                    <p class="text-white/70 text-[12px] font-medium leading-relaxed mb-8 max-w-[200px]">
+                        Xem lại lịch sử tích lũy và sử dụng S-Points của bạn.
                     </p>
 
-                    <!-- Points Balance Card -->
-                    <div class="flex items-center gap-4">
+                    <!-- Points & Stats -->
+                    <div class="flex items-end gap-3">
+                        <!-- Points Card (Glassmorphism) -->
                         <div
-                            class="bg-white/10 backdrop-blur-xl px-5 py-4 rounded-[20px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.15)] inline-block group hover:bg-white/15 transition-all cursor-pointer">
-                            <span class="text-[10px] font-black uppercase tracking-[0.15em] block text-white/70 mb-1">SỐ
-                                DƯ ĐIỂM</span>
+                            class="bg-white/10 backdrop-blur-md px-5 py-4 rounded-[22px] border border-white/20 shadow-xl min-w-[140px]">
+                            <span class="text-[9px] font-black uppercase tracking-widest block text-white/60 mb-1">Số dư
+                                hiện tại</span>
                             <div class="flex items-center gap-2">
-                                <span
-                                    class="material-symbols-outlined text-[#FFD700] fill-1 text-[24px] drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">stars</span>
-                                <span
-                                    class="text-[28px] font-black tracking-tight text-white drop-shadow-md">1.250</span>
+                                <span class="material-symbols-outlined text-yellow-400 fill-1 text-[24px]">toll</span>
+                                <span class="text-[28px] font-black tracking-tighter text-white">1.250</span>
                             </div>
                         </div>
 
-                        <!-- Extra metric for history screen -->
-                        <div class="text-center px-2">
-                            <span class="text-[10px] font-black uppercase tracking-[0.1em] block text-white/70 mb-1">ĐÃ
-                                ĐỔI</span>
+                        <!-- Mini Stat Badge -->
+                        <div class="bg-black/20 backdrop-blur-sm px-3 py-2 rounded-xl border border-white/10 mb-1">
                             <span
-                                class="text-[28px] font-black italic tracking-tighter text-white drop-shadow-md">08</span>
+                                class="text-[9px] font-bold text-white/50 block uppercase tracking-tighter leading-none mb-0.5">Đã
+                                đổi</span>
+                            <span class="text-sm font-black text-white">08</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product Preview Layout -->
-                <div class="relative w-full max-w-[280px] h-[220px] mt-10 md:mt-0 z-10 mx-auto md:mx-0">
-                    <!-- Voucher Card (-6deg) -->
-                    <div class="absolute top-4 left-0 w-[140px] aspect-[4/3] bg-white rounded-2xl p-1 shadow-[0_15px_30px_rgba(0,0,0,0.2)] -rotate-6 transition-transform duration-500 hover:-rotate-2 hover:scale-105 floating-element"
-                        style="animation-delay: -1s; z-index: 10;">
-                        <div class="w-full h-full rounded-xl overflow-hidden bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1544161515-436cefb65794?auto=format&fit=crop&q=80&w=400"
-                                class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <!-- Hoodie Card (+6deg) -->
-                    <div class="absolute top-0 right-4 w-[150px] aspect-[4/5] bg-white rounded-2xl p-1 shadow-[0_20px_40px_rgba(0,0,0,0.25)] rotate-6 transition-transform duration-500 hover:rotate-2 hover:scale-105 floating-element"
-                        style="animation-delay: -3s; z-index: 20;">
+                <!-- Gift Preview Column -->
+                <div class="relative shrink-0 flex items-center justify-center">
+                    <!-- Red Glow -->
+                    <div class="absolute w-40 h-40 bg-red-500/40 rounded-full blur-[40px] z-0 animate-pulse"></div>
+
+                    <!-- Floating Card -->
+                    <div class="relative z-10 floating-element">
                         <div
-                            class="w-full h-full rounded-xl overflow-hidden bg-slate-50 relative flex items-center justify-center p-2">
-                            <img src="https://i.postimg.cc/15LfNhMC/1620973652028_540.png"
-                                class="w-full h-full object-contain">
+                            class="bg-white p-2.5 rounded-[24px] shadow-2xl transform rotate-[8deg] hover:rotate-0 transition-transform duration-700">
+                            <div
+                                class="w-[140px] h-[160px] rounded-[18px] overflow-hidden bg-slate-50 flex items-center justify-center border border-slate-100 p-2">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDxgbWEptq2w3DLE4I5xiBg_zxlJ5LkzWG7uaG_Tj_sNrW6g3sD-yg8zPkD3-0zOzdHdjyAur-ENa4thKqEdK3Xqqv6WBDd3WdxQl2b_fWG6DFuQLLMnSKdRXlw54RtDq09W1mgV3c78v-vygmTIqTYoRz4obRyQHXrwJCDpw2d98Ct_heb78mKB6sN7UymUh_xzoW1y-yW2m0scalU2F8OllrJJiKjKPiyFckgJn4t-GzD5lEaWQax9mSIYWwaL0zifbJ0Zn6ZjC1"
+                                    alt="Featured Gift" class="w-full h-full object-contain">
+                            </div>
                         </div>
-                    </div>
-                    <!-- Glow effect behind cards -->
-                    <div
-                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/20 rounded-full blur-[40px] z-0">
                     </div>
                 </div>
             </div>

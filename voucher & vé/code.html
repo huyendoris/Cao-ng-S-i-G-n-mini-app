@@ -217,87 +217,86 @@
     </aside>
 
     <main class="fade-in">
-        <!-- Hero Section -->
-        <section
-            class="hero-banner pt-12 pb-20 px-6 mb-8 text-white relative overflow-hidden rounded-b-[40px] shadow-[0_20px_50px_rgba(227,6,19,0.2)]">
-            <!-- Premium Gradient -->
-            <div class="absolute inset-0 bg-gradient-to-br from-[#d90429] to-[#ef233c] z-0"></div>
+        <!-- Hero Section Redesign -->
+        <section class="relative mx-6 mt-6 overflow-hidden rounded-[24px] shadow-2xl">
+            <!-- Background Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#9a0915] via-[#E30613] to-[#ff5d63] z-0"></div>
 
-            <!-- Subtle Lighting Effect -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-0"></div>
+            <!-- Pattern Overlay -->
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none z-0">
+                <span class="material-symbols-outlined text-[320px] select-none">redeem</span>
+            </div>
+
+            <!-- Lighting Elements -->
             <div
-                class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 z-0">
+                class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 z-10 pointer-events-none">
             </div>
             <div
-                class="absolute bottom-0 left-0 w-64 h-64 bg-white/20 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 z-0">
+                class="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-[60px] translate-y-1/2 -translate-x-1/2 z-10 pointer-events-none">
             </div>
 
-            <!-- Background Decorative Image -->
-            <div
-                class="absolute inset-0 z-0 opacity-[0.06] mix-blend-overlay flex items-center justify-center pointer-events-none">
-                <span
-                    class="material-symbols-outlined text-[350px] -rotate-12 translate-x-10 -translate-y-10">redeem</span>
-            </div>
+            <div class="relative z-20 px-8 py-10 flex flex-row items-center justify-between gap-6">
+                <!-- Info Column -->
+                <div class="flex-1">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                        <span class="text-[10px] font-black text-white/90 uppercase tracking-widest leading-none">Ưu đãi
+                            Voucher</span>
+                    </div>
 
-            <!-- Micro Animation: Sparkles -->
-            <div class="absolute inset-0 z-0 pointer-events-none">
-                <span
-                    class="material-symbols-outlined text-white/60 text-sm absolute top-10 left-10 animate-pulse">sparkles</span>
-                <span class="material-symbols-outlined text-white/40 text-lg absolute top-1/4 right-32 animate-pulse"
-                    style="animation-delay: 1s;">sparkles</span>
-                <span class="material-symbols-outlined text-white/50 text-xs absolute bottom-16 left-1/4 animate-pulse"
-                    style="animation-delay: 2s;">sparkles</span>
-            </div>
-
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 mt-4">
-                <div class="max-w-xs z-10">
-                    <!-- Typography Fix -->
-                    <h2
-                        class="text-[36px] font-black leading-[1.1] uppercase tracking-tight text-white mb-4 drop-shadow-md">
+                    <h2 class="text-[28px] font-black leading-tight text-white mb-2 tracking-tight">
                         ĐỔI QUÀ<br>
-                        <span class="font-medium text-white/90">S-POINTS</span>
+                        <span class="text-white/80 font-medium">S-POINTS</span>
                     </h2>
-                    <!-- Subtitle Improvement -->
-                    <p class="text-[#ffffffcc] text-[14px] font-light leading-[1.6] mb-8 drop-shadow-sm max-w-[260px]">
-                        Tích lũy điểm thưởng từ học tập<br>
-                        và hoạt động để đổi các phần quà độc quyền.
+
+                    <p class="text-white/70 text-[12px] font-medium leading-relaxed mb-8 max-w-[200px]">
+                        Tích lũy điểm từ các hoạt động để nhận quà độc quyền.
                     </p>
 
-                    <!-- Points Balance Card -->
-                    <div
-                        class="bg-white/10 backdrop-blur-xl px-5 py-4 rounded-[20px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.15)] inline-block group hover:bg-white/15 transition-all cursor-pointer">
-                        <span class="text-[10px] font-black uppercase tracking-[0.15em] block text-white/70 mb-1">SỐ DƯ
-                            ĐIỂM</span>
-                        <div class="flex items-center gap-2">
+                    <!-- Points & Stats -->
+                    <div class="flex items-end gap-3">
+                        <!-- Points Card (Glassmorphism) -->
+                        <div
+                            class="bg-white/10 backdrop-blur-md px-5 py-4 rounded-[22px] border border-white/20 shadow-xl min-w-[140px]">
+                            <span class="text-[9px] font-black uppercase tracking-widest block text-white/60 mb-1">Số dư
+                                hiện tại</span>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-yellow-400 fill-1 text-[24px]">toll</span>
+                                <span class="text-[28px] font-black tracking-tighter text-white">2.450</span>
+                            </div>
+                        </div>
+
+                        <!-- Mini Stat Badge -->
+                        <div class="bg-black/20 backdrop-blur-sm px-3 py-2 rounded-xl border border-white/10 mb-1">
                             <span
-                                class="material-symbols-outlined text-[#FFD700] fill-1 text-[24px] drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">stars</span>
-                            <span class="text-[28px] font-black tracking-tight text-white drop-shadow-md">2.450</span>
+                                class="text-[9px] font-bold text-white/50 block uppercase tracking-tighter leading-none mb-0.5">Đã
+                                đổi</span>
+                            <span class="text-sm font-black text-white">08</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product Preview Layout -->
-                <div class="relative w-full max-w-[280px] h-[220px] mt-10 md:mt-0 z-10 mx-auto md:mx-0">
-                    <!-- Voucher Card (-6deg) -->
-                    <div class="absolute top-4 left-0 w-[140px] aspect-[4/3] bg-white rounded-2xl p-1 shadow-[0_15px_30px_rgba(0,0,0,0.2)] -rotate-6 transition-transform duration-500 hover:-rotate-2 hover:scale-105 floating-element"
-                        style="animation-delay: -1s; z-index: 10;">
-                        <div class="w-full h-full rounded-xl overflow-hidden bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1544161515-436cefb65794?auto=format&fit=crop&q=80&w=400"
-                                class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <!-- Hoodie Card (+6deg) -->
-                    <div class="absolute top-0 right-4 w-[150px] aspect-[4/5] bg-white rounded-2xl p-1 shadow-[0_20px_40px_rgba(0,0,0,0.25)] rotate-6 transition-transform duration-500 hover:rotate-2 hover:scale-105 floating-element"
-                        style="animation-delay: -3s; z-index: 20;">
+                <!-- Gift Preview Column -->
+                <div class="relative shrink-0 flex items-center justify-center">
+                    <!-- Red Glow -->
+                    <div class="absolute w-40 h-40 bg-red-500/40 rounded-full blur-[40px] z-0 animate-pulse"></div>
+
+                    <!-- Floating Card -->
+                    <div class="relative z-10 floating-element">
                         <div
-                            class="w-full h-full rounded-xl overflow-hidden bg-slate-50 relative flex items-center justify-center p-2">
-                            <img src="https://i.postimg.cc/15LfNhMC/1620973652028_540.png"
-                                class="w-full h-full object-contain">
+                            class="bg-white p-2.5 rounded-[24px] shadow-2xl transform rotate-[8deg] hover:rotate-0 transition-transform duration-700">
+                            <div
+                                class="w-[140px] h-[160px] rounded-[18px] overflow-hidden bg-slate-50 flex items-center justify-center border border-slate-100 p-2">
+                                <img src="Voucher-Highlands-Coffee-mua-1-tang-1.jpg" alt="Featured Gift"
+                                    class="w-full h-full object-cover rounded-xl">
+                            </div>
                         </div>
-                    </div>
-                    <!-- Glow effect behind cards -->
-                    <div
-                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/20 rounded-full blur-[40px] z-0">
+
+                        <!-- Decorative Sparkle -->
+                        <div class="absolute -top-4 -right-2 text-yellow-300">
+                            <span class="material-symbols-outlined text-xl animate-bounce">auto_awesome</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -357,8 +356,8 @@
             <!-- Gift 3: Grab Voucher -->
             <div class="gift-card flex flex-col">
                 <div class="relative aspect-square rounded-3xl bg-slate-50 overflow-hidden mb-4 p-4">
-                    <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=400"
-                        alt="Grab Voucher" class="w-full h-full object-contain">
+                    <img src="vouchergrab.jpg" alt="Grab Voucher"
+                        class="w-full h-full object-cover rounded-xl shadow-sm">
                 </div>
                 <h4 class="font-black text-navy text-sm mb-1 leading-tight">Voucher GrabBike/GrabCar 30k</h4>
                 <div class="flex items-center gap-1.5 mb-4 text-brand-red">
@@ -373,8 +372,7 @@
             <!-- Gift 4: Concert Ticket -->
             <div class="gift-card flex flex-col">
                 <div class="relative aspect-square rounded-3xl bg-slate-50 overflow-hidden mb-4 p-4">
-                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=400"
-                        alt="Concert Ticket" class="w-full h-full object-contain">
+                    <img src="concert.jpg" alt="Concert Ticket" class="w-full h-full object-cover rounded-xl shadow-sm">
                 </div>
                 <h4 class="font-black text-navy text-sm mb-1 leading-tight">Vé đại nhạc hội SGC Fest</h4>
                 <div class="flex items-center gap-1.5 mb-4 text-brand-red">
