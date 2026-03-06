@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -71,7 +72,58 @@
                 background-color: transparent !important;
             }
         }
-    </style>
+    
+        
+        /* Glassmorphism Menu Button */
+        .menu-btn-glassmorphism {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 300ms ease;
+        }
+        .menu-btn-glassmorphism:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .menu-btn-glassmorphism:active {
+            transform: scale(0.95);
+        }
+        .menu-icon-bars {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 20px;
+            height: 14px;
+        }
+        .menu-bar {
+            width: 100%;
+            height: 2px;
+            background-color: #FFFFFF !important;
+            border-radius: 9999px;
+            transition: all 300ms ease-in-out;
+            box-shadow: 0 0 2px rgba(0,0,0,0.3);
+        }
+        /* Animate to X */
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(2) {
+            opacity: 0;
+        }
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+</style>
     <style>
         body {
             min-height: max(884px, 100dvh);
@@ -81,7 +133,62 @@
         body {
             min-height: max(884px, 100dvh);
         }
-    </style>
+    
+        /* ================================================
+           TYPOGRAPHY SYSTEM – Inter / SF Pro / Helvetica
+        ================================================ */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body, * {
+            font-family: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+        }
+        /* Heading Large – Hero / Banner */
+        .typo-hero {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+        /* Heading Section */
+        .typo-section-heading {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+        /* Card Title */
+        .typo-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        /* Subtitle / Description */
+        .typo-subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6B7280;
+        }
+        /* Button Text */
+        .typo-btn {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        /* Small Label */
+        .typo-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        /* Mobile max-width rule for text */
+        p, h1, h2, h3, h4, h5, span.text-block {
+            max-width: 90%;
+        }
+</style>
 </head>
 
 <body class="bg-background-light font-display text-slate-900 antialiased overflow-x-hidden">

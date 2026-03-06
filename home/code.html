@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -208,21 +209,117 @@
         .float-chat-widget {
             animation: float-chat 3s ease-in-out infinite;
         }
-        .capsule-luxury {
-            @apply w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all;
-            background: linear-gradient(135deg, #FF3D00 0%, #E30613 100%);
-            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
+        
+        /* Glassmorphism Menu Button */
+        .menu-btn-glassmorphism {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 300ms ease;
         }
-        .capsule-luxury:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 20px rgba(198, 168, 94, 0.2);
+        .menu-btn-glassmorphism:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.3);
         }
-    </style>
+        .menu-btn-glassmorphism:active {
+            transform: scale(0.95);
+        }
+        .menu-icon-bars {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 20px;
+            height: 14px;
+        }
+        .menu-bar {
+            width: 100%;
+            height: 2px;
+            background-color: #FFFFFF !important;
+            border-radius: 9999px;
+            transition: all 300ms ease-in-out;
+            box-shadow: 0 0 2px rgba(0,0,0,0.3);
+        }
+        /* Animate to X */
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(2) {
+            opacity: 0;
+        }
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+</style>
     <style>
         body {
             min-height: max(884px, 100dvh);
         }
-    </style>
+    
+        /* ================================================
+           TYPOGRAPHY SYSTEM – Inter / SF Pro / Helvetica
+        ================================================ */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body, * {
+            font-family: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+        }
+        /* Heading Large – Hero / Banner */
+        .typo-hero {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+        /* Heading Section */
+        .typo-section-heading {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+        /* Card Title */
+        .typo-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        /* Subtitle / Description */
+        .typo-subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6B7280;
+        }
+        /* Button Text */
+        .typo-btn {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        /* Small Label */
+        .typo-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        /* Mobile max-width rule for text */
+        p, h1, h2, h3, h4, h5, span.text-block {
+            max-width: 90%;
+        }
+</style>
 </head>
 
 <body
@@ -297,8 +394,12 @@
     <header
         class="sticky top-0 z-50 bg-white/90 dark:bg-black/90 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
         <div class="flex items-center gap-4">
-            <label class="cursor-pointer capsule-luxury active:scale-95" for="drawer-toggle">
-                <span class="material-symbols-outlined text-white text-2xl font-bold">menu</span>
+            <label class="cursor-pointer menu-btn-glassmorphism relative z-[80]" for="drawer-toggle">
+                <div class="menu-icon-bars">
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                </div>
             </label>
             <h1 class="text-lg font-extrabold text-navy dark:text-white uppercase tracking-wider font-heading">CAO ĐẲNG
                 SÀI GÒN</h1>

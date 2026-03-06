@@ -10,13 +10,15 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#D61F36",
+                        "primary": "#E30613",
                         "icon-red": "#E05A6B",
                         "background-light": "#F8F9FA",
                         "background-dark": "#121212",
@@ -38,11 +40,11 @@
     </script>
     <style type="text/tailwindcss">
         :root {
-            --hero-gradient: linear-gradient(165deg, #D61F36 0%, #B00010 100%);
-            --xp-gradient: linear-gradient(to right, #FF5A5F, #D61F36);
+            --hero-gradient: linear-gradient(165deg, #E30613 0%, #B8000E 100%);
+            --xp-gradient: linear-gradient(to right, #FF4D59, #E30613);
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #E60023, #B4001C);
+            background: linear-gradient(135deg, #E30613, #B8000E);
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
@@ -72,25 +74,6 @@
             70% { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(227, 6, 19, 0)); }
             100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(227, 6, 19, 0)); }
         }
-        .capsule-luxury {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-            background: linear-gradient(135deg, #FF3D00 0%, #E30613 100%);
-            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
-        }
-        .capsule-luxury:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(198, 168, 94, 0.2);
-        }
-
         /* Side Drawer Fixes - Synced with Admissions */
         #side-drawer {
             transform: translateX(-100%);
@@ -160,7 +143,57 @@
             background-color: #E30613;
             box-shadow: 0 10px 15px -3px rgba(227, 6, 19, 0.3), 0 4px 6px -2px rgba(227, 6, 19, 0.05);
         }
-    </style>
+    
+        /* Glassmorphism Menu Button */
+        .menu-btn-glassmorphism {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 300ms ease;
+        }
+        .menu-btn-glassmorphism:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .menu-btn-glassmorphism:active {
+            transform: scale(0.95);
+        }
+        .menu-icon-bars {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 20px;
+            height: 14px;
+        }
+        .menu-bar {
+            width: 100%;
+            height: 2px;
+            background-color: #FFFFFF !important;
+            border-radius: 9999px;
+            transition: all 300ms ease-in-out;
+            box-shadow: 0 0 2px rgba(0,0,0,0.3);
+        }
+        /* Animate to X */
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(2) {
+            opacity: 0;
+        }
+        #drawer-toggle:checked ~ * .menu-btn-glassmorphism .menu-bar:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+</style>
     <style>
         body {
             min-height: max(884px, 100dvh);
@@ -218,6 +251,76 @@
 
         .btn-hover-effect:hover {
             transform: scale(1.02);
+        }
+
+        /* ================================================
+           TYPOGRAPHY SYSTEM – Inter / SF Pro / Helvetica
+        ================================================ */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body,
+        * {
+            font-family: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Heading Large – Hero / Banner */
+        .typo-hero {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+
+        /* Heading Section */
+        .typo-section-heading {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        /* Card Title */
+        .typo-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* Subtitle / Description */
+        .typo-subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6B7280;
+        }
+
+        /* Button Text */
+        .typo-btn {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        /* Small Label */
+        .typo-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* Mobile max-width rule for text */
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        span.text-block {
+            max-width: 90%;
         }
     </style>
 </head>
@@ -292,8 +395,12 @@
     <header
         class="sticky top-0 z-50 bg-white/90 dark:bg-black/90 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
         <div class="flex items-center gap-4">
-            <label class="cursor-pointer capsule-luxury active:scale-95 transition-transform" for="drawer-toggle">
-                <span class="material-symbols-outlined text-white text-2xl font-bold">menu</span>
+            <label class="cursor-pointer menu-btn-glassmorphism relative z-[80]" for="drawer-toggle">
+                <div class="menu-icon-bars">
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                    <span class="menu-bar"></span>
+                </div>
             </label>
             <h1 class="text-lg font-extrabold text-navy dark:text-white uppercase tracking-wider font-heading">CAO ĐẲNG
                 SÀI GÒN</h1>
@@ -309,8 +416,8 @@
     <main class="flex-1 overflow-y-auto pb-24">
         <!-- Profile Hero Section -->
         <div class="px-5 pt-8">
-            <div
-                class="relative w-full hero-gradient rounded-[32px] p-8 flex flex-col items-center shadow-2xl overflow-hidden group min-h-[220px]">
+            <div class="relative w-full flex flex-col items-center overflow-hidden group"
+                style="background: linear-gradient(180deg, #E30613 0%, #E30613 100%); border-radius: 22px; padding: 40px 24px;">
                 <!-- Decorative background elements -->
                 <div
                     class="absolute top-0 left-0 w-48 h-48 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl">
@@ -324,33 +431,50 @@
                 </div>
 
                 <div class="relative mb-4">
-                    <div
-                        class="relative w-24 h-24 rounded-full border-4 border-white p-0.5 bg-white/20 shadow-xl floating">
+                    <div class="relative rounded-full border-white shadow-xl floating shrink-0"
+                        style="width: 72px; height: 72px; border-style: solid; border-width: 3px; box-shadow: 0 4px 10px rgba(0,0,0,0.12);">
                         <img alt="Student portrait" class="w-full h-full object-cover rounded-full"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRG4yCxZvKDXIe9vMNCpEUBN1GAOXxVtUYbKPY5LIk-5DZQnA_vQTDtZr-qU_kTZcVyqAPZp-9BArSxHQ4Jk81hVsA0U_ugwCD5CIrFCY7DeASqh_3kM_UTGM40_OhAWJHtvnk7_JBMux0mUMXqYDNo50wD-PQvtaxN58juSGMQ0EyJz8gDHvNH8jHIaEidOCemZNT70SS-9L8cK6G_r0qpDqLmn1w3ujfHsjQVaWWhk3Pn5FUdreNif_HjMfRhMkVKHC1vNR3Z6P">
                     </div>
                 </div>
-                <div class="text-center space-y-0.5 relative z-10">
-                    <h2 class="text-white text-[24px] font-bold tracking-tight">Nguyễn Văn A</h2>
-                    <p class="text-white/70 text-[14px]">SGC-2024-001</p>
+                <div class="text-center space-y-1 relative z-10">
+                    <h2 class="text-white leading-tight"
+                        style="font-size: 20px; font-weight: 600; letter-spacing: 0.2px;">Nguyễn Văn A</h2>
+                    <p class="text-white relative" style="font-size: 13px; opacity: 0.85;">
+                        SGC-2024-001</p>
                 </div>
             </div>
 
             <!-- S-Points Card -->
             <div class="relative -mt-6 mx-4">
-                <div class="bg-white rounded-[20px] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+                <style>
+                    .btn-history {
+                        border-radius: 20px;
+                        padding: 6px 16px;
+                        background: #f3f5f7;
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: #E30613;
+                        border: none;
+                        cursor: pointer;
+                        transition: background 0.2s;
+                    }
+
+                    .btn-history:hover {
+                        background: #e9edf1;
+                    }
+                </style>
+                <div
+                    style="background: white; border-radius: 20px; padding: 20px 24px; box-shadow: 0 10px 24px rgba(0,0,0,0.06); position: relative; z-index: 20;">
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col">
-                            <span class="text-slate-400 text-[11px] font-black uppercase tracking-[0.1em] mb-1">S-Points
+                            <span
+                                style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #9aa2a9; font-weight: 600; margin-bottom: 4px; display: block;">S-Points
                                 Balance</span>
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-[#E60023] fill-1 text-[24px]">stars</span>
-                                <span class="text-[32px] font-bold text-[#E60023] leading-none">2,450</span>
-                            </div>
+                            <span
+                                style="font-size: 30px; font-weight: 700; color: #E30613; line-height: 1;">2,450</span>
                         </div>
-                        <button
-                            class="bg-[#F8F9FA] text-slate-600 px-5 py-2 rounded-full text-xs font-bold border border-slate-200 active:bg-slate-100 transition-colors"
-                            onclick="window.location.href='../lịch sử đổi quà/code.html'">
+                        <button class="btn-history" onclick="window.location.href='../lịch sử đổi quà/code.html'">
                             Lịch sử
                         </button>
                     </div>
@@ -359,103 +483,130 @@
         </div>
 
         <!-- Main Actions -->
-        <div class="grid grid-cols-2 gap-4 px-5 mt-5">
-            <button
-                class="flex items-center justify-center gap-3 rounded-[14px] bg-[#E60023] h-14 font-bold text-white shadow-lg active:scale-95 btn-hover-effect"
-                onclick="window.location.href='../lộ trình của bạn/code.html'">
-                <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">route</span>
-                <span class="text-xs uppercase tracking-widest">Lộ trình học</span>
+        <div class="grid grid-cols-2 gap-3 px-5 mt-5">
+            <style>
+                .btn-route {
+                    background: linear-gradient(135deg, #E30613, #c0000f);
+                    border-radius: 16px;
+                    height: 52px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.3);
+                }
+
+                .btn-route:active {
+                    transform: scale(0.97);
+                }
+
+                .btn-simulate {
+                    background: #ffffff;
+                    border: 1.5px solid #E30613;
+                    border-radius: 16px;
+                    height: 52px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #E30613;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                }
+
+                .btn-simulate:active {
+                    transform: scale(0.97);
+                }
+
+                .btn-simulate:hover {
+                    background: #fff5f5;
+                }
+            </style>
+            <button class="btn-route" onclick="window.location.href='../lộ trình của bạn/code.html'">
+                <span class="material-symbols-outlined"
+                    style="font-size:18px; font-variation-settings:'FILL' 1;">route</span>
+                <span>Lộ trình học</span>
             </button>
-            <button
-                class="flex items-center justify-center gap-3 rounded-[14px] bg-white border border-[#E6E6E6] h-14 font-bold text-[#333] active:scale-95 btn-hover-effect shadow-sm"
-                onclick="window.location.href='../mô phỏng cơ hội/code.html'">
-                <span class="material-symbols-outlined text-xl text-[#007AFF]">campaign</span>
-                <span class="text-xs uppercase tracking-widest">Mô phỏng cơ hội</span>
+            <button class="btn-simulate" onclick="window.location.href='../mô phỏng cơ hội/code.html'">
+                <span class="material-symbols-outlined"
+                    style="font-size:18px; font-variation-settings:'FILL' 1;">campaign</span>
+                <span>Mô phỏng cơ hội</span>
             </button>
         </div>
 
         <!-- Menu Sections -->
-        <div class="mt-10 px-5 space-y-4">
-            <a class="flex items-center justify-between bg-white dark:bg-slate-900 p-5 rounded-[24px] shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.98] hover:shadow-md hover:-translate-y-0.5 transition-all group"
+        <div class="mt-6 px-5 flex flex-col gap-3">
+            <a class="flex items-center gap-4 bg-white p-4 rounded-[18px] shadow-[0_4px_14px_rgba(0,0,0,0.05)] active:scale-[0.98] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all group"
                 href="../trắc nghiệm AI/code.html">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="size-12 rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-[#ef233c]"
-                            style="font-variation-settings: 'FILL' 1;">psychology</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-black text-[15px] text-navy dark:text-white">Trắc nghiệm AI</span>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Khám phá tiềm năng
-                            bản thân</span>
-                    </div>
+                <div class="w-10 h-10 rounded-[14px] bg-[#fff4f4] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[#E30613]"
+                        style="font-size:20px; font-variation-settings:'FILL' 1;">psychology</span>
                 </div>
-                <span
-                    class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+                <div class="flex flex-col flex-1">
+                    <span class="text-[15px] font-semibold text-[#111]">Trắc nghiệm AI</span>
+                    <span class="text-[12px] text-[#9aa2a9] mt-0.5">Khám phá tiềm năng</span>
+                </div>
+                <span class="material-symbols-outlined text-[#ddd] group-hover:text-[#E30613] transition-colors"
+                    style="font-size:20px;">chevron_right</span>
             </a>
 
-            <a class="flex items-center justify-between bg-white dark:bg-slate-900 p-5 rounded-[24px] shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.98] hover:shadow-md hover:-translate-y-0.5 transition-all group"
+            <a class="flex items-center gap-4 bg-white p-4 rounded-[18px] shadow-[0_4px_14px_rgba(0,0,0,0.05)] active:scale-[0.98] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all group"
                 href="../lộ trình của bạn/code.html">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="size-12 rounded-2xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-orange-500"
-                            style="font-variation-settings: 'FILL' 1;">analytics</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-black text-[15px] text-navy dark:text-white">Lộ trình của tôi</span>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">3 giai đoạn hoàn
-                            tất</span>
-                    </div>
+                <div class="w-10 h-10 rounded-[14px] bg-[#fff4f4] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[#E30613]"
+                        style="font-size:20px; font-variation-settings:'FILL' 1;">analytics</span>
                 </div>
-                <span
-                    class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+                <div class="flex flex-col flex-1">
+                    <span class="text-[15px] font-semibold text-[#111]">Lộ trình của tôi</span>
+                    <span class="text-[12px] text-[#9aa2a9] mt-0.5">3 giai đoạn hoàn tất</span>
+                </div>
+                <span class="material-symbols-outlined text-[#ddd] group-hover:text-[#E30613] transition-colors"
+                    style="font-size:20px;">chevron_right</span>
             </a>
 
-            <a class="flex items-center justify-between bg-white dark:bg-slate-900 p-5 rounded-[24px] shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.98] hover:shadow-md hover:-translate-y-0.5 transition-all group"
+            <a class="flex items-center gap-4 bg-white p-4 rounded-[18px] shadow-[0_4px_14px_rgba(0,0,0,0.05)] active:scale-[0.98] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all group"
                 href="../kho quà tặng/code.html">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="size-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-emerald-500"
-                            style="font-variation-settings: 'FILL' 1;">card_giftcard</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-black text-[15px] text-navy dark:text-white">Điểm thưởng</span>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Đổi quà & Học
-                            bổng</span>
-                    </div>
+                <div class="w-10 h-10 rounded-[14px] bg-[#fff4f4] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[#E30613]"
+                        style="font-size:20px; font-variation-settings:'FILL' 1;">card_giftcard</span>
                 </div>
-                <span
-                    class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+                <div class="flex flex-col flex-1">
+                    <span class="text-[15px] font-semibold text-[#111]">Điểm thưởng</span>
+                    <span class="text-[12px] text-[#9aa2a9] mt-0.5">Đổi quà & Học bổng</span>
+                </div>
+                <span class="material-symbols-outlined text-[#ddd] group-hover:text-[#E30613] transition-colors"
+                    style="font-size:20px;">chevron_right</span>
             </a>
 
-            <a class="flex items-center justify-between bg-white dark:bg-slate-900 p-5 rounded-[24px] shadow-sm border border-slate-100 dark:border-slate-800 active:scale-[0.98] hover:shadow-md hover:-translate-y-0.5 transition-all group"
+            <a class="flex items-center gap-4 bg-white p-4 rounded-[18px] shadow-[0_4px_14px_rgba(0,0,0,0.05)] active:scale-[0.98] hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all group"
                 href="../lịch sử đổi quà/code.html">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="size-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-blue-600"
-                            style="font-variation-settings: 'FILL' 1;">history</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-black text-[15px] text-navy dark:text-white">Lịch sử đổi quà</span>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Kiểm tra trạng
-                            thái</span>
-                    </div>
+                <div class="w-10 h-10 rounded-[14px] bg-[#fff4f4] flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[#E30613]"
+                        style="font-size:20px; font-variation-settings:'FILL' 1;">history</span>
                 </div>
-                <span
-                    class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+                <div class="flex flex-col flex-1">
+                    <span class="text-[15px] font-semibold text-[#111]">Lịch sử đổi quà</span>
+                    <span class="text-[12px] text-[#9aa2a9] mt-0.5">Kiểm tra trạng thái</span>
+                </div>
+                <span class="material-symbols-outlined text-[#ddd] group-hover:text-[#E30613] transition-colors"
+                    style="font-size:20px;">chevron_right</span>
             </a>
-
         </div>
 
-        <!-- Floating Feedback Button -->
+        <!-- Floating Support Button -->
         <button onclick="toggleFeedback()"
-            class="fixed bottom-24 right-5 z-[90] w-14 h-14 rounded-full bg-purple-600 text-white shadow-xl flex items-center justify-center active:scale-90 transition-all hover:scale-105"
-            style="box-shadow: 0 8px 24px rgba(124,58,237,0.4);" title="Hỗ trợ & Góp ý">
-            <span class="material-symbols-outlined text-[26px]"
-                style="font-variation-settings: 'FILL' 1;">headset_mic</span>
+            class="fixed bottom-24 right-5 z-[90] flex items-center justify-center active:scale-90 transition-all hover:scale-105"
+            style="width:52px; height:52px; border-radius:50%; background:#ffffff; box-shadow:0 6px 18px rgba(0,0,0,0.12); border:none; cursor:pointer;"
+            title="Hỗ trợ & Góp ý">
+            <span class="material-symbols-outlined" style="font-size:22px; color:#111;">headset_mic</span>
         </button>
 
     </main>
@@ -518,11 +669,11 @@
                 <form onsubmit="submitFeedback(event)">
                     <div class="mb-5">
                         <textarea required
-                            class="w-full min-h-[100px] bg-[#FAFAFA] border border-transparent rounded-2xl p-4 text-[14px] text-slate-700 focus:outline-none focus:border-[#E60023] focus:bg-white transition-all resize-none placeholder:text-slate-400"
+                            class="w-full min-h-[100px] bg-[#FAFAFA] border border-transparent rounded-2xl p-4 text-[14px] text-slate-700 focus:outline-none focus:border-[#E30613] focus:bg-white transition-all resize-none placeholder:text-slate-400"
                             placeholder="Nhập nội dung góp ý hoặc câu hỏi cần hỗ trợ..."></textarea>
                     </div>
                     <button type="submit"
-                        class="w-full h-[52px] bg-[#E60023] text-white text-[15px] font-bold rounded-xl active:scale-95 transition-all hover:shadow-[0_8px_20px_rgba(230,0,35,0.25)] flex items-center justify-center">
+                        class="w-full h-[52px] bg-[#E30613] text-white text-[15px] font-bold rounded-xl active:scale-95 transition-all hover:shadow-[0_8px_20px_rgba(230,0,35,0.25)] flex items-center justify-center">
                         XÁC NHẬN GỬI
                     </button>
                 </form>
